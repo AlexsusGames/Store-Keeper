@@ -7,6 +7,7 @@ public class InteractiveHandler : MonoBehaviour
 
     private Camera mainCamera;
     private IInteractable currentInteractable; 
+    private bool isEnable = true;
 
     private void Start()
     {
@@ -18,13 +19,21 @@ public class InteractiveHandler : MonoBehaviour
         }
     }
 
+    public void ChangeEnavled(bool value)
+    {
+        isEnable = value;
+    }
+
     private void Update()
     {
-        HighlightObject();
-
-        if (Input.GetKeyDown(KeyCode.E) && currentInteractable != null)
+        if (isEnable)
         {
-            currentInteractable.Interact();
+            HighlightObject();
+
+            if (Input.GetKeyDown(KeyCode.E) && currentInteractable != null)
+            {
+                currentInteractable.Interact();
+            }
         }
     }
 
@@ -39,6 +48,11 @@ public class InteractiveHandler : MonoBehaviour
                 if(currentInteractable == interactable)
                 {
                     return;
+                }
+
+                if(currentInteractable != null)
+                {
+                    currentInteractable.OutlineEnabled(false);
                 }
 
                 currentInteractable = interactable;

@@ -10,12 +10,19 @@ public class FirstPersonController : MonoBehaviour
     private int cachedState;
     private bool isHandShowed;
 
+    private bool moveBlock = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
         spead = moveSpeed;
+    }
+
+    public void MovementBlockEnabled(bool enabled)
+    {
+        moveBlock = enabled;
     }
 
     private void ShowHand()
@@ -28,22 +35,30 @@ public class FirstPersonController : MonoBehaviour
 
     void FixedUpdate()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        if(moveBlock == false)
+        {
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
 
-        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? spead * 2 : spead;
+            if(z == 0 && x == 0)
+            {
+                rb.velocity = Vector3.zero;
+            }
 
-        if(x == 0 && z == 0)                      SetAnimationState(0);
-        else if (Input.GetKey(KeyCode.LeftShift)) SetAnimationState(2);
-        else                                      SetAnimationState(1);
+            float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? spead * 2 : spead;
 
-        Vector3 move = transform.right * x + transform.forward * z;
-        rb.MovePosition(rb.position + move * currentSpeed * Time.fixedDeltaTime);
+            if (x == 0 && z == 0) SetAnimationState(0);
+            else if (Input.GetKey(KeyCode.LeftShift)) SetAnimationState(2);
+            else SetAnimationState(1);
+
+            Vector3 move = transform.right * x + transform.forward * z;
+            rb.MovePosition(rb.position + move * currentSpeed * Time.fixedDeltaTime);
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && moveBlock == false)
         {
             ShowHand();
         }
