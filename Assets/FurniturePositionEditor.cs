@@ -1,90 +1,113 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class FurniturePositionEditor : MonoBehaviour
 {
-    [SerializeField] private LayerMask layer;
     [SerializeField] private Camera topDownCamera;
-    [SerializeField] private float rayDistance = 50f;
-
-    [SerializeField] private FurnitureHandlerMenu handleMenu;
-    [SerializeField] private StoreEditor storeEditor;
+    [SerializeField] private Transform parent; 
 
     private FurniturePlacementView cachedView;
-    private StoreFurnitureConfigFinder configFinder;
-    private FurnitureFactory furnitureFactory;
+    private GameObject editablePrefab => cachedView.gameObject;
+    private Vector3 cachedPosition;
+    private Quaternion cachedRotation;
+
+    public event Action<bool> IsAvailablePosition;
+    private bool isAvailable = true;
 
     private bool isEditing;
+    private bool isConfirmed;
 
-    private void Awake()
-    {
-        configFinder = new();
-    }
+    public Action DeselectAction;
 
-    private void Update()
+    public FurniturePositionData GetNewPosition()
     {
-        TrySelectFurniture();
-        HandleMouseClick();
-    }
-
-    private void HandleMouseClick()
-    {
-        if(!isEditing)
+        return new FurniturePositionData()
         {
-            if (Input.GetMouseButtonDown(0))
+            Id = cachedView.FurnitureId,
+            Name = cachedView.FurnitureName,
+            Position = cachedView.transform.localPosition,
+            Rotation = cachedView.transform.localRotation.eulerAngles
+        };
+    }
+    public void OnFurnitureSelected(FurniturePlacementView furniture)
+    {
+        cachedView = furniture;
+        cachedPosition = furniture.transform.localPosition;
+        cachedRotation = furniture.transform.localRotation;
+
+        isConfirmed = false;
+    }
+
+    public void SetEditStatus(bool isEditing)
+    {
+        this.isEditing = isEditing;
+        Cursor.visible = !isEditing;
+    }
+
+    public void OnDeselect()
+    {
+        if (isEditing || !isConfirmed)
+        {
+            if(DeselectAction != null)
             {
-                if (cachedView != null)
-                {
-                    isEditing = true;
-                    var sprite = configFinder.FindById(cachedView.FurnitureId).shopSprite;
-
-                    UnityAction storeAction = () =>
-                    {
-                        storeEditor.StoreFurniture(cachedView.FurnitureId);
-                        Destroy(cachedView.gameObject);
-                        isEditing = false;
-                    };
-
-                    UnityAction confirmAction = () =>
-                    {
-                        isEditing = false;
-                    };
-
-                    handleMenu.SetFurniture(sprite, storeAction, confirmAction, null);
-                }
+                DeselectAction?.Invoke();
+            }
+            else
+            {
+                cachedView.transform.localPosition = cachedPosition;
+                cachedView.transform.localRotation = cachedRotation;
+                cachedView.Select(false);
+                SetEditStatus(false);
             }
         }
     }
 
-    private void TrySelectFurniture()
+    public void Confirm()
     {
-        if(!isEditing)
+        if(isAvailable)
         {
-            Ray ray = topDownCamera.ScreenPointToRay(Input.mousePosition);
+            isConfirmed = true;
+        }
+    }
 
-            if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, layer))
+    private void Update()
+    {
+        EditPosition();
+        Rotate();
+    }
+
+    private void Rotate()
+    {
+        if (Input.GetButtonDown("R") && isEditing)
+        {
+            Vector3 rotation = cachedView.transform.localRotation.eulerAngles;
+            rotation.y += 90;
+
+            cachedView.transform.localRotation = Quaternion.Euler(rotation);
+        }
+    }
+
+    private void EditPosition()
+    {
+        if (isEditing)
+        {
+            if(editablePrefab != null)
             {
-                if (hit.collider.TryGetComponent(out FurniturePlacementView furniture))
-                {
-                    if (cachedView == furniture)
-                    {
-                        return;
-                    }
-                    else if (cachedView != null)
-                    {
-                        cachedView.Choose(false);
-                    }
+                float fixedHeight = 0;
 
-                    cachedView = furniture;
-                    furniture.Choose(true);
-                    return;
-                }
-            }
+                float distanceToObject = Vector3.Distance(topDownCamera.transform.position, parent.position);
 
-            if (cachedView != null)
-            {
-                cachedView.Choose(false);
-                cachedView = null;
+                Vector3 mouseWorldPosition = topDownCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, distanceToObject));
+
+                Vector3 localPosition = parent.InverseTransformPoint(mouseWorldPosition);
+
+                localPosition.y = fixedHeight;
+
+                editablePrefab.transform.localPosition = localPosition;
+
+                isAvailable = cachedView.CheckAvailableToPlace();
+                IsAvailablePosition?.Invoke(isAvailable);
             }
         }
     }

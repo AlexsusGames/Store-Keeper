@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0800198878809bc4baff3b79d8098d71, type: 3}
   m_Name: Stand
   m_EditorClassIdentifier: 
-  id: stand
+  name: stand
   shopSprite: {fileID: 21300000, guid: 23174de6235e9d2478cd744846b15fb1, type: 3}
   prefab: {fileID: 4990332793368463306, guid: 3fe05fda6eef8804681aeddf77122fc0, type: 3}
   Price: 0

@@ -50,7 +50,7 @@ public class TopDownCameraMovement : MonoBehaviour
 
         yPosition -= mouseY;
 
-        yPosition = Mathf.Clamp(yPosition, 25f, 75f);
+        yPosition = Mathf.Clamp(yPosition, 25f, 50f);
         transform.localPosition = new Vector3(transform.localPosition.x, yPosition, transform.localPosition.z);
     }
 

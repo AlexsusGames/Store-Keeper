@@ -23,11 +23,15 @@ public class FurnitureHandlerMenu : MonoBehaviour
         AssignButton(replaceButton, replaceAction);
     }
 
+    public void ChangeConfirmButtonInterractable(bool value)
+    {
+        confirmButton.interactable = value;
+    }
+
     private void AssignButton(Button button, UnityAction action)
     {
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(action);
-        button.onClick.AddListener(Hide);
     }
 
     public void Hide() => gameObject.SetActive(false);

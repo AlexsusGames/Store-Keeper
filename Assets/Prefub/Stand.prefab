@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2936109700804116258}
   - component: {fileID: 6342688198491833967}
   - component: {fileID: 8154590629718837276}
-  - component: {fileID: 3771235732338361364}
   - component: {fileID: 2433251471883130848}
   m_Layer: 3
   m_Name: 'Stand_1 '
@@ -86,27 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3771235732338361364
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 617512188375879345}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.35498244, y: 0.1495664, z: 3.334357}
-  m_Center: {x: -0.16749123, y: -0.06478319, z: 1.6571785}
 --- !u!114 &2433251471883130848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +92,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617512188375879345}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
@@ -136,7 +114,7 @@ GameObject:
   - component: {fileID: 8765506982596756304}
   - component: {fileID: 4921657545607212813}
   - component: {fileID: 5150665304309731104}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +135,7 @@ Transform:
   m_Children:
   - {fileID: 2936109700804116258}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4921657545607212813
 MonoBehaviour:
@@ -171,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4830631e67b37c945bce6ee2a00208ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  furnitureId: stand
+  furnitureName: stand
   outline: {fileID: 2433251471883130848}
 --- !u!65 &5150665304309731104
 BoxCollider:

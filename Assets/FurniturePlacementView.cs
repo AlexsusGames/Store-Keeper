@@ -4,26 +4,41 @@ using UnityEngine;
 
 public class FurniturePlacementView : MonoBehaviour
 {
-    [SerializeField] private string furnitureId;
+    [SerializeField] private string furnitureName;
     [SerializeField] private Outline outline;
+    private BoxCollider bCollider;
     private bool isPossibleToPlace;
     public bool IsPossibleToPlace => isPossibleToPlace;
-    public string FurnitureId => furnitureId;
+    public string FurnitureName => furnitureName;
+    public string FurnitureId { get; set; }
 
-    public void Choose(bool value)
+    private void Awake()
+    {
+        bCollider = GetComponent<BoxCollider>();
+    }
+
+    public void Select(bool value)
     {
         outline.enabled = value;
+        ChangeOutlineColor(Color.white);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public bool CheckAvailableToPlace()
     {
-        outline.OutlineColor = Color.red;
-        isPossibleToPlace = false;
+        Vector3 position = bCollider.bounds.center;
+        Vector3 halfExtents = bCollider.bounds.size / 2f;
+
+        Collider[] results = Physics.OverlapBox(position, halfExtents, Quaternion.identity);
+
+        Color color = results.Length == 1 ? Color.green : Color.red;
+        ChangeOutlineColor(color);
+
+        return results.Length == 1;
     }
 
-    private void OnCollisionExit(Collision collision)
+
+    public void ChangeOutlineColor(Color color)
     {
-        outline.OutlineColor = Color.green;
-        isPossibleToPlace = true;
+        outline.OutlineColor = color;
     }
 }

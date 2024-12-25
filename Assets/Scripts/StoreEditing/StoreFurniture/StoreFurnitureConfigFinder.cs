@@ -9,14 +9,14 @@ public class StoreFurnitureConfigFinder
         storeFurnitureConfigs = Resources.LoadAll<StoreFurnitureConfig>("StoreFurnitureConfigs");
     }
 
-    public StoreFurnitureConfig FindById(string id)
+    public StoreFurnitureConfig FindByName(string name)
     {
         foreach(var config in storeFurnitureConfigs)
         {
-            if(config.id == id) 
+            if(config.name == name) 
                 return config;
         }
 
-        throw new System.Exception($"There is no such a config with id: {id}");
+        throw new System.Exception($"There is no such a config with id: {name}");
     }
 }

@@ -9,6 +9,7 @@ public class CameraViewChanger : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private TopDownCameraMovement topDownCamera;
     [SerializeField] private GameObject UiTopDownCamera;
+    [SerializeField] private Canvas computerUI;
 
     public bool isTopDownMode = false;
 
@@ -27,6 +28,7 @@ public class CameraViewChanger : MonoBehaviour
         UiTopDownCamera.gameObject.SetActive(isTopDownMode);
 
         player.InteractiveHandler.ChangeEnavled(!isTopDownMode);
+        computerUI.enabled = !isTopDownMode;
     }
 
     private void CursorEnabled(bool value)

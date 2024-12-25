@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class FurnitureInventoryView : MonoBehaviour
 {
     [SerializeField] private FurnitureSlotView[] slotsView;
     private StoreFurnitureConfigFinder configFinder;
 
-    public void SetData(List<FurnitureData> data)
+    public void SetData(List<FurnitureData> data, UnityAction<string> action)
     {
         if(configFinder == null)
             configFinder = new StoreFurnitureConfigFinder();
@@ -16,11 +19,21 @@ public class FurnitureInventoryView : MonoBehaviour
         {
             if (i < data.Count)
             {
-                var sprite = configFinder.FindById(data[i].FurnitureId).shopSprite;
+                int index = i;
+                var sprite = configFinder.FindByName(data[i].FurnitureId).shopSprite;
+                slotsView[i].ItemId = data[i].FurnitureId;
 
                 slotsView[i].SetData(sprite, data[i].Amount);
+                slotsView[i].TryGetComponent(out Button button);
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() => action?.Invoke(slotsView[index].ItemId));
             }
-            else slotsView[i].Hide();
+            else
+            {
+                slotsView[i].Hide();
+                slotsView[i].TryGetComponent(out Button button);
+                button.onClick.RemoveAllListeners();
+            }
         }
     }
 }

@@ -6,15 +6,15 @@ public class FurnitureFactory : MonoBehaviour
     private StoreFurnitureConfigFinder configFinder;
     private Transform parent;
 
-    public void Init(Transform transform, StoreFurnitureConfigFinder configFinder)
+    public void Init(StoreFurnitureConfigFinder configFinder)
     {
-        this.parent = transform;
+        parent = transform;
         this.configFinder = configFinder;
     }
 
     public FurniturePlacementView Create(string id)
     {
-        var prefab = configFinder.FindById(id);
+        var prefab = configFinder.FindByName(id).prefab;
 
         var obj = Instantiate(prefab, parent);
 

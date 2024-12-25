@@ -92,16 +92,27 @@ public class FurnitureDataProvider
         return remainingAmount >= amount;
     }
 
-    public void RemoveFurniture(string id, int amount)
+    public void RemoveFurniture(string id, int amount = 1)
     {
         LoadData();
+        FurnitureData itemToRemove = null;
 
         foreach(var data in data.FurnitureList)
         {
             if(data.FurnitureId == id)
             {
                 data.Amount -= amount;
+
+                if(data.Amount == 0)
+                {
+                    itemToRemove = data;
+                }
             }
+        }
+
+        if(itemToRemove != null)
+        {
+            data.FurnitureList.Remove(itemToRemove);
         }
 
         SaveData();
