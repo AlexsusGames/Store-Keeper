@@ -13,7 +13,7 @@ public class StoreFurnitureConfigFinder
     {
         foreach(var config in storeFurnitureConfigs)
         {
-            if(config.name == name) 
+            if(config.Name == name) 
                 return config;
         }
 

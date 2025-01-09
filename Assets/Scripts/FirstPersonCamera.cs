@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Threading;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class FirstPersonCamera : MonoBehaviour
@@ -18,7 +17,8 @@ public class FirstPersonCamera : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; 
+        Cursor.lockState = CursorLockMode.Locked;
+        standartPos = transform.localPosition;
     }
 
     private void LateUpdate()
@@ -41,7 +41,9 @@ public class FirstPersonCamera : MonoBehaviour
         cameraBlock = enabled;
     }
 
-    public void SetRotation(Vector3 direction)
+    public bool IsWorking => moveCoroutine != null;
+
+    private void SetRotation(Vector3 direction)
     {
         this.transform.localRotation = Quaternion.Euler(Vector3.zero);
         playerBody.localRotation = Quaternion.Euler(direction);
@@ -51,8 +53,7 @@ public class FirstPersonCamera : MonoBehaviour
     {
         if(moveCoroutine == null)
         {
-            standartPos = transform.position;
-            moveCoroutine = StartCoroutine(MoveCameraCoroutine(globalCord, callback));
+            moveCoroutine = StartCoroutine(MoveCameraCoroutine(globalCord, callback, false));
         }
     }
 
@@ -60,28 +61,47 @@ public class FirstPersonCamera : MonoBehaviour
     {
         if (moveCoroutine == null)
         {
-            moveCoroutine = StartCoroutine(MoveCameraCoroutine(standartPos, callback));
+            moveCoroutine = StartCoroutine(MoveCameraCoroutine(standartPos, callback, true));
         }
     }
 
-    private IEnumerator MoveCameraCoroutine(Vector3 targetPosition, Action callback)
+    private IEnumerator MoveCameraCoroutine(Vector3 targetPosition, Action callback, bool isLocalPos)
     {
-        Vector3 startPosition = transform.position;
+        Vector3 startPosition;
+        if (!isLocalPos)
+        {
+            startPosition = transform.position;
+        }
+        else startPosition = transform.localPosition;
+
+
         float elapsedTime = 0f;
 
         while (elapsedTime < animationDuration)
         {
+            SetRotation(new Vector3(0f, -90f, 0f));
+
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / animationDuration);
 
-            transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            if(!isLocalPos)
+            {
+                transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            }
+            else transform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
 
             yield return null;
         }
-        transform.position = targetPosition;
-        moveCoroutine = null;
+
+        if(!isLocalPos)
+        {
+            transform.position = targetPosition;
+        }
+        else transform.localPosition = targetPosition;
 
         callback?.Invoke();
+
+        moveCoroutine = null;
     }
 
 }

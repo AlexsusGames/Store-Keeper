@@ -10,17 +10,20 @@ public class StoreEditor : MonoBehaviour
     [SerializeField] private FurniturePositionEditor furniturePositionEditor;
     [SerializeField] private FurnitureInventoryView inventoryView;
     [SerializeField] private FurnitureHandlerMenu handleMenu;
+    [SerializeField] private Transform floorSurface;
 
-    [SerializeField] private FurnitureFactory factory;
+    [SerializeField] private StoreFactory factory;
 
     private FurnitureDataProvider dataProvider;
     private StoreFurnitureConfigFinder configFinder;
 
     private FurniturePositionDataProvider positionDataProvider;
+    private ProductsManager productsManager;
     private bool isBeingPlaced;
 
     private void Awake()
     {
+        productsManager = new ProductsManager();
         dataProvider = new();
         configFinder = new();
         positionDataProvider = new();
@@ -69,14 +72,17 @@ public class StoreEditor : MonoBehaviour
 
         UnityAction storeAction = () =>
         {
-            dataProvider.AddFurniture(furnitureView.FurnitureName);
-            furniturePositionEditor.SetEditStatus(false);
-            furnitureSelector.Deselect();
+            if(!furnitureView.HasProducts())
+            {
+                dataProvider.AddFurniture(furnitureView.FurnitureName);
+                furniturePositionEditor.SetEditStatus(false);
+                furnitureSelector.Deselect();
 
-            positionDataProvider.RemoveById(furnitureView.FurnitureId);
+                positionDataProvider.RemoveById(furnitureView.FurnitureId);
 
-            Destroy(furnitureView.gameObject);
-            isBeingPlaced = false;
+                Destroy(furnitureView.gameObject);
+                isBeingPlaced = false;
+            }
         };
 
         UnityAction confirmAction = () =>
@@ -90,7 +96,10 @@ public class StoreEditor : MonoBehaviour
 
         UnityAction editAction = () =>
         {
-            furniturePositionEditor.SetEditStatus(true);
+            if(!furnitureView.HasProducts())
+            {
+                furniturePositionEditor.SetEditStatus(true);
+            }
         };
 
         furniturePositionEditor.DeselectAction = furnitureSelector.IsCreated ? new System.Action(storeAction) : null;
@@ -103,7 +112,11 @@ public class StoreEditor : MonoBehaviour
         handleMenu.SetFurniture(sprite, storeAction, confirmAction, editAction);
     }
 
-    private void OnDestroy() => dataProvider.OnDataChange -= UpdateInventoryView;
+    private void OnDestroy()
+    {
+        dataProvider.OnDataChange -= UpdateInventoryView;
+        productsManager.SavePosition(GetActiveSurfaces());
+    }
 
     private void UpdateInventoryView()
     {
@@ -116,6 +129,8 @@ public class StoreEditor : MonoBehaviour
     {
         var positions = positionDataProvider.GetPositions();
 
+        productsManager.PlaceProducts(string.Empty, floorSurface);
+
         foreach(var position in positions)
         {
             Debug.Log(position.Name);
@@ -126,6 +141,26 @@ public class StoreEditor : MonoBehaviour
 
             prefab.transform.localPosition = position.Position;
             prefab.transform.localRotation = Quaternion.Euler(position.Rotation);
+
+            productsManager.PlaceProducts(prefab.FurnitureId, prefab.transform);
         }
+    }
+
+    public List<Surface> GetActiveSurfaces()
+    {
+        var childCount = transform.childCount;
+        List<Surface> result = new List<Surface>();
+
+        for (int i = 0; i < childCount; i++)
+        {
+            var child = transform.GetChild(i);
+
+            if (child.TryGetComponent(out Surface surface))
+            {
+                result.Add(surface);
+            }
+        }
+
+        return result;
     }
 }

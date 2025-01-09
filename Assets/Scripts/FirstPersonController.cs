@@ -35,6 +35,11 @@ public class FirstPersonController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(moveBlock)
+        {
+            rb.velocity = Vector3.zero;
+        }
+
         if(moveBlock == false)
         {
             float x = Input.GetAxis("Horizontal");
@@ -51,8 +56,12 @@ public class FirstPersonController : MonoBehaviour
             else if (Input.GetKey(KeyCode.LeftShift)) SetAnimationState(2);
             else SetAnimationState(1);
 
-            Vector3 move = transform.right * x + transform.forward * z;
-            rb.MovePosition(rb.position + move * currentSpeed * Time.fixedDeltaTime);
+            //Vector3 move = transform.right * x + transform.forward * z;
+            //rb.MovePosition(rb.position + move * currentSpeed * Time.fixedDeltaTime);
+
+            Vector3 move = (transform.right * x + transform.forward * z).normalized;
+
+            rb.velocity = move * currentSpeed;
         }
     }
 
@@ -75,12 +84,12 @@ public class FirstPersonController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        spead = 1;
+        //spead = 1;
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        spead = moveSpeed;
+        //spead = moveSpeed;
     }
 }
 

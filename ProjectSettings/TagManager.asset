@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - surface
   layers:
   - Default
   - TransparentFX
@@ -13,9 +14,9 @@ TagManager:
   - UI
   - InteractiveObjects
   - FurniturePlaces
-  - 
-  - 
-  - 
+  - Post-Processing
+  - GrabbedItem
+  - Surface
   - 
   - 
   - 
