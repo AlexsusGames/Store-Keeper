@@ -447,6 +447,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMesh: {fileID: 3842469715060878065}
+  inputClues:
+  - {fileID: 6752581916871399899, guid: 4f5c7f3c7708d1f40a1dd5ce2e6d0d56, type: 3}
 --- !u!65 &5664534629184984543
 BoxCollider:
   m_ObjectHideFlags: 0

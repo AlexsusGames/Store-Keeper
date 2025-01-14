@@ -534,6 +534,7 @@ MonoBehaviour:
   - {fileID: 2876753375771043835}
   - {fileID: 4665993982385722834}
   - {fileID: 6540570083353740249}
+  ProductName: 
   childPoint: {fileID: 5560516537824809735}
 --- !u!114 &2069358846399064929
 MonoBehaviour:
@@ -548,6 +549,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMesh: {fileID: 8201458135192291982}
+  inputClues:
+  - {fileID: 6752581916871399899, guid: 3069840b9e86e3745b2f2498d1a08fa7, type: 3}
   renderers:
   - {fileID: 688770014135215674}
   - {fileID: 1971286801882266195}

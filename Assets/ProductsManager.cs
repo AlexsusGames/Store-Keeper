@@ -11,9 +11,9 @@ public class ProductsManager
 
     private ProductFinder productFinder;
 
-    public ProductsManager()
+    public ProductsManager(ProductFinder productFinder)
     {
-        productFinder = Resources.Load<ProductFinder>("");
+        this.productFinder = productFinder;
     }
 
     private void Init()
@@ -36,7 +36,7 @@ public class ProductsManager
 
     public void PlaceProducts(string id, Transform parent)
     {
-        if(storageProducts == null)
+        if (storageProducts == null)
             Init();
 
         if (!storageProducts.ContainsKey(id))
@@ -46,33 +46,35 @@ public class ProductsManager
 
         foreach (var product in products)
         {
-            var config = productFinder.FindByName(product.ProductName);
-            var prefab = config.GetPrefab(parent);
+            if (product.ProductName == string.Empty)
+                continue;
 
-            prefab.transform.position = product.Position;
-            prefab.transform.localRotation = product.Rotation;
-
-            if(product.Child != null)
-            {
-
-            }
+            SpawnProduct(parent, product);
         }
     }
 
     private void SpawnProduct(Transform parent, StorageData data)
     {
+        Debug.Log($"Product Data Child is null - {data.Child == null}");
+
         var config = productFinder.FindByName(data.ProductName);
+
         var prefab = config.GetPrefab(parent);
 
         prefab.transform.position = data.Position;
         prefab.transform.localRotation = data.Rotation;
 
+        if(prefab.TryGetComponent(out Box box))
+        {
+            box.Init(data.ProductCount);
+        }
+
         if (data.Child != null)
         {
             var childData = data.Child;
-            var box = prefab.GetComponent<StoreBox>();
-            
-            SpawnProduct(box.ChildPoint, childData);
+            var storeBox = prefab.GetComponent<StoreBox>();
+
+            SpawnProduct(storeBox.ChildPoint, childData);
         }
     }
 
@@ -91,12 +93,13 @@ public class ProductsManager
                 for (int k = 0; k < childCount; k++)
                 {
                     var productData = CreateProductData(surfaces[j].GetChild(k).gameObject, surfaceList[i]);
+
+                    Debug.Log($"Product Data Child is null - {productData.Child == null}");
+
                     data.Add(productData);
                 }
             }
         }
-
-        Debug.Log(data.Count);
 
         storageDataProvider.SaveData(new StorageDataList() { list = data });
     }
@@ -109,14 +112,18 @@ public class ProductsManager
 
             storageData.ProductName = box.ProductName;
             storageData.ProductCount = box.GetItemsAmount();
-            storageData.StorageId = surface.GetSurfaceId();
+
+            if(surface != null)
+            {
+                storageData.StorageId = surface.GetSurfaceId();
+            }
+
             storageData.Position = box.transform.position;
-            storageData.Rotation = box.transform.rotation;
+            storageData.Rotation = box.transform.localRotation;
 
             if(box.IsHasChild)
             {
-                box.TryGetComponent(out Surface boxSurface);
-                storageData.Child = CreateProductData(box.ChilBox.gameObject, boxSurface);
+                storageData.Child = CreateProductData(box.ChilBox.gameObject, null);
             }
 
             return storageData;

@@ -56,9 +56,6 @@ public class FirstPersonController : MonoBehaviour
             else if (Input.GetKey(KeyCode.LeftShift)) SetAnimationState(2);
             else SetAnimationState(1);
 
-            //Vector3 move = transform.right * x + transform.forward * z;
-            //rb.MovePosition(rb.position + move * currentSpeed * Time.fixedDeltaTime);
-
             Vector3 move = (transform.right * x + transform.forward * z).normalized;
 
             rb.velocity = move * currentSpeed;

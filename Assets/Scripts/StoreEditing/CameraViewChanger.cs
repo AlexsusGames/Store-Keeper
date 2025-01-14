@@ -27,7 +27,7 @@ public class CameraViewChanger : MonoBehaviour
         topDownCamera.gameObject.SetActive(isTopDownMode);
         UiTopDownCamera.gameObject.SetActive(isTopDownMode);
 
-        player.InteractiveHandler.ChangeEnavled(!isTopDownMode);
+        player.InteractiveHandler.ChangeEnabled(!isTopDownMode);
         computerUI.enabled = !isTopDownMode;
     }
 

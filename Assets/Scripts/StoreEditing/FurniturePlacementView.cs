@@ -19,6 +19,11 @@ public class FurniturePlacementView : MonoBehaviour
         bCollider = GetComponent<BoxCollider>();
     }
 
+    public Transform GetFirstSurface()
+    {
+        return surfaces[0].transform;
+    }
+
     public void Select(bool value)
     {
         outline.enabled = value;

@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using Unity.Burst.CompilerServices;
-using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class ItemGrab : MonoBehaviour
 {
@@ -15,65 +9,98 @@ public class ItemGrab : MonoBehaviour
     [SerializeField] private LayerMask surfaceMask;
 
     [SerializeField] private InteractiveHandler interactableHandler;
+    [SerializeField] private GameInputView gameInputView;
+    [SerializeField] private StoreEditor storeEditor;
 
     private PickupObject grabbedItem;
     private Quaternion standartRotation = Quaternion.Euler(Vector3.zero);
     private Camera mCamera;
+
+    private bool editMode;
 
     private void Awake()
     {
         mCamera = Camera.main;
     }
 
+    private void Start()
+    {
+        var savedObj = storeEditor.GetGrabbedSavedObject();
+
+        if (savedObj != null)
+        {
+            Grab(savedObj);
+        }
+    }
+
     private void Update()
     {
-        if (grabbedItem != null && Input.GetButtonDown("R"))
+        if(grabbedItem != null)
         {
-            Vector3 currentRotation = standartRotation.eulerAngles;
-            currentRotation.y += 90f;
-
-            standartRotation = Quaternion.Euler(currentRotation);
-        }
-
-        if (grabbedItem != null)
-        {
-            Ray ray = mCamera.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
-
-            if (Physics.Raycast(ray, out RaycastHit hit, grabDistance, surfaceMask))
+            if (Input.GetMouseButtonDown(1))
             {
-                if(hit.collider.TryGetComponent(out StoreBoxRef box))
+                editMode = !editMode;
+            }
+
+            if (!editMode)
+            {
+                SetStandartPosition();
+                gameInputView.SetItemGrabbedState();
+            }
+        }
+        else gameInputView.SetEmptyHandState();
+
+        if (editMode)
+        {
+            gameInputView.SetEditModeState();
+            if (grabbedItem != null && Input.GetButtonDown("R"))
+            {
+                Vector3 currentRotation = standartRotation.eulerAngles;
+                currentRotation.y += 90f;
+
+                standartRotation = Quaternion.Euler(currentRotation);
+            }
+
+            if (grabbedItem != null)
+            {
+                Ray ray = mCamera.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
+
+                if (Physics.Raycast(ray, out RaycastHit hit, grabDistance, surfaceMask))
                 {
-                    SetChildPosition(box.StoreBox.ChildPoint);
-
-                    HundleClick();
-
-                    return;
-                }
-
-                StorageSurface storeSurface = null;
-
-                if (hit.collider.TryGetComponent(out StorageSurface storage))
-                {
-                    storeSurface = storage;
-
-                    if (!storage.IsOpened())
+                    if (hit.collider.TryGetComponent(out StoreBoxRef box))
                     {
-                        SetStandartPosition();
+                        SetChildPosition(box.StoreBox.ChildPoint);
+
+                        HundleClick();
+
+                        return;
+                    }
+
+                    StorageSurface storeSurface = null;
+
+                    if (hit.collider.TryGetComponent(out StorageSurface storage))
+                    {
+                        storeSurface = storage;
+
+                        if (!storage.IsOpened())
+                        {
+                            SetStandartPosition();
+                            return;
+                        }
+                    }
+
+                    if (hit.collider.tag == "surface")
+                    {
+                        SetCustomPosition(hit.transform, hit.point);
+
+                        HundleClick(storeSurface);
+
                         return;
                     }
                 }
 
-                if (hit.collider.tag == "surface")
-                {
-                    SetCustomPosition(hit.transform, hit.point);
-
-                    HundleClick(storeSurface);
-
-                    return;
-                }
+                SetStandartPosition();
             }
-
-            SetStandartPosition();
         }
     }
 
@@ -84,7 +111,7 @@ public class ItemGrab : MonoBehaviour
         if (isAvailable && Input.GetMouseButtonDown(0))
         {
             grabbedItem.Place();
-
+            editMode = false;
             grabbedItem = null;
         }
     }
@@ -116,6 +143,22 @@ public class ItemGrab : MonoBehaviour
 
         grabbedItem.transform.localPosition = Vector3.zero;
         grabbedItem.transform.localRotation = standartRotation;
+    }
+
+    public void GetRidOfEmptyBox()
+    {
+        if (grabbedItem != null)
+        {
+            if(grabbedItem.TryGetComponent(out StoreBox box))
+            {
+                if(box.GetItemsAmount() == 0)
+                {
+                    Destroy(grabbedItem.gameObject);
+                    grabbedItem = null;
+                    editMode = false;
+                }
+            }
+        }
     }
 
     public void Grab(PickupObject obj)

@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80e48b026d4b5f84b9a88d7878fb3768, type: 3}
   m_Name: ProductFinder
   m_EditorClassIdentifier: 
-  productConfigs: []
+  productConfigs:
+  - {fileID: 11400000, guid: 14c9327dfa8f6c348b880b2cfd20a165, type: 2}

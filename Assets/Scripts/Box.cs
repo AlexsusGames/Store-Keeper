@@ -7,16 +7,23 @@ public class Box : MonoBehaviour, IOverheadChecker
     [SerializeField] private GameObject[] items;
     public string ProductName;
 
+    private int itemAmount;
+
     protected BoxCollider bCollider;
 
     private void Awake()
     {
-        Init(5);
+        bCollider = GetComponent<BoxCollider>();
     }
 
-    private void Init(int productAmount)
+    public void SetStandart()
     {
-        bCollider = GetComponent<BoxCollider>();
+        Init(items.Length);
+    }
+
+    public void Init(int productAmount)
+    {
+        itemAmount = 0;
 
         if(items.Length < productAmount)
         {
@@ -32,23 +39,11 @@ public class Box : MonoBehaviour, IOverheadChecker
         for (int i = 0;i < productAmount; i++)
         {
             items[i].SetActive(true);
+            itemAmount++;
         }
     }
 
-    public int GetItemsAmount()
-    {
-        int countOfItems = 0;
-
-        for (int i = 0; i < items.Length; i++)
-        {
-            if (items[i].activeInHierarchy)
-            {
-                countOfItems++;
-            }
-        }
-
-        return countOfItems;
-    }
+    public int GetItemsAmount() => itemAmount;
 
     public int CanTake() => items.Length - GetItemsAmount();
 
@@ -66,6 +61,7 @@ public class Box : MonoBehaviour, IOverheadChecker
                 }
 
                 items[i].SetActive(true);
+                itemAmount++;
                 amountToAdd--;
             }
         }
@@ -86,6 +82,7 @@ public class Box : MonoBehaviour, IOverheadChecker
 
                 items[i].SetActive(false);
                 amountToRemove--;
+                itemAmount--;
             }
         }
     }

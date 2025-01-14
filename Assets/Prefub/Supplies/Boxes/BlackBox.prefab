@@ -261,6 +261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMesh: {fileID: 2633933142819780470}
+  inputClues:
+  - {fileID: 6752581916871399899, guid: 3069840b9e86e3745b2f2498d1a08fa7, type: 3}
   renderers:
   - {fileID: 4559242821351938880}
   enablePreviewMat: {fileID: 2100000, guid: b1481dad54b8dc84fa36f00318678e8f, type: 2}
@@ -333,4 +335,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
+  ProductName: 
   childPoint: {fileID: 2105126675221267900}

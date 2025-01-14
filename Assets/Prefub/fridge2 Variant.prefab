@@ -515,6 +515,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMesh: {fileID: 530063033401875789}
+  inputClues:
+  - {fileID: 6752581916871399899, guid: 1ed91ed47344f5f41a877fec90a9228c, type: 3}
 --- !u!114 &530063033401875789
 MonoBehaviour:
   m_ObjectHideFlags: 0

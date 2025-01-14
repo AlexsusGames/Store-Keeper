@@ -6,6 +6,8 @@ public class InteractiveHandler : MonoBehaviour
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private ItemGrab itemGrabbing;
 
+    [SerializeField] private GameInputView gameInputView;
+
     private Camera mainCamera;
     private IInteractable currentInteractable; 
     private bool isEnable = true;
@@ -20,7 +22,7 @@ public class InteractiveHandler : MonoBehaviour
         }
     }
 
-    public void ChangeEnavled(bool value)
+    public void ChangeEnabled(bool value)
     {
         isEnable = value;
     }
@@ -30,6 +32,9 @@ public class InteractiveHandler : MonoBehaviour
         if (isEnable)
         {
             HighlightObject();
+
+            var inputClue = currentInteractable != null ? currentInteractable.GetInputClue() : null;
+            gameInputView.AssignEmptyState(inputClue);
 
             if (Input.GetKeyDown(KeyCode.E) && currentInteractable != null)
             {

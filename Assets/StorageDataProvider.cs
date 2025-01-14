@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
 public class StorageDataProvider 
 {
@@ -8,7 +9,10 @@ public class StorageDataProvider
 
     public void SaveData(StorageDataList list)
     {
-        string save = JsonUtility.ToJson(list);
+        string save = JsonConvert.SerializeObject(list, Formatting.Indented, new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        });
         PlayerPrefs.SetString(KEY, save);
     }
 
@@ -17,7 +21,7 @@ public class StorageDataProvider
         if (PlayerPrefs.HasKey(KEY))
         {
             string save = PlayerPrefs.GetString(KEY);
-            data = JsonUtility.FromJson<StorageDataList>(save);
+            data = JsonConvert.DeserializeObject<StorageDataList>(save);
         }
         else data = new();
     }

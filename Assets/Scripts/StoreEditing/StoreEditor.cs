@@ -13,6 +13,8 @@ public class StoreEditor : MonoBehaviour
     [SerializeField] private Transform floorSurface;
 
     [SerializeField] private StoreFactory factory;
+    [SerializeField] private ProductFinder productFinder;
+    [SerializeField] private Surface handSurface;
 
     private FurnitureDataProvider dataProvider;
     private StoreFurnitureConfigFinder configFinder;
@@ -23,7 +25,7 @@ public class StoreEditor : MonoBehaviour
 
     private void Awake()
     {
-        productsManager = new ProductsManager();
+        productsManager = new ProductsManager(productFinder);
         dataProvider = new();
         configFinder = new();
         positionDataProvider = new();
@@ -133,8 +135,6 @@ public class StoreEditor : MonoBehaviour
 
         foreach(var position in positions)
         {
-            Debug.Log(position.Name);
-
             var prefab = factory.Create(position.Name);
 
             prefab.FurnitureId = position.Id;
@@ -142,8 +142,21 @@ public class StoreEditor : MonoBehaviour
             prefab.transform.localPosition = position.Position;
             prefab.transform.localRotation = Quaternion.Euler(position.Rotation);
 
-            productsManager.PlaceProducts(prefab.FurnitureId, prefab.transform);
+            productsManager.PlaceProducts(prefab.FurnitureId, prefab.GetFirstSurface());
         }
+    }
+
+    public PickupObject GetGrabbedSavedObject()
+    {
+        productsManager.PlaceProducts(handSurface.GetSurfaceId(), handSurface.transform);
+        
+        if(handSurface.transform.childCount > 0)
+        {
+            handSurface.transform.GetChild(0).TryGetComponent(out PickupObject obj);
+            return obj;
+        }
+
+        return null;
     }
 
     public List<Surface> GetActiveSurfaces()
@@ -160,6 +173,8 @@ public class StoreEditor : MonoBehaviour
                 result.Add(surface);
             }
         }
+
+        result.Add(handSurface);
 
         return result;
     }

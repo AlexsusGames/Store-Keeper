@@ -14,6 +14,10 @@ public class ProductConfig : ScriptableObject
     {
         GameObject obj = Instantiate(prefab.gameObject, parent);
         obj.TryGetComponent(out Box box);
+
+        if (box == null)
+            throw new System.Exception("Prefab doesn't contain 'Box' script");
+
         box.ProductName = ProductName;
 
         return obj;

@@ -6,6 +6,7 @@ public class Surface : MonoBehaviour
 {
     [SerializeField] private List<Transform> surfaces;
     [SerializeField] private FurniturePlacementView view;
+    [SerializeField] private string surfaceId = string.Empty;
 
     public List<Transform> Surfaces => surfaces;
     public string GetSurfaceId()
@@ -13,6 +14,6 @@ public class Surface : MonoBehaviour
         if (view != null)
             return view.FurnitureId;
 
-        else return string.Empty;
+        else return surfaceId;
     }
 }
