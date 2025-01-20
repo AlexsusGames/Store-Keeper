@@ -12,7 +12,13 @@ public class FirstPersonController : MonoBehaviour
 
     private bool moveBlock = false;
 
-    void Start()
+    public Vector3 PlayerPosition
+    {
+        get => rb.position;
+        set => rb.position = value;
+    }
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;

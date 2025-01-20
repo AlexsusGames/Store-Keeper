@@ -16,9 +16,12 @@ public abstract class InteractiveManager : MonoBehaviour, IInteractable
 
     public void OutlineEnabled(bool enabled)
     {
-        if(enabled != outlineMesh.enabled)
+        if(outlineMesh != null)
         {
-            outlineMesh.enabled = enabled;
+            if (enabled != outlineMesh.enabled)
+            {
+                outlineMesh.enabled = enabled;
+            }
         }
     }
 }

@@ -630,7 +630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   furnitureName: fridge
   outline: {fileID: 6759389989076259493}
-  collidersAmount: 7
+  collidersAmount: 6
   surfaces:
   - {fileID: 1891857511187554523}
   - {fileID: 1831755659952648207}
@@ -757,6 +757,7 @@ MonoBehaviour:
   - {fileID: 2317568312912467469}
   - {fileID: 9139741459728844326}
   view: {fileID: 3668452218193163248}
+  surfaceId: 
 --- !u!1 &6906682809003605744 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 2790cec2ba7821a4abbbefb52c796320, type: 3}

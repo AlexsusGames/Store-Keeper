@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
-public class StoreEditor : MonoBehaviour
+public class StoreEditor : MonoBehaviour, IDataProvider
 {
     [SerializeField] private FurnitureSelectionEditor furnitureSelector;
     [SerializeField] private FurniturePositionEditor furniturePositionEditor;
@@ -16,29 +16,25 @@ public class StoreEditor : MonoBehaviour
     [SerializeField] private ProductFinder productFinder;
     [SerializeField] private Surface handSurface;
 
-    private FurnitureDataProvider dataProvider;
+    private NonPlacedFurnitureDataProvider nonPlacedFurnitureData;
+    private PlacedFurnitureDataProvider placedFurnitureData;
+
     private StoreFurnitureConfigFinder configFinder;
 
-    private FurniturePositionDataProvider positionDataProvider;
     private ProductsManager productsManager;
     private bool isBeingPlaced;
 
     private void Awake()
     {
         productsManager = new ProductsManager(productFinder);
-        dataProvider = new();
+
+        nonPlacedFurnitureData = new();
         configFinder = new();
-        positionDataProvider = new();
+        placedFurnitureData = new();
+
         factory.Init(configFinder);
-    }
 
-    private void Start()
-    {
-        Init();
-
-        UpdateInventoryView();
-
-        dataProvider.OnDataChange += UpdateInventoryView;
+        nonPlacedFurnitureData.OnDataChange += UpdateInventoryView;
 
         furnitureSelector.OnSelected += OnFurnitureSelected;
         furnitureSelector.OnSelected += furniturePositionEditor.OnFurnitureSelected;
@@ -56,9 +52,9 @@ public class StoreEditor : MonoBehaviour
         if(!isBeingPlaced && !furnitureSelector.IsSelected)
         {
             isBeingPlaced = true;
-            dataProvider.RemoveFurniture(name);
+            nonPlacedFurnitureData.RemoveFurniture(name);
 
-            string id = positionDataProvider.GetFreeID();
+            string id = placedFurnitureData.GetFreeID();
             var obj = factory.Create(name);
 
             obj.FurnitureId = id;
@@ -76,11 +72,11 @@ public class StoreEditor : MonoBehaviour
         {
             if(!furnitureView.HasProducts())
             {
-                dataProvider.AddFurniture(furnitureView.FurnitureName);
+                nonPlacedFurnitureData.AddFurniture(furnitureView.FurnitureName);
                 furniturePositionEditor.SetEditStatus(false);
                 furnitureSelector.Deselect();
 
-                positionDataProvider.RemoveById(furnitureView.FurnitureId);
+                placedFurnitureData.RemoveById(furnitureView.FurnitureId);
 
                 Destroy(furnitureView.gameObject);
                 isBeingPlaced = false;
@@ -92,7 +88,7 @@ public class StoreEditor : MonoBehaviour
             furniturePositionEditor.Confirm();
             furnitureSelector.Deselect();
 
-            positionDataProvider.AddFurniture(furniturePositionEditor.GetNewPosition());
+            placedFurnitureData.AddFurniture(furniturePositionEditor.GetNewPosition());
             isBeingPlaced = false;
         };
 
@@ -114,22 +110,16 @@ public class StoreEditor : MonoBehaviour
         handleMenu.SetFurniture(sprite, storeAction, confirmAction, editAction);
     }
 
-    private void OnDestroy()
-    {
-        dataProvider.OnDataChange -= UpdateInventoryView;
-        productsManager.SavePosition(GetActiveSurfaces());
-    }
-
     private void UpdateInventoryView()
     {
-        var data = dataProvider.GetFurnitureList();
+        var data = nonPlacedFurnitureData.GetFurnitureList();
         UnityAction<string> action = CreateNewFurniture;
         inventoryView.SetData(data, action);
     }
 
     private void Init()
     {
-        var positions = positionDataProvider.GetPositions();
+        var positions = placedFurnitureData.GetPositions();
 
         productsManager.PlaceProducts(string.Empty, floorSurface);
 
@@ -177,5 +167,19 @@ public class StoreEditor : MonoBehaviour
         result.Add(handSurface);
 
         return result;
+    }
+
+    public void Save()
+    {
+        productsManager.SavePosition(GetActiveSurfaces());
+        placedFurnitureData.SaveData();
+        nonPlacedFurnitureData.SaveData();
+    }
+
+    public void Load()
+    {
+        Init();
+
+        UpdateInventoryView();
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDataProvider
 {
     [SerializeField] private FirstPersonCamera playerCamera;
     [SerializeField] private FirstPersonController playerController;
@@ -11,4 +11,29 @@ public class Player : MonoBehaviour
     public FirstPersonCamera FirstPersonCamera => playerCamera;
     public FirstPersonController PlayerController => playerController;
     public InteractiveHandler InteractiveHandler => interactiveHandler;
+
+    private const string KEY = "player_data_save";
+    private PlayerData playerData;
+
+    public void Load()
+    {
+        if (PlayerPrefs.HasKey(KEY))
+        {
+            string save = PlayerPrefs.GetString(KEY);
+            playerData = JsonUtility.FromJson<PlayerData>(save);
+
+            playerController.PlayerPosition = playerData.Position;
+        }
+    }
+
+    public void Save()
+    {
+        playerData = new PlayerData()
+        {
+            Position = playerController.PlayerPosition,
+        };
+
+        string save = JsonUtility.ToJson(playerData);
+        PlayerPrefs.SetString(KEY, save);
+    }
 }

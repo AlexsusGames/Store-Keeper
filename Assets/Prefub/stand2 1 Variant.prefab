@@ -63,7 +63,7 @@ Transform:
   m_GameObject: {fileID: 1354935737730724934}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.076, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8333333, y: 0.8333333, z: 0.8333333}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3375625430762864557}
@@ -131,7 +131,7 @@ Transform:
   m_GameObject: {fileID: 1410687223062557528}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 6.072, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8333333, y: 0.8333333, z: 0.8333333}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3375625430762864557}
@@ -199,7 +199,7 @@ Transform:
   m_GameObject: {fileID: 5662179885551018920}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.614, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8333333, y: 0.8333333, z: 0.8333333}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3375625430762864557}
@@ -267,7 +267,7 @@ Transform:
   m_GameObject: {fileID: 5915943857158913961}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 3.098, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8333333, y: 0.8333333, z: 0.8333333}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3375625430762864557}
@@ -335,7 +335,7 @@ Transform:
   m_GameObject: {fileID: 9153069065916505174}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 4.63, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8333333, y: 0.8333333, z: 0.8333333}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3375625430762864557}
@@ -681,6 +681,7 @@ MonoBehaviour:
   - {fileID: 849936992987994004}
   - {fileID: 4797997224288516179}
   view: {fileID: 830357880026812812}
+  surfaceId: 
 --- !u!4 &2085296845535854868 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 525d7f3de54b88340b88e281c111bcd7, type: 3}

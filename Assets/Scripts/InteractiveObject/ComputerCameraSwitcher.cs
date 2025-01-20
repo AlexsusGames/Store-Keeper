@@ -13,7 +13,7 @@ public class ComputerCameraSwitcher : InteractiveManager
     {
         if(!cameraChanger.IsWorking)
         {
-            if (!cameraChanger.isTopDownMode)
+            if (!cameraChanger.storeEditorModeEnabled)
             {
                 isInteracting = !isInteracting;
 

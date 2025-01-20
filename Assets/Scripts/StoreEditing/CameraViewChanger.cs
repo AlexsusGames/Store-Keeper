@@ -5,17 +5,16 @@ using UnityEngine;
 
 public class CameraViewChanger : MonoBehaviour
 {
-    [SerializeField] private GameObject lockedCursorObj;
+    [SerializeField] private GameObject gameplayCanvas;
     [SerializeField] private Player player;
-    [SerializeField] private TopDownCameraMovement topDownCamera;
-    [SerializeField] private GameObject UiTopDownCamera;
+    [SerializeField] private GameObject storeEditor;
     [SerializeField] private Canvas computerUI;
 
-    public bool isTopDownMode = false;
+    public bool storeEditorModeEnabled = false;
 
     private void Update()
     {
-        if (isTopDownMode && Input.GetButtonDown("Cancel"))
+        if (storeEditorModeEnabled && Input.GetButtonDown("Cancel"))
         {
             SwitchTopDownCamera();
         }
@@ -23,17 +22,16 @@ public class CameraViewChanger : MonoBehaviour
 
     public void SwitchTopDownCamera()
     {
-        isTopDownMode = !isTopDownMode;
-        topDownCamera.gameObject.SetActive(isTopDownMode);
-        UiTopDownCamera.gameObject.SetActive(isTopDownMode);
+        storeEditorModeEnabled = !storeEditorModeEnabled;
+        storeEditor.gameObject.SetActive(storeEditorModeEnabled);
 
-        player.InteractiveHandler.ChangeEnabled(!isTopDownMode);
-        computerUI.enabled = !isTopDownMode;
+        player.InteractiveHandler.ChangeEnabled(!storeEditorModeEnabled);
+        computerUI.enabled = !storeEditorModeEnabled;
     }
 
     private void CursorEnabled(bool value)
     {
-        lockedCursorObj.SetActive(!value);
+        gameplayCanvas.SetActive(!value);
         Cursor.visible = value;
         Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
     }
