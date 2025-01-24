@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3300620350423519658}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.7080474, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4285713, y: 1.4285713, z: 1.4285713}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6717714913865593056}
@@ -52,8 +52,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 0, z: 5}
-  m_Center: {x: 0, y: -0.05, z: 0}
+  m_Size: {x: 2.1748133, y: 0, z: 3.4005904}
+  m_Center: {x: 0.00023472312, y: -0.05000118, z: -0.009129883}
 --- !u!114 &9081310859053661696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 3670904097323259275}
   - component: {fileID: 4562243636042829406}
   - component: {fileID: 8506767111161978394}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: 'vegetablesBox '
   m_TagString: Untagged
   m_Icon: {fileID: 0}

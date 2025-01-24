@@ -7,6 +7,7 @@ public class ProductConfig : ScriptableObject
 {
     [SerializeField] private GameObject prefab;
 
+    public int Capacity;
     public string ProductName;
     public StorageType StorageType;
 

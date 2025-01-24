@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -11,5 +12,5 @@ public class StorageData
     public Vector3 Position;
     public Quaternion Rotation;
 
-    public StorageData Child;
+    public List<StorageData> Childs;
 }

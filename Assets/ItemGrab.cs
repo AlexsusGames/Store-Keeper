@@ -69,19 +69,34 @@ public class ItemGrab : MonoBehaviour
                 {
                     if (hit.collider.TryGetComponent(out StoreBoxRef box))
                     {
-                        SetChildPosition(box.StoreBox.ChildPoint);
+                        bool canFold = true;
 
-                        HundleClick();
+                        if (box.StoreBox.FoldBtType)
+                        {
+                            if(grabbedItem.StoreBox.BoxType != box.StoreBox.BoxType)
+                            {
+                                Debug.Log(grabbedItem.StoreBox.BoxType);
+                                Debug.Log(box.StoreBox.BoxType);
+                                canFold = false;
+                            }
+                        }
 
-                        return;
+                        if(canFold)
+                        {
+                            if (grabbedItem.IsFreeToPlace)
+                            {
+                                SetCustomPosition(box.StoreBox.ChildPoint, hit.point);
+                            }
+                            else SetChildPosition(box.StoreBox.ChildPoint);
+
+                            HundleClick();
+
+                            return;
+                        }
                     }
-
-                    StorageSurface storeSurface = null;
 
                     if (hit.collider.TryGetComponent(out StorageSurface storage))
                     {
-                        storeSurface = storage;
-
                         if (!storage.IsOpened())
                         {
                             SetStandartPosition();
@@ -93,7 +108,7 @@ public class ItemGrab : MonoBehaviour
                     {
                         SetCustomPosition(hit.transform, hit.point);
 
-                        HundleClick(storeSurface);
+                        HundleClick();
 
                         return;
                     }
@@ -104,7 +119,7 @@ public class ItemGrab : MonoBehaviour
         }
     }
 
-    private void HundleClick(StorageSurface storeSurface = null)
+    private void HundleClick()
     {
         bool isAvailable = grabbedItem.CheckAvailableToPlace();
 
@@ -194,7 +209,7 @@ public class ItemGrab : MonoBehaviour
         {
             if(grabbedItem.gameObject.TryGetComponent(out Box grabbedBox) && obj.TryGetComponent(out Box box))
             {
-                if (grabbedBox.GetType() == box.GetType())
+                if (grabbedBox.ProductName == box.ProductName)
                 {
                     if(grabbedBox.GetItemsAmount() > 0 && box.CanTake() > 0)
                     {

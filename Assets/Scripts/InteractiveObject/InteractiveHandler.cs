@@ -62,21 +62,36 @@ public class InteractiveHandler : MonoBehaviour
                     return;
                 }
 
-                if(currentInteractable != null)
-                {
-                    currentInteractable.OutlineEnabled(false);
-                }
-
-                currentInteractable = interactable;
-                currentInteractable.OutlineEnabled(true);
+                OnInteractableChange(interactable);
                 return;
             }
         }
 
-        if(currentInteractable != null)
+        OnInteractableChange(null);
+    }
+
+    private void OnInteractableChange(IInteractable interactable)
+    {
+        if (currentInteractable != null)
         {
-            currentInteractable.OutlineEnabled(false); 
+            if (currentInteractable is PickupObject obj)
+            {
+                obj.SetCapActive(true);
+            }
+
+            currentInteractable.OutlineEnabled(false);
             currentInteractable = null;
+        }
+
+        if(interactable != null)
+        {
+            currentInteractable = interactable;
+            currentInteractable.OutlineEnabled(true);
+
+            if (interactable is PickupObject obj)
+            {
+                obj.SetCapActive(false);
+            }
         }
     }
 }

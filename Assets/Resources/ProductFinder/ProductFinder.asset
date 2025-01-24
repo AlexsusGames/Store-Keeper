@@ -14,3 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   productConfigs:
   - {fileID: 11400000, guid: 14c9327dfa8f6c348b880b2cfd20a165, type: 2}
+  - {fileID: 11400000, guid: a1a312b80cd76834bbf0c47198052118, type: 2}
+  - {fileID: 11400000, guid: 14d52b40e2e8a044c831d15939ffe6d5, type: 2}
+  - {fileID: 11400000, guid: 15e0ded9244c3274ca7075cebf9b5ec8, type: 2}
+  - {fileID: 11400000, guid: 0b46bc4b62827aa47a593ab5d562441d, type: 2}
+  - {fileID: 11400000, guid: 516e3b44c0d119e4ab6ae8af1b17e75f, type: 2}
+  - {fileID: 11400000, guid: 548e9cbd559616449b9014006aab1395, type: 2}
+  - {fileID: 11400000, guid: 7c07f5b4cf88e3b4abacfb900fccb9a1, type: 2}

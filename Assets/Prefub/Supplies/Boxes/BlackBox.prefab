@@ -322,6 +322,8 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   countOfCollision: 1
+  cap: {fileID: 0}
+  IsFreeToPlace: 0
 --- !u!114 &4529147299695735861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,3 +339,5 @@ MonoBehaviour:
   items: []
   ProductName: 
   childPoint: {fileID: 2105126675221267900}
+  BoxType: 1
+  FoldBtType: 0

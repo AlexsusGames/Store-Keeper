@@ -14,20 +14,23 @@ public class PickupObject : InteractiveManager
     [SerializeField] private UnityEvent OnPlaced;
 
     [SerializeField] private int countOfCollision;
+    [SerializeField] private GameObject cap;
 
-    private List<Material> cachedMaterials = new();
+    private List<Material[]> cachedMaterials = new();
     private BoxCollider bCollider;
+
+    private StoreBox box;
+    public bool IsFreeToPlace;
+    public StoreBox StoreBox => box;
 
     private void Awake()
     {
         bCollider = GetComponent<BoxCollider>(); 
+        box = GetComponent<StoreBox>();
 
         for (int i = 0; i < renderers.Length; i++)
         {
-            for(int j = 0; j < renderers[i].materials.Length; j++)
-            {
-                cachedMaterials.Add(renderers[i].materials[j]);
-            }
+            cachedMaterials.Add(renderers[i].materials);
         }
     }
 
@@ -39,31 +42,33 @@ public class PickupObject : InteractiveManager
         }
     }
 
+    public void SetCapActive(bool isActive)
+    {
+        if(cap != null)
+        {
+            cap.SetActive(isActive);
+        }
+    }
+
     public void Grab()
     {
+        OutlineEnabled(false);
+        OutlineBlock = true;
         OnGrabbed?.Invoke();
     }
     public void Place()
     {
         OnPlaced?.Invoke();
         SetDefaut();
+        OutlineBlock = false;
     }
     public void SetDefaut()
     {
         OutlineEnabled(false);
 
-        int matIndex = 0;
-
         for (int i = 0; i < renderers.Length; i++)
         {
-            Material[] materials = renderers[i].materials;
-
-            for (int j = 0; j < 1; j++)
-            {
-                materials[j] = cachedMaterials[matIndex];
-                matIndex++;
-            }
-
+            Material[] materials = cachedMaterials[i];
             renderers[i].materials = materials;
         }
 
@@ -80,7 +85,7 @@ public class PickupObject : InteractiveManager
         {
             Material[] materials = renderers[i].materials;
 
-            for (int j = 0; j < 1; j++)
+            for (int j = 0; j < materials.Length; j++)
             {
                 materials[j] = mat;
             }

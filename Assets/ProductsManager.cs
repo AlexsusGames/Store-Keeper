@@ -44,37 +44,44 @@ public class ProductsManager
 
         var products = storageProducts[id];
 
-        foreach (var product in products)
-        {
-            if (product.ProductName == string.Empty)
-                continue;
-
-            SpawnProduct(parent, product);
-        }
+        SpawnProduct(parent, products);
     }
 
-    private void SpawnProduct(Transform parent, StorageData data)
+    private void SpawnProduct(Transform parent, List<StorageData> data)
     {
-        Debug.Log($"Product Data Child is null - {data.Child == null}");
-
-        var config = productFinder.FindByName(data.ProductName);
-
-        var prefab = config.GetPrefab(parent);
-
-        prefab.transform.position = data.Position;
-        prefab.transform.localRotation = data.Rotation;
-
-        if(prefab.TryGetComponent(out Box box))
+        for (int i = 0;i < data.Count;i++)
         {
-            box.Init(data.ProductCount);
-        }
+            if (data[i].ProductName == string.Empty)
+            {
+                continue;
+            }
 
-        if (data.Child != null)
-        {
-            var childData = data.Child;
-            var storeBox = prefab.GetComponent<StoreBox>();
+            Debug.Log($"Product Data Child is null - {data[i].Childs == null}");
 
-            SpawnProduct(storeBox.ChildPoint, childData);
+            var config = productFinder.FindByName(data[i].ProductName);
+
+            var prefab = config.GetPrefab(parent);
+
+            prefab.transform.position = data[i].Position;
+            prefab.transform.localRotation = data[i].Rotation;
+
+            if (prefab.TryGetComponent(out Box box))
+            {
+                box.Init(data[i].ProductCount);
+            }
+
+            if (prefab.TryGetComponent(out PickupObject pickupObject))
+            {
+                pickupObject.ChangeLayer(3);
+            }
+
+            if (data[i].Childs != null)
+            {
+                var childData = data[i].Childs;
+                var storeBox = prefab.GetComponent<StoreBox>();
+
+                SpawnProduct(storeBox.ChildPoint, childData);
+            }
         }
     }
 
@@ -94,7 +101,7 @@ public class ProductsManager
                 {
                     var productData = CreateProductData(surfaces[j].GetChild(k).gameObject, surfaceList[i]);
 
-                    Debug.Log($"Product Data Child is null - {productData.Child == null}");
+                    Debug.Log($"Product Data Child is null - {productData.Childs == null}");
 
                     data.Add(productData);
                 }
@@ -123,7 +130,16 @@ public class ProductsManager
 
             if(box.IsHasChild)
             {
-                storageData.Child = CreateProductData(box.ChilBox.gameObject, null);
+                List<StorageData> list = new List<StorageData>();
+
+                for (int i = 0; i < box.ChildPoint.childCount; i++)
+                {
+                    var child = box.ChildPoint.GetChild(i);
+                    var data = CreateProductData(child.gameObject, null);
+                    list.Add(data);
+                }
+
+                storageData.Childs = list;
             }
 
             return storageData;
