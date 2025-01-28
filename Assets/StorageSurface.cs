@@ -6,13 +6,18 @@ using UnityEngine;
 public class StorageSurface : MonoBehaviour
 {
     [SerializeField] private FurniturePlacementView parent;
-    [SerializeField] private Door door;
+    [SerializeField] private Door[] door;
 
     public bool IsOpened()
     {
         if (door == null)
             return true;
 
-        return door.IsOpen;
+        for (int i = 0; i < door.Length; i++)
+        {
+            if (door[i].IsOpen) return true;
+        }
+
+        return false;
     }
 }

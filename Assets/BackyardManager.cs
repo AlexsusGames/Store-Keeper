@@ -2,34 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackyardManager : MonoBehaviour, IDataProvider
+public class BackyardManager : MonoBehaviour
 {
     [SerializeField] private Animator gateAnimator;
     [SerializeField] private Animator truckAnimator;
     [SerializeField] private TruckView truckView;
+    [SerializeField] private ProductsBlank blank;
 
-    private const string KEY = "DeliverDataSave";
-    private DeliverData data;
+    [SerializeField] private Transform[] paletaPoints;
+    public bool isDelivering {  get; private set; }
 
-    private CarType currentCar;
-    private bool isDelivering;
+    private Dictionary<string, float> expectedProducts;
+    private Dictionary<string, float> actualProducts;
+
+    public List<DeliveryConfig> test;
 
     private void Start()
     {
-        StartCoroutine(Timer());
-    }
-
-    private IEnumerator Timer()
-    {
-        OpenGates(true);
-
-        CarType type = CarType.Grocceries;
-
-        truckView.ChangeSkin(type);
-
-        SetCarDrivingAnimation(true);
-
-        yield return new WaitForSeconds(2);
+        DeliverProducts(test);
     }
 
     private void OpenGates(bool value)
@@ -37,10 +27,62 @@ public class BackyardManager : MonoBehaviour, IDataProvider
         gateAnimator.SetBool("isOpen", value);
     }
 
-    public void DeliverProducts()
+    public void DeliverProducts(List<DeliveryConfig> deliveryData)
     {
+        truckView.ChangeSkin(deliveryData[0].CarType);
+
+        expectedProducts = new();
+        actualProducts = new();
+
         SetCarDrivingAnimation(true);
         isDelivering = true;
+
+        for(int i = 0; i < deliveryData.Count; i++)
+        {
+            var delivery = deliveryData[i].GetOrderDelivered(paletaPoints[i]);
+            var order = delivery.GetOrder();
+
+            foreach (var item in order.Keys)
+            {
+                float current = 0;
+
+                if(expectedProducts.ContainsKey(item))
+                    current = expectedProducts[item];
+
+                expectedProducts[item] = order[item] + current;
+            }
+
+            Print(expectedProducts);
+
+            var changedOrder = deliveryData[i].GetChangedOrderByDifficult(delivery);
+
+            foreach(var item in changedOrder.Keys)
+            {
+                float current = 0;
+
+                if (actualProducts.ContainsKey(item))
+                    current = actualProducts[item];
+
+                actualProducts[item] = changedOrder[item] + current;
+            }
+
+            Print(actualProducts);
+        }
+
+        blank.SetData(expectedProducts);
+    }
+
+    private void Print(Dictionary<string, float> values)
+    {
+        string debug = "";
+
+        foreach(var item in values.Keys)
+        {
+            debug += $"Key: {item}. Value: {values[item]}.";
+            debug += "\n";
+        }
+
+        Debug.Log(debug);
     }
 
     public void OnDelivered()
@@ -53,40 +95,4 @@ public class BackyardManager : MonoBehaviour, IDataProvider
     {
         truckAnimator.SetBool("drivingInside", value);
     }
-
-    public void Save()
-    {
-        DeliverData data = new DeliverData()
-        {
-            IsDeliviring = isDelivering,
-            CarType = currentCar
-        };
-
-        string save = JsonUtility.ToJson(data);
-
-        PlayerPrefs.SetString(KEY, save);
-    }
-
-    public void Load()
-    {
-        if (PlayerPrefs.HasKey(KEY))
-        {
-            string save = PlayerPrefs.GetString(KEY);
-            data = JsonUtility.FromJson<DeliverData>(save);
-
-            if(data.IsDeliviring)
-            {
-                isDelivering = true;
-                truckView.ChangeSkin(data.CarType);
-                truckView.SetBeckyardPosition();
-            }
-        }
-    }
-}
-
-[System.Serializable]
-public class DeliverData
-{
-    public CarType CarType;
-    public bool IsDeliviring;
 }

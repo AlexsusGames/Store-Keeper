@@ -316,10 +316,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1461304994638716399, guid: 7e328afc715030645990f8d3ded10f42, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1461304994638716399, guid: 7e328afc715030645990f8d3ded10f42, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c4fb4cf60b762b4790945dc8bd51d51, type: 2}
+    - target: {fileID: -1461304994638716399, guid: 7e328afc715030645990f8d3ded10f42, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 691eef7c91f64224d93ef791e7c0b37d, type: 2}
     - target: {fileID: 919132149155446097, guid: 7e328afc715030645990f8d3ded10f42, type: 3}
       propertyPath: m_Name
       value: milkyBox_v2
       objectReference: {fileID: 0}
+    - target: {fileID: 1863191399037859163, guid: 7e328afc715030645990f8d3ded10f42, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1863191399037859163, guid: 7e328afc715030645990f8d3ded10f42, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 691eef7c91f64224d93ef791e7c0b37d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -459,6 +479,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c4fb4cf60b762b4790945dc8bd51d51, type: 2}
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2 (5)
@@ -547,6 +575,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c4fb4cf60b762b4790945dc8bd51d51, type: 2}
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2
@@ -635,6 +671,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c4fb4cf60b762b4790945dc8bd51d51, type: 2}
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2 (2)
@@ -723,6 +767,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c4fb4cf60b762b4790945dc8bd51d51, type: 2}
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2 (9)
@@ -811,6 +863,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c4fb4cf60b762b4790945dc8bd51d51, type: 2}
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2 (6)
@@ -899,6 +959,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c4fb4cf60b762b4790945dc8bd51d51, type: 2}
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2 (7)
@@ -987,6 +1055,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c4fb4cf60b762b4790945dc8bd51d51, type: 2}
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2 (4)
@@ -1075,6 +1151,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c4fb4cf60b762b4790945dc8bd51d51, type: 2}
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2 (1)
@@ -1163,6 +1247,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c4fb4cf60b762b4790945dc8bd51d51, type: 2}
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2 (8)
@@ -1251,6 +1343,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c4fb4cf60b762b4790945dc8bd51d51, type: 2}
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2 (3)

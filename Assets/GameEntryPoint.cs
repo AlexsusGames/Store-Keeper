@@ -11,6 +11,8 @@ public class GameEntryPoint : MonoBehaviour
     {
         storeEditor.Load();
         player.Load();
+
+        Application.targetFrameRate = 144;
     }
 
     private void OnDisable()

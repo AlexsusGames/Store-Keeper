@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4611c4fe119ecfa47aa4e2b5ce234ed6, type: 3}
   m_Name: Dessert_Yogurt
   m_EditorClassIdentifier: 
-  prefab: {fileID: 828277208807111747, guid: 07ff3228e638a2a4fba34b481c1a11c3, type: 3}
+  prefab: {fileID: 8334817494780121374, guid: 07ff3228e638a2a4fba34b481c1a11c3, type: 3}
   Capacity: 6
   ProductName: Dessert_Yogurt
   StorageType: 1

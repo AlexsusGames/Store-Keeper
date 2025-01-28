@@ -30,7 +30,7 @@ public class PickupObject : InteractiveManager
 
         for (int i = 0; i < renderers.Length; i++)
         {
-            cachedMaterials.Add(renderers[i].materials);
+            cachedMaterials.Add(renderers[i].sharedMaterials);
         }
     }
 
@@ -69,7 +69,7 @@ public class PickupObject : InteractiveManager
         for (int i = 0; i < renderers.Length; i++)
         {
             Material[] materials = cachedMaterials[i];
-            renderers[i].materials = materials;
+            renderers[i].sharedMaterials = materials;
         }
 
         OutlineEnabled(true);
@@ -83,14 +83,14 @@ public class PickupObject : InteractiveManager
 
         for (int i = 0;i < renderers.Length; i++)
         {
-            Material[] materials = renderers[i].materials;
+            Material[] materials = renderers[i].sharedMaterials;
 
             for (int j = 0; j < materials.Length; j++)
             {
                 materials[j] = mat;
             }
 
-            renderers[i].materials = materials;
+            renderers[i].sharedMaterials = materials;
         }
 
         OutlineEnabled(true);

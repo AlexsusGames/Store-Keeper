@@ -67,7 +67,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 3668452218193163248}
-  door: {fileID: 5507644665643220634}
+  door:
+  - {fileID: 5507644665643220634}
 --- !u!1 &5064330280941448580
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 3668452218193163248}
-  door: {fileID: 5507644665643220634}
+  door:
+  - {fileID: 5507644665643220634}
 --- !u!1 &5357044876167899242
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +221,103 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5445397912494566328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1219837279919697961}
+  - component: {fileID: 8856100380824427953}
+  - component: {fileID: 3438362105055569242}
+  - component: {fileID: 4413379240522075043}
+  m_Layer: 6
+  m_Name: InteractBlock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1219837279919697961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5445397912494566328}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6043740104404216703}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8856100380824427953
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5445397912494566328}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.799189, y: 12.206457, z: 0.5160483}
+  m_Center: {x: -0.10457095, y: 7.7572994, z: -2.9860444}
+--- !u!65 &3438362105055569242
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5445397912494566328}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.780704, y: 11.987884, z: 0.50867844}
+  m_Center: {x: -0.15192051, y: 7.7691402, z: 2.994647}
+--- !u!65 &4413379240522075043
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5445397912494566328}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4544025, y: 12.086604, z: 5.484839}
+  m_Center: {x: 2.3602595, y: 7.751531, z: 0.02249405}
 --- !u!1 &7026563242491591209
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +385,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 3668452218193163248}
-  door: {fileID: 5507644665643220634}
+  door:
+  - {fileID: 5507644665643220634}
 --- !u!1 &7615657245202620719
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,6 +580,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2790cec2ba7821a4abbbefb52c796320, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6936921859974037681}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2790cec2ba7821a4abbbefb52c796320, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1219837279919697961}
     - targetCorrespondingSourceObject: {fileID: -2093772787462966335, guid: 2790cec2ba7821a4abbbefb52c796320, type: 3}
       insertIndex: -1
       addedObject: {fileID: 823903126695782697}

@@ -60,6 +60,7 @@ public class DeliveredProducts : MonoBehaviour
 
     private void AddProduct(StoreBox box)
     {
+        box.SetStandart();
         products.Add(box);
 
         if (box.IsHasChild)

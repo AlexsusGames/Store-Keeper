@@ -72,7 +72,7 @@ public class ProductsManager
 
             if (prefab.TryGetComponent(out PickupObject pickupObject))
             {
-                pickupObject.ChangeLayer(3);
+                pickupObject.ChangeLayer(0);
             }
 
             if (data[i].Childs != null)

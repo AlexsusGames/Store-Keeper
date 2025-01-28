@@ -9,15 +9,21 @@ public class DeliveryConfig : ScriptableObject
     [Range(0,10)] public int Difficulty;
     private GameObject Prefab => Products.gameObject;
     public Dictionary<string, int> Order => Products.GetOrder();
+    public CarType CarType;
 
-    public GameObject GetOrderDelivered(Transform parent)
+    public DeliveredProducts GetOrderDelivered(Transform parent)
     {
         var obj = Instantiate(Prefab, parent);
 
         obj.TryGetComponent(out DeliveredProducts products);
         products.Init();
-        products.ChangeOrder(Difficulty);
 
-        return obj;
+        return products;
+    }
+
+    public Dictionary<string, int> GetChangedOrderByDifficult(DeliveredProducts products)
+    {
+        products.ChangeOrder(Difficulty);
+        return products.GetOrder();
     }
 }

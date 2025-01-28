@@ -207,6 +207,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9088474774b685447aa3634f8f9d656e, type: 2}
     - target: {fileID: 919132149155446097, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
       propertyPath: m_Name
       value: Yogurt_Lunch (4)
@@ -295,6 +303,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9088474774b685447aa3634f8f9d656e, type: 2}
     - target: {fileID: 919132149155446097, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
       propertyPath: m_Name
       value: Yogurt_Lunch (3)
@@ -383,6 +399,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9088474774b685447aa3634f8f9d656e, type: 2}
     - target: {fileID: 919132149155446097, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
       propertyPath: m_Name
       value: Yogurt_Lunch
@@ -471,6 +495,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9088474774b685447aa3634f8f9d656e, type: 2}
     - target: {fileID: 919132149155446097, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
       propertyPath: m_Name
       value: Yogurt_Lunch (1)
@@ -559,6 +591,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9088474774b685447aa3634f8f9d656e, type: 2}
     - target: {fileID: 919132149155446097, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
       propertyPath: m_Name
       value: Yogurt_Lunch (2)
@@ -645,6 +685,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6d35a6c674928c047bc11e2a09e7a08d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6d35a6c674928c047bc11e2a09e7a08d, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 6d35a6c674928c047bc11e2a09e7a08d, type: 3}
@@ -784,6 +828,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9088474774b685447aa3634f8f9d656e, type: 2}
     - target: {fileID: 919132149155446097, guid: ebbab18b2b3815c4d917b7ea059ee330, type: 3}
       propertyPath: m_Name
       value: Yogurt_Lunch (5)

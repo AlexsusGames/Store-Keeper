@@ -14,7 +14,6 @@ public class Box : MonoBehaviour, IOverheadChecker
     private void Awake()
     {
         bCollider = GetComponent<BoxCollider>();
-        Init(Random.Range(0, items.Length));
     }
 
     public void SetStandart()
