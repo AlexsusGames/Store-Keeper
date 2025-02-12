@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8334817494780121374, guid: 07ff3228e638a2a4fba34b481c1a11c3, type: 3}
   Capacity: 6
-  ProductName: Dessert_Yogurt
+  ProductName: Yogurt "Dessert" 60g.
   StorageType: 1

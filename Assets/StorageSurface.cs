@@ -10,7 +10,7 @@ public class StorageSurface : MonoBehaviour
 
     public bool IsOpened()
     {
-        if (door == null)
+        if (door == null || door.Length == 0)
             return true;
 
         for (int i = 0; i < door.Length; i++)

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8074700725048967516, guid: 9d032f3fa4f94814e98886c65ace9a64, type: 3}
   Capacity: 6
-  ProductName: Lunch_Yogurt
+  ProductName: Yogurt "Lunch" 30g.
   StorageType: 1

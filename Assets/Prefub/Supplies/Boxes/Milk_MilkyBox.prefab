@@ -81,7 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMesh: {fileID: 7944084796922475687}
   inputClues:
-  - {fileID: 6752581916871399899, guid: 3069840b9e86e3745b2f2498d1a08fa7, type: 3}
+  - {fileID: 11400000, guid: ea64425a1bffddb4999d0fe06a593d49, type: 2}
   renderers:
   - {fileID: 7242302241605740189}
   - {fileID: 618094889586468798}
@@ -177,7 +177,7 @@ MonoBehaviour:
   - {fileID: 2922571661070806603}
   - {fileID: 3896664175525676778}
   - {fileID: 1372066350533591463}
-  ProductName: Milk_Milky_v1
+  ProductName: Milk "Milky" 700ml.
   childPoint: {fileID: 872585871779936254}
   BoxType: 2
   FoldBtType: 0
@@ -313,6 +313,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8391193718175552794, guid: 7e328afc715030645990f8d3ded10f42, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8391193718175552794, guid: 7e328afc715030645990f8d3ded10f42, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -328,6 +332,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 691eef7c91f64224d93ef791e7c0b37d, type: 2}
+    - target: {fileID: -516098083770646512, guid: 7e328afc715030645990f8d3ded10f42, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7e328afc715030645990f8d3ded10f42, type: 3}
       propertyPath: m_Name
       value: milkyBox_v2
@@ -491,6 +499,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milky_v2 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -586,6 +598,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -683,6 +699,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milky_v2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -778,6 +798,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -875,6 +899,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milky_v2 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -970,6 +998,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1067,6 +1099,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milky_v2 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1162,6 +1198,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1259,6 +1299,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milky_v2 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1354,6 +1398,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
       propertyPath: m_Name
       value: milky_v2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aade1f41ca328d64bb941025c44c6ad1, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

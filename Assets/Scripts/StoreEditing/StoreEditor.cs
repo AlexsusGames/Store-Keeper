@@ -23,6 +23,7 @@ public class StoreEditor : MonoBehaviour, IDataProvider
 
     private ProductsManager productsManager;
     private bool isBeingPlaced;
+    public NonPlacedFurnitureDataProvider NonPlacedFurnitureData => nonPlacedFurnitureData;
 
     private void Awake()
     {

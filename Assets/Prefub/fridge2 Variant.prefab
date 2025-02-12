@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMesh: {fileID: 6307331149597013843}
   inputClues:
-  - {fileID: 6752581916871399899, guid: 1ed91ed47344f5f41a877fec90a9228c, type: 3}
+  - {fileID: 11400000, guid: f197cc22db444cc43b56edf1f7d4f7b5, type: 2}
 --- !u!114 &6307331149597013843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,7 +556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   furnitureName: fridge2
   outline: {fileID: 551494536337096092}
-  collidersAmount: 6
+  collidersAmount: 9
   surfaces:
   - {fileID: 4191168368810137001}
 --- !u!65 &5043566044002646487
@@ -720,7 +720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMesh: {fileID: 530063033401875789}
   inputClues:
-  - {fileID: 6752581916871399899, guid: 1ed91ed47344f5f41a877fec90a9228c, type: 3}
+  - {fileID: 11400000, guid: f197cc22db444cc43b56edf1f7d4f7b5, type: 2}
 --- !u!114 &530063033401875789
 MonoBehaviour:
   m_ObjectHideFlags: 0

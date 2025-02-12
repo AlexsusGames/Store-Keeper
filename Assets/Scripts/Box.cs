@@ -105,4 +105,6 @@ public class Box : MonoBehaviour, IOverheadChecker
 
         return true;
     }
+
+    public int GetCapacity() => items.Length;
 }

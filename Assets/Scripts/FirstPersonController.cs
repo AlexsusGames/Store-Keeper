@@ -3,6 +3,14 @@ using UnityEngine;
 public class FirstPersonController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    [SerializeField] private GameObject tablet;
+
+    public bool TabletActivity
+    {
+        get => tablet.activeInHierarchy;
+        set => tablet.SetActive(value);
+    }
+
     public float moveSpeed = 5f;
 
     private Rigidbody rb;
@@ -31,12 +39,15 @@ public class FirstPersonController : MonoBehaviour
         moveBlock = enabled;
     }
 
-    private void ShowHand()
+    public void ShowHand()
     {
-        isHandShowed = !isHandShowed;
+        if(TabletActivity)
+        {
+            isHandShowed = !isHandShowed;
 
-        int weigh = isHandShowed ? 1 : 0;
-        animator.SetLayerWeight(1, weigh);
+            int weigh = isHandShowed ? 1 : 0;
+            animator.SetLayerWeight(1, weigh);
+        }
     }
 
     void FixedUpdate()
@@ -44,28 +55,27 @@ public class FirstPersonController : MonoBehaviour
         if(moveBlock)
         {
             rb.velocity = Vector3.zero;
+            SetAnimationState(0);
+            return;
         }
 
-        if(moveBlock == false)
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
+
+        if (z == 0 && x == 0)
         {
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
-
-            if(z == 0 && x == 0)
-            {
-                rb.velocity = Vector3.zero;
-            }
-
-            float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? spead * 2 : spead;
-
-            if (x == 0 && z == 0) SetAnimationState(0);
-            else if (Input.GetKey(KeyCode.LeftShift)) SetAnimationState(2);
-            else SetAnimationState(1);
-
-            Vector3 move = (transform.right * x + transform.forward * z).normalized;
-
-            rb.velocity = move * currentSpeed;
+            rb.velocity = Vector3.zero;
         }
+
+        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? spead * 2 : spead;
+
+        if (x == 0 && z == 0) SetAnimationState(0);
+        else if (Input.GetKey(KeyCode.LeftShift)) SetAnimationState(2);
+        else SetAnimationState(1);
+
+        Vector3 move = (transform.right * x + transform.forward * z).normalized;
+
+        rb.velocity = move * currentSpeed;
     }
 
     private void Update()
@@ -83,16 +93,6 @@ public class FirstPersonController : MonoBehaviour
             cachedState = state;
             animator.SetInteger("walkingState", state);
         }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //spead = 1;
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        //spead = moveSpeed;
     }
 }
 

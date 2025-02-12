@@ -15,4 +15,4 @@ MonoBehaviour:
   Name: stand2
   shopSprite: {fileID: 21300000, guid: f00d63509f99a4f4a9548ba422be77bb, type: 3}
   prefab: {fileID: 1710143837211990958, guid: 06d10fe69b0b92941be4256db1b4feb0, type: 3}
-  Price: 0
+  Price: 100

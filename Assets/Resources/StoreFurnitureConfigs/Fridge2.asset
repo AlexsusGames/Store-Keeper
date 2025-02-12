@@ -15,4 +15,4 @@ MonoBehaviour:
   Name: fridge2
   shopSprite: {fileID: 21300000, guid: 418365c78dd1d0349a0c454e96f1d7ee, type: 3}
   prefab: {fileID: 5624768024231261035, guid: 6225764054df2104bb117f1c3d3594a0, type: 3}
-  Price: 0
+  Price: 800

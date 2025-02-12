@@ -10,6 +10,7 @@ public class ProductConfig : ScriptableObject
     public int Capacity;
     public string ProductName;
     public StorageType StorageType;
+    public MeasureType MeasureType;
 
     public GameObject GetPrefab(Transform parent)
     {

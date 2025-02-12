@@ -12,6 +12,8 @@ public class ItemGrab : MonoBehaviour
     [SerializeField] private GameInputView gameInputView;
     [SerializeField] private StoreEditor storeEditor;
 
+    [SerializeField] private BoxInfoView view;
+
     private PickupObject grabbedItem;
     private Quaternion standartRotation = Quaternion.Euler(Vector3.zero);
     private Camera mCamera;
@@ -48,11 +50,11 @@ public class ItemGrab : MonoBehaviour
                 gameInputView.SetItemGrabbedState();
             }
         }
-        else gameInputView.SetEmptyHandState();
+        else gameInputView.SetNullState();
 
         if (editMode)
         {
-            gameInputView.SetEditModeState();
+            gameInputView.SetItemEditingState();
             if (grabbedItem != null && Input.GetButtonDown("R"))
             {
                 Vector3 currentRotation = standartRotation.eulerAngles;
@@ -75,8 +77,6 @@ public class ItemGrab : MonoBehaviour
                         {
                             if(grabbedItem.StoreBox.BoxType != box.StoreBox.BoxType)
                             {
-                                Debug.Log(grabbedItem.StoreBox.BoxType);
-                                Debug.Log(box.StoreBox.BoxType);
                                 canFold = false;
                             }
                         }
@@ -126,6 +126,7 @@ public class ItemGrab : MonoBehaviour
         if (isAvailable && Input.GetMouseButtonDown(0))
         {
             grabbedItem.Place();
+            view.Hide();
             editMode = false;
             grabbedItem = null;
         }
@@ -182,26 +183,20 @@ public class ItemGrab : MonoBehaviour
         {
             if(obj.TryGetComponent(out IOverheadChecker checker))
             {
-                grabbedItem = obj;
-                grabbedItem.Grab();
-
-                if (!checker.IsAvailableToGrab())
+                if (checker.IsAvailableToGrab())
                 {
                     if(checker is StoreBox box)
                     {
                         if (!box.IsHasChild)
                         {
+                            grabbedItem = obj;
+                            grabbedItem.Grab();
+
                             SetStandartPosition();
-                            return;
+                            view.ShowInfo(box);
                         }
                     }
-
-                    grabbedItem.Place();
-                    grabbedItem = null;
-                    return;
                 }
-
-                SetStandartPosition();
             }
         }
 

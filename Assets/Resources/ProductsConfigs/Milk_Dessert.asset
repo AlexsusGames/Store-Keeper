@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 6525243825307404317, guid: b7202b37bdf3af64ea636f53d0d37776, type: 3}
   Capacity: 10
-  ProductName: Milk_DessertBox
+  ProductName: Milk "Dessert" 700ml.
   StorageType: 0

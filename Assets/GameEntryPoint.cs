@@ -12,7 +12,7 @@ public class GameEntryPoint : MonoBehaviour
         storeEditor.Load();
         player.Load();
 
-        Application.targetFrameRate = 144;
+        Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
     }
 
     private void OnDisable()

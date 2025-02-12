@@ -15,6 +15,20 @@ public class Player : MonoBehaviour, IDataProvider
     private const string KEY = "player_data_save";
     private PlayerData playerData;
 
+    private void Awake()
+    {
+        playerController.TabletActivity = false;
+    }
+
+    public void BlockControl(bool value)
+    {
+        PlayerController.MovementBlockEnabled(value);
+        FirstPersonCamera.SetCameraBlockEnabled(value);
+
+        Cursor.visible = value;
+        Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
+    }
+
     public void Load()
     {
         if (PlayerPrefs.HasKey(KEY))

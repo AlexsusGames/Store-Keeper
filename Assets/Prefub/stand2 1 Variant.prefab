@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 830357880026812812}
-  door: {fileID: 0}
+  door: []
 --- !u!1 &1410687223062557528
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 830357880026812812}
-  door: {fileID: 0}
+  door: []
 --- !u!1 &5662179885551018920
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 830357880026812812}
-  door: {fileID: 0}
+  door: []
 --- !u!1 &5915943857158913961
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 830357880026812812}
-  door: {fileID: 0}
+  door: []
 --- !u!1 &9153069065916505174
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 830357880026812812}
-  door: {fileID: 0}
+  door: []
 --- !u!1001 &1980122669912499967
 PrefabInstance:
   m_ObjectHideFlags: 0

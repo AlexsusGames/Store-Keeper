@@ -15,6 +15,8 @@ public class Tablet : InteractiveManager
 
     public override void Interact()
     {
+        isEnable = view.activeInHierarchy;
+
         isEnable = !isEnable;
 
         view.SetActive(isEnable);

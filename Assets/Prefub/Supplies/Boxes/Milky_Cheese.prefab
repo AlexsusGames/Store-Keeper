@@ -106,7 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMesh: {fileID: 198121053396243699}
   inputClues:
-  - {fileID: 6752581916871399899, guid: 3069840b9e86e3745b2f2498d1a08fa7, type: 3}
+  - {fileID: 11400000, guid: ea64425a1bffddb4999d0fe06a593d49, type: 2}
   renderers:
   - {fileID: 2414756377829706932}
   - {fileID: 4752780426163979992}
@@ -251,7 +251,7 @@ MonoBehaviour:
   - {fileID: 7007801788272012570}
   - {fileID: 9041243472913869806}
   - {fileID: 8459729788731781222}
-  ProductName: Milky_Cheese
+  ProductName: Cheese "Milky" 40g.
   childPoint: {fileID: 2559609348369689087}
   BoxType: 4
   FoldBtType: 1
@@ -402,6 +402,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -501,6 +505,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -602,6 +610,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -701,6 +713,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -802,6 +818,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -901,6 +921,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1002,6 +1026,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1101,6 +1129,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1202,6 +1234,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1302,6 +1338,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1397,6 +1437,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5cc89c1c06a1d6246b552d3c25e71d30, type: 3}
       propertyPath: m_Name
       value: cartonBox v2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5cc89c1c06a1d6246b552d3c25e71d30, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1543,6 +1587,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1642,6 +1690,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1743,6 +1795,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1842,6 +1898,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1943,6 +2003,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2042,6 +2106,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2143,6 +2211,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2242,6 +2314,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2343,6 +2419,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2442,6 +2522,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2543,6 +2627,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2642,6 +2730,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2743,6 +2835,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2842,6 +2938,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2943,6 +3043,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3042,6 +3146,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3143,6 +3251,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3242,6 +3354,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3343,6 +3459,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3442,6 +3562,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3543,6 +3667,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3642,6 +3770,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3743,6 +3875,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3843,6 +3979,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: milkyCheese (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3942,6 +4082,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
       propertyPath: m_Name
       value: milkyCheese (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4b6e132ac5522e8449541f19e17be94d, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

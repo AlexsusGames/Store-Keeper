@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 6975383823758899945, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
   Capacity: 10
-  ProductName: Milk_Milky_v1
+  ProductName: Milk "Milky" 700ml.
   StorageType: 0

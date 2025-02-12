@@ -57,6 +57,9 @@ public class NonPlacedFurnitureDataProvider
 
     public void AddFurniture(string id, int amount = 1)
     {
+        if (amount == 0)
+            return;
+
         var data = FindByID(id);
 
         if(data  != null)

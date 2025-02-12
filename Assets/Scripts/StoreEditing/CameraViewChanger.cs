@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraViewChanger : MonoBehaviour
+public class CameraViewChanger : MonoBehaviour, IWindow
 {
     [SerializeField] private GameObject gameplayCanvas;
     [SerializeField] private Player player;
@@ -11,14 +11,6 @@ public class CameraViewChanger : MonoBehaviour
     [SerializeField] private Canvas computerUI;
 
     public bool storeEditorModeEnabled = false;
-
-    private void Update()
-    {
-        if (storeEditorModeEnabled && Input.GetButtonDown("Cancel"))
-        {
-            SwitchTopDownCamera();
-        }
-    }
 
     public void SwitchTopDownCamera()
     {
@@ -29,20 +21,17 @@ public class CameraViewChanger : MonoBehaviour
         computerUI.enabled = !storeEditorModeEnabled;
     }
 
-    private void CursorEnabled(bool value)
+    private void UIEnabled(bool value)
     {
         gameplayCanvas.SetActive(!value);
-        Cursor.visible = value;
-        Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
     public bool IsWorking => player.FirstPersonCamera.IsWorking;
 
     public void MovePlayerCamera(Vector3 cords, Vector3 viewPoint)
     {
-        player.PlayerController.MovementBlockEnabled(true);
-        player.FirstPersonCamera.SetCameraBlockEnabled(true);
-        CursorEnabled(true);
+        player.BlockControl(true);
+        UIEnabled(true);
 
         player.FirstPersonCamera.SetNewCameraPosition(cords, null);
     }
@@ -51,11 +40,18 @@ public class CameraViewChanger : MonoBehaviour
     {
         Action callback = () =>
         {
-            CursorEnabled(false);
-            player.PlayerController.MovementBlockEnabled(false);
-            player.FirstPersonCamera.SetCameraBlockEnabled(false);
+            UIEnabled(false);
+            player.BlockControl(false);
         };
 
         player.FirstPersonCamera.ResetCameraPosition(callback);
+    }
+
+    public void Close()
+    {
+        if (storeEditorModeEnabled)
+        {
+            SwitchTopDownCamera();
+        }
     }
 }

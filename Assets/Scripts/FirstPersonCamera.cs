@@ -6,7 +6,7 @@ using UnityEngine;
 public class FirstPersonCamera : MonoBehaviour
 {
     [SerializeField] private float mouseSensitivity = 100f;
-    [SerializeField] private Transform playerBody;
+    [SerializeField] private Rigidbody playerBody;
 
     private Coroutine moveCoroutine = null;
 
@@ -14,6 +14,7 @@ public class FirstPersonCamera : MonoBehaviour
     private Vector3 standartPos;
     private float xRotation = 0f;
     private float animationDuration = 0.5f;
+
 
     private void Start()
     {
@@ -23,16 +24,18 @@ public class FirstPersonCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(cameraBlock == false)
+        if (cameraBlock == false)
         {
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.smoothDeltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.smoothDeltaTime;
 
             xRotation -= mouseY;
             xRotation = Mathf.Clamp(xRotation, -90f, 70f);
 
             transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-            playerBody.Rotate(Vector3.up * mouseX);
+
+            Quaternion deltaRotation = Quaternion.Euler(Vector3.up * mouseX);
+            playerBody.MoveRotation(playerBody.rotation * deltaRotation);
         }
     }
 
@@ -46,7 +49,7 @@ public class FirstPersonCamera : MonoBehaviour
     private void SetRotation(Vector3 direction)
     {
         this.transform.localRotation = Quaternion.Euler(Vector3.zero);
-        playerBody.localRotation = Quaternion.Euler(direction);
+        playerBody.rotation = Quaternion.Euler(direction);
     }
 
     public void SetNewCameraPosition(Vector3 globalCord, Action callback)

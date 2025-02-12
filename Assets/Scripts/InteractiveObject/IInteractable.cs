@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IInteractable 
 {
-    RectTransform[] GetInputClue();
+    InputViewConfig[] GetInputClue();
     void Interact();
 
     void OutlineEnabled(bool enabled);

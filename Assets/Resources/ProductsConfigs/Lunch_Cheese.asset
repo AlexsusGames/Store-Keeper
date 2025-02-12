@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1564033518481828120, guid: 668a9535375b3744ab102b7b1e8fa6f3, type: 3}
   Capacity: 35
-  ProductName: Lunch_Cheese
+  ProductName: Cheese "Lunch" 40g.
   StorageType: 1

@@ -61,7 +61,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8730713502450439519, guid: b7202b37bdf3af64ea636f53d0d37776, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8566448842166593828}
+      addedObject: {fileID: 968996577072249984}
     - targetCorrespondingSourceObject: {fileID: 8730713502450439519, guid: b7202b37bdf3af64ea636f53d0d37776, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7903980360454245905}
@@ -89,7 +89,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2351316062377970087}
+    m_TransformParent: {fileID: 7143739228856950332}
     m_Modifications:
     - target: {fileID: 4867669995534460470, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
       propertyPath: m_RootOrder
@@ -233,7 +233,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7665991245568987566, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7665991245568987566, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -277,7 +277,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7731474314330109274, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
       propertyPath: m_Name
-      value: Paleta Variant
+      value: 1Milk Paleta
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122595141881088430, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122595141881088430, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
+      propertyPath: m_TagString
+      value: surface
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -290,13 +298,13 @@ PrefabInstance:
       addedObject: {fileID: 8411876135586872385}
     - targetCorrespondingSourceObject: {fileID: 4179329395341192041, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8012169441761204335}
+      addedObject: {fileID: 3220870685368094708}
     - targetCorrespondingSourceObject: {fileID: 4179329395341192041, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2593777966860916166}
     - targetCorrespondingSourceObject: {fileID: 4179329395341192041, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7567438941921421251}
+      addedObject: {fileID: 2314191110032959865}
     - targetCorrespondingSourceObject: {fileID: 4179329395341192041, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8484737606790306264}
@@ -305,7 +313,7 @@ PrefabInstance:
       addedObject: {fileID: 2455667783748443783}
     - targetCorrespondingSourceObject: {fileID: 4179329395341192041, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5895699042552922668}
+      addedObject: {fileID: 854369184832096228}
     - targetCorrespondingSourceObject: {fileID: 4179329395341192041, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6231250309069164148}
@@ -314,17 +322,46 @@ PrefabInstance:
       addedObject: {fileID: 7615379532997324583}
     - targetCorrespondingSourceObject: {fileID: 4179329395341192041, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8526163571079625896}
+      addedObject: {fileID: 4560560420495897116}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7731474314330109274, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3796944497264396460}
+    - targetCorrespondingSourceObject: {fileID: 9122595141881088430, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1458512211181237673}
   m_SourcePrefab: {fileID: 100100000, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
 --- !u!4 &2617353074641263955 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4179329395341192041, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
   m_PrefabInstance: {fileID: 2138437073045829178}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7148539455247941524 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9122595141881088430, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
+  m_PrefabInstance: {fileID: 2138437073045829178}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1458512211181237673
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7148539455247941524}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.614419, y: 0, z: 5.729118}
+  m_Center: {x: 2.6160975, y: -0.03705133, z: -1.1397527}
 --- !u!1 &8567807869123019616 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7731474314330109274, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
@@ -354,6 +391,10 @@ PrefabInstance:
     - target: {fileID: 1507467823901788354, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_Name
       value: Milk_MilkyBottles (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507467823901788354, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5267339173153377979, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_RootOrder
@@ -420,6 +461,10 @@ PrefabInstance:
     - target: {fileID: 1564033518481828120, guid: 668a9535375b3744ab102b7b1e8fa6f3, type: 3}
       propertyPath: m_Name
       value: Lunch_Cheese
+      objectReference: {fileID: 0}
+    - target: {fileID: 1564033518481828120, guid: 668a9535375b3744ab102b7b1e8fa6f3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4467058779379311293, guid: 668a9535375b3744ab102b7b1e8fa6f3, type: 3}
       propertyPath: m_RootOrder
@@ -494,6 +539,10 @@ PrefabInstance:
     - target: {fileID: 1507467823901788354, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_Name
       value: Milk_MilkyBottles (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507467823901788354, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5267339173153377979, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_RootOrder
@@ -629,7 +678,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4876254503982263867}
+    m_TransformParent: {fileID: 1846757971498740723}
     m_Modifications:
     - target: {fileID: 3602839621276304872, guid: 893d90fa495ee7e4c93f41fac75b879e, type: 3}
       propertyPath: m_RootOrder
@@ -819,6 +868,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Milk_MilkyBox
       objectReference: {fileID: 0}
+    - target: {fileID: 6975383823758899945, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -893,6 +946,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Milky_Cheese
       objectReference: {fileID: 0}
+    - target: {fileID: 5226580064838745052, guid: 893d90fa495ee7e4c93f41fac75b879e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -901,14 +958,14 @@ PrefabInstance:
       addedObject: {fileID: 1779154045131846157}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 893d90fa495ee7e4c93f41fac75b879e, type: 3}
---- !u!4 &4876254503982263867 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2559609348369689087, guid: 893d90fa495ee7e4c93f41fac75b879e, type: 3}
-  m_PrefabInstance: {fileID: 4189631553264255500}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &5895699042552922668 stripped
+--- !u!4 &854369184832096228 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3602839621276304872, guid: 893d90fa495ee7e4c93f41fac75b879e, type: 3}
+  m_PrefabInstance: {fileID: 4189631553264255500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1846757971498740723 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2559609348369689087, guid: 893d90fa495ee7e4c93f41fac75b879e, type: 3}
   m_PrefabInstance: {fileID: 4189631553264255500}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4370337668080129891
@@ -922,6 +979,10 @@ PrefabInstance:
     - target: {fileID: 1507467823901788354, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_Name
       value: Milk_MilkyBottles (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507467823901788354, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5267339173153377979, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_RootOrder
@@ -1032,6 +1093,10 @@ PrefabInstance:
     - target: {fileID: 6525243825307404317, guid: b7202b37bdf3af64ea636f53d0d37776, type: 3}
       propertyPath: m_Name
       value: Milk_Dessert
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525243825307404317, guid: b7202b37bdf3af64ea636f53d0d37776, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1393,6 +1458,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Milk_MilkyBottles (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1507467823901788354, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5267339173153377979, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1442,7 +1511,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
---- !u!4 &7567438941921421251 stripped
+--- !u!4 &2314191110032959865 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5267339173153377979, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
   m_PrefabInstance: {fileID: 7567438941921421250}
@@ -1458,6 +1527,10 @@ PrefabInstance:
     - target: {fileID: 1507467823901788354, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_Name
       value: Milk_MilkyBottles
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507467823901788354, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5267339173153377979, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_RootOrder
@@ -1569,6 +1642,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Milk_MilkyBox (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6975383823758899945, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1577,14 +1654,14 @@ PrefabInstance:
       addedObject: {fileID: 6304006698590512741}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
---- !u!4 &2351316062377970087 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 872585871779936254, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
-  m_PrefabInstance: {fileID: 8016307010234296770}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &8012169441761204335 stripped
+--- !u!4 &3220870685368094708 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4867669995534460470, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
+  m_PrefabInstance: {fileID: 8016307010234296770}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7143739228856950332 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 872585871779936254, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
   m_PrefabInstance: {fileID: 8016307010234296770}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8526163571079625895
@@ -1598,6 +1675,10 @@ PrefabInstance:
     - target: {fileID: 1507467823901788354, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_Name
       value: Milk_MilkyBottles (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507467823901788354, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5267339173153377979, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_RootOrder
@@ -1648,7 +1729,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
---- !u!4 &8526163571079625896 stripped
+--- !u!4 &4560560420495897116 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5267339173153377979, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
   m_PrefabInstance: {fileID: 8526163571079625895}
@@ -1714,7 +1795,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d032f3fa4f94814e98886c65ace9a64, type: 3}
---- !u!4 &8566448842166593828 stripped
+--- !u!4 &968996577072249984 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8213809037198048732, guid: 9d032f3fa4f94814e98886c65ace9a64, type: 3}
   m_PrefabInstance: {fileID: 8975637276455387484}

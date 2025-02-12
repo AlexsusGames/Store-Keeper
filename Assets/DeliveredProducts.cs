@@ -65,7 +65,13 @@ public class DeliveredProducts : MonoBehaviour
 
         if (box.IsHasChild)
         {
-            AddProduct(box.ChilBox);
+            for(int i = 0; i < box.ChildPoint.childCount;i++)
+            {
+                if(box.ChildPoint.GetChild(i).TryGetComponent(out StoreBox childBox))
+                {
+                    AddProduct(childBox);
+                }
+            }
         }
     }
 }

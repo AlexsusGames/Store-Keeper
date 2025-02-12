@@ -7,7 +7,7 @@ public class BackyardManager : MonoBehaviour
     [SerializeField] private Animator gateAnimator;
     [SerializeField] private Animator truckAnimator;
     [SerializeField] private TruckView truckView;
-    [SerializeField] private ProductsBlank blank;
+    [SerializeField] private OrderManager orderManager;
 
     [SerializeField] private Transform[] paletaPoints;
     public bool isDelivering {  get; private set; }
@@ -29,7 +29,8 @@ public class BackyardManager : MonoBehaviour
 
     public void DeliverProducts(List<DeliveryConfig> deliveryData)
     {
-        truckView.ChangeSkin(deliveryData[0].CarType);
+        var carType = deliveryData[0].CarType;
+        truckView.ChangeSkin(carType);
 
         expectedProducts = new();
         actualProducts = new();
@@ -69,7 +70,7 @@ public class BackyardManager : MonoBehaviour
             Print(actualProducts);
         }
 
-        blank.SetData(expectedProducts);
+        orderManager.Init(expectedProducts, actualProducts, carType);
     }
 
     private void Print(Dictionary<string, float> values)

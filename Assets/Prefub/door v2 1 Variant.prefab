@@ -145,7 +145,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6893280800736480568, guid: 1a84ef06315182a40b0b34f977e07537, type: 3}
+  - {fileID: 2100000, guid: 4934a962a666ab44b95795bb8a56e3ba, type: 2}
   - {fileID: 6717064317365246057, guid: 1a84ef06315182a40b0b34f977e07537, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -235,7 +235,7 @@ PrefabInstance:
     - target: {fileID: -4683669308469848369, guid: 1a84ef06315182a40b0b34f977e07537, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ba79d3d46ea834745bc476ba63bb274f, type: 2}
+      objectReference: {fileID: 2100000, guid: e5f7ea0db04becb43b7072667942650c, type: 2}
     - target: {fileID: 919132149155446097, guid: 1a84ef06315182a40b0b34f977e07537, type: 3}
       propertyPath: m_Name
       value: door v2 1 Variant
@@ -267,11 +267,11 @@ PrefabInstance:
     - target: {fileID: 9077926073120308842, guid: 1a84ef06315182a40b0b34f977e07537, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1bec67a7f3139d644a73643c1a1bc8be, type: 2}
+      objectReference: {fileID: 2100000, guid: 7cd73ffcc37c7e042bc8fe653b7fbdfe, type: 2}
     - target: {fileID: 9077926073120308842, guid: 1a84ef06315182a40b0b34f977e07537, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: ba79d3d46ea834745bc476ba63bb274f, type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6762071270493712272, guid: 1a84ef06315182a40b0b34f977e07537, type: 3}
@@ -338,6 +338,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMesh: {fileID: 8405853625596490488}
+  inputClues:
+  - {fileID: 11400000, guid: f197cc22db444cc43b56edf1f7d4f7b5, type: 2}
 --- !u!95 &1984677779418159375
 Animator:
   serializedVersion: 5

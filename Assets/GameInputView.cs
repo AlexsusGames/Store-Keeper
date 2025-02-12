@@ -1,68 +1,85 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameInputView : MonoBehaviour
 {
-    [SerializeField] private RectTransform[] points;
+    [SerializeField] private InputUnitView[] views;
 
-    [SerializeField] private RectTransform[] emptyHandState;
-    [SerializeField] private RectTransform[] itemGrabbedState;
-    [SerializeField] private RectTransform[] editModeState;
+    [SerializeField] private InputViewConfig[] itemGrabState;
+    [SerializeField] private InputViewConfig[] itemEditState;
 
-    private List<GameObject> currentState;
-    private int currentStateIndex;
+    private event Action<InputViewConfig> configChanged;
 
-    public void AssignEmptyState(RectTransform[] state)
+    private InputViewConfig[] cathedInteractable;
+    private InputViewConfig[] cathedState;
+
+    private void Awake()
     {
-        emptyHandState = state;
-
-        if(currentStateIndex == 1)
+        for (int i = 0; i < views.Length; i++)
         {
-            if (state == null)
-            {
-                SetNullState();
-                return;
-            }
+            configChanged += views[i].DisableViewByConfig;
+        }
+    }
+    public void SetItemGrabbedState() => AssignStateUnits(itemGrabState);
+    public void SetItemEditingState() => AssignStateUnits(itemEditState);
+    public void SetNullState() => AssignStateUnits(null);
 
-            currentStateIndex = 0;
+    private void AssignStateUnits(InputViewConfig[] configs) => AssignUnits(configs, ref cathedState);
+    public void AssignInteractableUnits(InputViewConfig[] configs) => AssignUnits(configs, ref cathedInteractable);
+
+    private void AssignUnits(InputViewConfig[] configs, ref InputViewConfig[] cachedConfigs)
+    {
+        if (configs == cachedConfigs)
+            return;
+
+        if (configs == null)
+        {
+            ExchangeConfigs(cachedConfigs);
+            cachedConfigs = configs;
+            return;
+        }
+
+        ExchangeConfigs(cachedConfigs);
+        PlaceNewClues(configs);
+
+        cachedConfigs = configs;
+    }
+
+    private void PlaceNewClues(InputViewConfig[] configs)
+    {
+        for(int i = 0;i < configs.Length; i++)
+        {
+            if (configs[i].isIgnored && cathedState != null)
+                continue;
+
+            var freeUnit = GetFreeView();
+            freeUnit.SetData(configs[i]);
         }
     }
 
-    private void SetNullState() => SetState(null, 4);
-    public void SetEmptyHandState() => SetState(emptyHandState, 1);
-    public void SetItemGrabbedState() => SetState(itemGrabbedState, 2);
-    public void SetEditModeState() => SetState(editModeState, 3);
-
-    private void RemoveLastState()
+    private InputUnitView GetFreeView()
     {
-        if(currentState != null)
+        for(int i = 0;i < views.Length;i++)
         {
-            for (int i = 0; i < currentState.Count; i++)
+            if (!views[i].gameObject.activeInHierarchy)
             {
-                Destroy(currentState[i].gameObject);
+                return views[i];
             }
         }
 
-        currentState = new();
+        throw new Exception("All inputViews are busy now");
     }
 
-    private void SetState(RectTransform[] state, int index)
+    private void ExchangeConfigs(InputViewConfig[] configs)
     {
-        if(currentStateIndex != index)
+        if(configs != null)
         {
-            RemoveLastState();
-
-            if (state != null)
+            for (int i = 0; i < configs.Length; i++)
             {
-                for (int i = 0; i < state.Length; i++)
-                {
-                    var item = Instantiate(state[i], points[i]);
-                    currentState.Add(item.gameObject);
-                }
+                configChanged?.Invoke(configs[i]);
             }
-
-            currentStateIndex = index;
         }
     }
 }

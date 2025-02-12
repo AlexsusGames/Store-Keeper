@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 4921657545607212813}
-  door: {fileID: 0}
+  door: []
 --- !u!1 &2636558403309620200
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 4921657545607212813}
-  door: {fileID: 0}
+  door: []
 --- !u!1 &4285264502275446103
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 4921657545607212813}
-  door: {fileID: 0}
+  door: []
 --- !u!1 &4990332793368463306
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   furnitureName: stand
   outline: {fileID: 2433251471883130848}
-  collidersAmount: 6
+  collidersAmount: 5
   surfaces:
   - {fileID: 4660159545873945278}
   - {fileID: 62422725124082940}
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 4921657545607212813}
-  door: {fileID: 0}
+  door: []
 --- !u!1 &6228435830325714424
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,4 +686,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 4921657545607212813}
-  door: {fileID: 0}
+  door: []

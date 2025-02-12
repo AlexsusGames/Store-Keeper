@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class InteractiveManager : MonoBehaviour, IInteractable
 {
     [SerializeField] private Outline outlineMesh;
-    [SerializeField] private RectTransform[] inputClues;
+    [SerializeField] private InputViewConfig[] inputClues;
 
     private bool outlineBlock;
 
@@ -15,7 +15,7 @@ public abstract class InteractiveManager : MonoBehaviour, IInteractable
         set => outlineBlock = value;
     }
 
-    public RectTransform[] GetInputClue()
+    public InputViewConfig[] GetInputClue()
     {
         return inputClues;
     }

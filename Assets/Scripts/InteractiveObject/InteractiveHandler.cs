@@ -29,23 +29,21 @@ public class InteractiveHandler : MonoBehaviour
 
     private void Update()
     {
-        if (isEnable)
+        if (!isEnable) return;
+        if (Input.GetKeyDown(KeyCode.E) && currentInteractable != null)
         {
-            HighlightObject();
-
-            var inputClue = currentInteractable != null ? currentInteractable.GetInputClue() : null;
-            gameInputView.AssignEmptyState(inputClue);
-
-            if (Input.GetKeyDown(KeyCode.E) && currentInteractable != null)
-            {
-                if(currentInteractable is PickupObject obj)
-                {
-                    itemGrabbing.Grab(obj);
-                }
-
-                currentInteractable.Interact();
-            }
+            if (currentInteractable is PickupObject obj)
+                itemGrabbing.Grab(obj);
+            currentInteractable.Interact();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        HighlightObject();
+
+        var inputClue = currentInteractable != null ? currentInteractable.GetInputClue() : null;
+        gameInputView.AssignInteractableUnits(inputClue);
     }
 
     private void HighlightObject()
@@ -65,9 +63,7 @@ public class InteractiveHandler : MonoBehaviour
                 OnInteractableChange(interactable);
                 return;
             }
-        }
-
-        OnInteractableChange(null);
+        } else OnInteractableChange(null);
     }
 
     private void OnInteractableChange(IInteractable interactable)
