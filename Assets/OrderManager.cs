@@ -9,14 +9,13 @@ public class OrderManager : MonoBehaviour
     [SerializeField] private GameObject orderPanel;
     [SerializeField] private Calculator calculator;
     [SerializeField] private Notes notes;
-
-    private Dictionary<string, float> expectedOrder;
-    private Dictionary<string, float> actualOrder;
+    public Dictionary<string, float> ExpectedOrder { get; private set; }
+    public Dictionary<string, float> ActualOrder { get; private set; }
 
     private List<string> itemsList;
     private List<float> notesList;
     private bool isEditing => orderPanel.activeInHierarchy;
-    private int lastIndex => expectedOrder.Count - 1;
+    private int lastIndex => ExpectedOrder.Count - 1;
     private int currentIndex;
 
     private void Awake()
@@ -60,7 +59,7 @@ public class OrderManager : MonoBehaviour
         notesList[index] = value;
         ChangeIndex();
 
-        bool isEqual = notesList[index] == expectedOrder[item];
+        bool isEqual = notesList[index] == ExpectedOrder[item];
         
         for ( int i = 0; i < views.Length; i++)
         {
@@ -68,10 +67,22 @@ public class OrderManager : MonoBehaviour
         }
     }
 
+    public Dictionary<string, float> GetNotes()
+    {
+        Dictionary<string, float> result = new();
+
+        for ( int i = 0; i < itemsList.Count; i++)
+        {
+            result[itemsList[i]] = notesList[i];
+        }
+
+        return result;
+    }
+
     public void Init(Dictionary<string, float> expectedOrder, Dictionary<string, float> actualOrder, CarType type)
     {
-        this.expectedOrder = expectedOrder;
-        this.actualOrder = actualOrder;
+        this.ExpectedOrder = expectedOrder;
+        this.ActualOrder = actualOrder;
 
         itemsList = actualOrder.Keys.ToList();
         notesList = Enumerable.Repeat(0f, actualOrder.Keys.Count).ToList();

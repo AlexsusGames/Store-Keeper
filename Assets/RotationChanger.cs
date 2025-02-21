@@ -16,6 +16,12 @@ public class RotationChanger : InteractiveManager
         currentRotation = transform.localRotation;
     }
 
+    public void SetStandart()
+    {
+        value = true;
+        Interact();
+    }
+
     public override void Interact()
     {
         value = !value;

@@ -4,20 +4,43 @@ using UnityEngine;
 
 public class GameEntryPoint : MonoBehaviour
 {
-    [SerializeField] private StoreEditor storeEditor;
-    [SerializeField] private Player player;
+    [SerializeField] private GameObject[] dataProviders;
+    [SerializeField] private ProductSupplyManager productSupplyManager;
+    [SerializeField] private SupplyConfig test;
 
     private void Start()
     {
-        storeEditor.Load();
-        player.Load();
+        Init();
 
         Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
     }
 
+    public void Init()
+    {
+        productSupplyManager.SetData(test);
+
+        for (int i = 0; i < dataProviders.Length; i++)
+        {
+            if (dataProviders[i].TryGetComponent(out IDataProvider data))
+            {
+                data.Load();
+            }
+        }
+    }
+
+    public void SaveData()
+    {
+        for (int i = 0; i < dataProviders.Length; i++)
+        {
+            if (dataProviders[i].TryGetComponent(out IDataProvider data))
+            {
+                data.Save();
+            }
+        }
+    }
+
     private void OnDisable()
     {
-        storeEditor.Save();
-        player.Save();
+        SaveData();
     }
 }

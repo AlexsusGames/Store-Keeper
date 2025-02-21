@@ -123,12 +123,17 @@ public class ItemGrab : MonoBehaviour
     {
         bool isAvailable = grabbedItem.CheckAvailableToPlace();
 
-        if (isAvailable && Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            grabbedItem.Place();
-            view.Hide();
-            editMode = false;
-            grabbedItem = null;
+            if (isAvailable)
+            {
+                grabbedItem.Place();
+                view.Hide();
+                editMode = false;
+                grabbedItem = null;
+            }
+
+            else CluesManager.instance.ShowClue("A drawer cannot be placed here.");
         }
     }
 
@@ -181,22 +186,17 @@ public class ItemGrab : MonoBehaviour
     {
         if(grabbedItem == null)
         {
-            if(obj.TryGetComponent(out IOverheadChecker checker))
+            if(obj.TryGetComponent(out StoreBox box))
             {
-                if (checker.IsAvailableToGrab())
+                if (!box.IsHasChild)
                 {
-                    if(checker is StoreBox box)
-                    {
-                        if (!box.IsHasChild)
-                        {
-                            grabbedItem = obj;
-                            grabbedItem.Grab();
+                    grabbedItem = obj;
+                    grabbedItem.Grab();
 
-                            SetStandartPosition();
-                            view.ShowInfo(box);
-                        }
-                    }
+                    SetStandartPosition();
+                    view.ShowInfo(box);
                 }
+                else CluesManager.instance.ShowClue("First, remove the top drawer");
             }
         }
 
@@ -214,6 +214,8 @@ public class ItemGrab : MonoBehaviour
                         box.AddItems(itemsToReplace);
                     }
                 }
+
+                else CluesManager.instance.ShowClue("Products can only be transferred between identical drawers");
             }
         }
     }

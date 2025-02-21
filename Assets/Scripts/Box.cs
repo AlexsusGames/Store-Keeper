@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Box : MonoBehaviour, IOverheadChecker
+public class Box : MonoBehaviour
 {
     [SerializeField] private GameObject[] items;
     public string ProductName;
@@ -67,6 +67,8 @@ public class Box : MonoBehaviour, IOverheadChecker
         }
     }
 
+    public void RemoveAll() => RemoveItems(itemAmount);
+
     public void RemoveItems(int amount)
     {
         int amountToRemove = amount;
@@ -85,25 +87,6 @@ public class Box : MonoBehaviour, IOverheadChecker
                 itemAmount--;
             }
         }
-    }
-
-    public bool IsAvailableToGrab()
-    {
-        Vector3 position = bCollider.bounds.center;
-
-        position.y += bCollider.bounds.extents.y / 2f;
-
-        Vector3 halfExtents = bCollider.bounds.size / 2f;
-
-        Collider[] results = Physics.OverlapBox(position, halfExtents, Quaternion.identity);
-
-        for (int i = 0; i < results.Length; i++)
-        {
-            if (results[i].TryGetComponent(out Box box) && box != this)
-                return false;
-        }
-
-        return true;
     }
 
     public int GetCapacity() => items.Length;

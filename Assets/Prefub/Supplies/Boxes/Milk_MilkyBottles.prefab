@@ -119,7 +119,7 @@ MonoBehaviour:
         m_CallState: 2
   countOfCollision: 1
   cap: {fileID: 0}
-  IsFreeToPlace: 0
+  IsFreeToPlace: 1
 --- !u!114 &4983016890670948145
 MonoBehaviour:
   m_ObjectHideFlags: 0

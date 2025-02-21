@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TruckView : MonoBehaviour
 {
     [SerializeField] private Material[] companiesMaterials;
     [SerializeField] private MeshRenderer[] renderers;
+
+    [SerializeField] private UnityEvent OnSkinChange;
 
     private Vector3 beckyardPosition = new Vector3(96.4199982f, 0, 140.399994f);
 
@@ -16,6 +19,8 @@ public class TruckView : MonoBehaviour
 
     public void ChangeSkin(CarType type)
     {
+        OnSkinChange?.Invoke();
+
         var material = companiesMaterials[(int)type];
 
         for (int i = 0; i < renderers.Length; i++)

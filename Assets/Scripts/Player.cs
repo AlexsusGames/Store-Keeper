@@ -7,13 +7,13 @@ public class Player : MonoBehaviour, IDataProvider
     [SerializeField] private FirstPersonCamera playerCamera;
     [SerializeField] private FirstPersonController playerController;
     [SerializeField] private InteractiveHandler interactiveHandler;
-
+    [SerializeField] private Transform cartPoint;
+    public Transform CartPoint => cartPoint;
     public FirstPersonCamera FirstPersonCamera => playerCamera;
-    public FirstPersonController PlayerController => playerController;
     public InteractiveHandler InteractiveHandler => interactiveHandler;
 
     private const string KEY = "player_data_save";
-    private PlayerData playerData;
+    private DataLoader<PositionData> dataLoader;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour, IDataProvider
 
     public void BlockControl(bool value)
     {
-        PlayerController.MovementBlockEnabled(value);
+        playerController.MovementBlockEnabled(value);
         FirstPersonCamera.SetCameraBlockEnabled(value);
 
         Cursor.visible = value;
@@ -31,23 +31,23 @@ public class Player : MonoBehaviour, IDataProvider
 
     public void Load()
     {
-        if (PlayerPrefs.HasKey(KEY))
-        {
-            string save = PlayerPrefs.GetString(KEY);
-            playerData = JsonUtility.FromJson<PlayerData>(save);
+        dataLoader = new();
 
-            playerController.PlayerPosition = playerData.Position;
+        var data = dataLoader.Load(KEY);
+
+        if (data != null)
+        {
+            playerController.PlayerPosition = data.Position;
         }
     }
 
     public void Save()
     {
-        playerData = new PlayerData()
+        PositionData data = new PositionData()
         {
             Position = playerController.PlayerPosition,
         };
 
-        string save = JsonUtility.ToJson(playerData);
-        PlayerPrefs.SetString(KEY, save);
+        dataLoader.Save(data, KEY);
     }
 }

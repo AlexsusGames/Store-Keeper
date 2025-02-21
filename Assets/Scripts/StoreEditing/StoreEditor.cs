@@ -15,6 +15,7 @@ public class StoreEditor : MonoBehaviour, IDataProvider
     [SerializeField] private StoreFactory factory;
     [SerializeField] private ProductFinder productFinder;
     [SerializeField] private Surface handSurface;
+    [SerializeField] private Surface cartSurface;
 
     private NonPlacedFurnitureDataProvider nonPlacedFurnitureData;
     private PlacedFurnitureDataProvider placedFurnitureData;
@@ -63,6 +64,8 @@ public class StoreEditor : MonoBehaviour, IDataProvider
             furnitureSelector.Select(obj);
             furniturePositionEditor.SetEditStatus(true);
         }
+
+        else CluesManager.instance.ShowClue("First, confirm the storage container's placement");
     }
 
     private void OnFurnitureSelected(FurniturePlacementView furnitureView)
@@ -82,6 +85,8 @@ public class StoreEditor : MonoBehaviour, IDataProvider
                 Destroy(furnitureView.gameObject);
                 isBeingPlaced = false;
             }
+
+            else CluesManager.instance.ShowClue("Before editing the storage unit's placement, remove all products from it.");
         };
 
         UnityAction confirmAction = () =>
@@ -99,6 +104,8 @@ public class StoreEditor : MonoBehaviour, IDataProvider
             {
                 furniturePositionEditor.SetEditStatus(true);
             }
+
+            else CluesManager.instance.ShowClue("Before editing the storage unit's placement, remove all products from it.");
         };
 
         furniturePositionEditor.DeselectAction = furnitureSelector.IsCreated ? new System.Action(storeAction) : null;
@@ -123,6 +130,7 @@ public class StoreEditor : MonoBehaviour, IDataProvider
         var positions = placedFurnitureData.GetPositions();
 
         productsManager.PlaceProducts(string.Empty, floorSurface);
+        productsManager.PlaceProducts(cartSurface.GetSurfaceId(), cartSurface.transform);
 
         foreach(var position in positions)
         {
@@ -166,6 +174,7 @@ public class StoreEditor : MonoBehaviour, IDataProvider
         }
 
         result.Add(handSurface);
+        result.Add(cartSurface);
 
         return result;
     }

@@ -7,31 +7,32 @@ using UnityEngine;
 public class ProductsBlank : MonoBehaviour
 {
     [SerializeField] private BlankUnitView prefab;
-    [SerializeField] private RectTransform[] unitPoints;
+    [SerializeField] private BlankUnitView[] units;
     [SerializeField] private TMP_Text dateText;
     [SerializeField] private TMP_Text supplierText;
     [SerializeField] private TMP_Text shopNameText;
 
-    private readonly string[] companyNames = { "LLC \"MarketWay Distributors\"", "Inc. \"GrainConnect Partners\"", "Corp. \"LactoBridge\"" };
-    private const string SHOP_COMPANY_NAME = "LLC \"StoreKeeper\"";
+    private readonly string[] companyNames = { "LLC \"MarketWay Distributors\"", "Inc. \"Bakery\"", "Corp. \"Dairy\"" };
+    private const string SHOP_COMPANY_NAME = "LLC \"Store Keeper\"";
 
     [SerializeField] private Color drawColor;
     [SerializeField] private Color transperentColor;
 
     [SerializeField] private ProductFinder productFinder;
 
-    private List<BlankUnitView> cachedUnits;
-
     public void DrawUnit(int index)
     {
-        for (int i = 0; i < cachedUnits.Count; i++)
+        for (int i = 0; i < units.Length; i++)
         {
+            if (units[i].Background == null)
+                units[i].Init();
+
             Color color = index == i ? drawColor : transperentColor;
-            cachedUnits[i].Background.color = color;
+            units[i].Background.color = color;
         }
     }
 
-    public void SetEqualStatusByIndex(int index, bool value) => cachedUnits[index].SetEqualStatus(value);
+    public void SetEqualStatusByIndex(int index, bool value) => units[index].SetEqualStatus(value);
 
     public void SetData(Dictionary<string, float> products, CarType type)
     {
@@ -41,46 +42,42 @@ public class ProductsBlank : MonoBehaviour
         supplierText.text = companyNames[(int)type];
         shopNameText.text = SHOP_COMPANY_NAME;
 
-        cachedUnits = new List<BlankUnitView>();
-
         foreach(var item in products.Keys)
         {
-            var parent = GetFreeTransform();
+            var unit = GetFreeUnit();
 
-            if (parent != null)
-            {
-                var unit = Instantiate(prefab, parent);
-                var product = productFinder.FindByName(item);
+            if (unit == null)
+                throw new Exception("Blank is full");
 
-                unit.Init()
-                    .SetName(item)
-                    .SetNumber(GetRandomNumber())
-                    .SetEqualStatus(false)
-                    .SetPcsPriceAndQty(0, products[item], product.MeasureType);
+            var product = productFinder.FindByName(item);
 
-                cachedUnits.Add(unit);
-            }
+            unit.SetName(item)
+                .SetNumber(GetRandomNumber())
+                .SetEqualStatus(false)
+                .SetPcsPriceAndQty(0, products[item], product.MeasureType);
         }
     }
 
     private void Clear()
     {
-        if(cachedUnits != null)
+        for (int i = 0; i < units.Length; i++)
         {
-            for (int i = 0; i < cachedUnits.Count; i++)
-            {
-                Destroy(cachedUnits[i]);
-            }
+            units[i].gameObject.SetActive(false);
+            units[i].IsFree = true;
         }
     }
 
     private int GetRandomNumber() => UnityEngine.Random.Range(111111, 999999);
-    private RectTransform GetFreeTransform()
+    private BlankUnitView GetFreeUnit()
     {
-        for (int i = 0; i < unitPoints.Length; i++)
+        for (int i = 0; i < units.Length; i++)
         {
-            if (unitPoints[i].childCount == 0)
-                return unitPoints[i];
+            if (units[i].IsFree)
+            {
+                units[i].gameObject.SetActive(true);
+                units[i].IsFree = false;
+                return units[i];
+            }
         }
 
         Debug.Log("there is no place in blank");

@@ -8,6 +8,9 @@ public class FirstPersonCamera : MonoBehaviour
     [SerializeField] private float mouseSensitivity = 100f;
     [SerializeField] private Rigidbody playerBody;
 
+    private float cartSensivity => mouseSensitivity / 2;
+    private float sensivity;
+
     private Coroutine moveCoroutine = null;
 
     private bool cameraBlock;
@@ -15,19 +18,19 @@ public class FirstPersonCamera : MonoBehaviour
     private float xRotation = 0f;
     private float animationDuration = 0.5f;
 
-
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         standartPos = transform.localPosition;
+        sensivity = mouseSensitivity;
     }
 
     private void LateUpdate()
     {
         if (cameraBlock == false)
         {
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.smoothDeltaTime;
-            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.smoothDeltaTime;
+            float mouseX = Input.GetAxis("Mouse X") * sensivity * Time.smoothDeltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * sensivity * Time.smoothDeltaTime;
 
             xRotation -= mouseY;
             xRotation = Mathf.Clamp(xRotation, -90f, 70f);
@@ -42,6 +45,11 @@ public class FirstPersonCamera : MonoBehaviour
     public void SetCameraBlockEnabled(bool enabled)
     {
         cameraBlock = enabled;
+    }
+
+    public void SetCartEnabled(bool value)
+    {
+        sensivity = value ? cartSensivity : mouseSensitivity;
     }
 
     public bool IsWorking => moveCoroutine != null;

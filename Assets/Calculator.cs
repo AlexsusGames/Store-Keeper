@@ -65,10 +65,11 @@ public class Calculator : MonoBehaviour
     {
         float result;
 
-        if(float.TryParse(calculatorText, NumberStyles.Float, CultureInfo.InvariantCulture, out result))
+        if (float.TryParse(calculatorText, NumberStyles.Float, CultureInfo.InvariantCulture, out result))
         {
             OnNoted?.Invoke(result);
             ResetValue();
         }
+        else CluesManager.instance.ShowClue("Only result can be noted!");
     }
 }

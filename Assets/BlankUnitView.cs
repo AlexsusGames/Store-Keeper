@@ -16,11 +16,13 @@ public class BlankUnitView : MonoBehaviour
     [SerializeField] private Sprite equalStatusSprite;
     [SerializeField] private Sprite unequalStatusSprite;
     public Image Background { get; private set; }
+    public bool IsFree { get; set; }
 
     public BlankUnitView Init()
     {
-        Background = GetComponent<Image>();
-        
+        if(Background == null)
+            Background = GetComponent<Image>();
+
         return this;
     }
 

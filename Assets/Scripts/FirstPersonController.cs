@@ -5,6 +5,8 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject tablet;
 
+    public float DampTime;
+
     public bool TabletActivity
     {
         get => tablet.activeInHierarchy;
@@ -14,7 +16,7 @@ public class FirstPersonController : MonoBehaviour
     public float moveSpeed = 5f;
 
     private Rigidbody rb;
-    private float spead;
+    private float speed;
     private int cachedState;
     private bool isHandShowed;
 
@@ -31,7 +33,7 @@ public class FirstPersonController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
-        spead = moveSpeed;
+        speed = moveSpeed;
     }
 
     public void MovementBlockEnabled(bool enabled)
@@ -50,9 +52,9 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if(moveBlock)
+        if (moveBlock)
         {
             rb.velocity = Vector3.zero;
             SetAnimationState(0);
@@ -62,20 +64,35 @@ public class FirstPersonController : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        if (z == 0 && x == 0)
+        if (x == 0 && z == 0)
         {
+            SetAnimationState(0);
             rb.velocity = Vector3.zero;
+            return;
         }
 
-        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? spead * 2 : spead;
+        bool isRunning = Input.GetKey(KeyCode.LeftShift) && z > 0;
+        float currentSpeed = isRunning ? speed * 2 : speed;
 
-        if (x == 0 && z == 0) SetAnimationState(0);
-        else if (Input.GetKey(KeyCode.LeftShift)) SetAnimationState(2);
-        else SetAnimationState(1);
+        Vector3 moveDirection = (transform.right * x + transform.forward * z).normalized;
+        rb.velocity = moveDirection * currentSpeed;
 
-        Vector3 move = (transform.right * x + transform.forward * z).normalized;
+        int animState = GetAnimationState(x, z, isRunning);
+        SetAnimationState(animState);
+    }
 
-        rb.velocity = move * currentSpeed;
+    private int GetAnimationState(float x, float z, bool isRunning)
+    {
+        if (z < 0)
+            x *= -1;
+
+        animator.SetFloat("x", x, DampTime, Time.fixedDeltaTime);
+        animator.SetFloat("z", z, DampTime, Time.fixedDeltaTime);
+
+        if (isRunning)
+            return 2;
+
+        return 1;
     }
 
     private void Update()
