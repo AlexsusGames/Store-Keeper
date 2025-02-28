@@ -15,4 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 1507467823901788354, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
   Capacity: 6
   ProductName: Milk "Milky" 500ml.
+  Price: 6
   StorageType: 1
+  MeasureType: 0
+  minWeight: 0.7
+  maxWeight: 0.72

@@ -15,4 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 6525243825307404317, guid: b7202b37bdf3af64ea636f53d0d37776, type: 3}
   Capacity: 10
   ProductName: Milk "Dessert" 700ml.
+  Price: 5.79
   StorageType: 0
+  MeasureType: 0
+  minWeight: 0.7
+  maxWeight: 0.72

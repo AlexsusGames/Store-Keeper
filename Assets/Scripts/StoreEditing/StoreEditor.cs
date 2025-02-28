@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
+using Zenject;
 
 public class StoreEditor : MonoBehaviour, IDataProvider
 {
@@ -13,9 +14,10 @@ public class StoreEditor : MonoBehaviour, IDataProvider
     [SerializeField] private Transform floorSurface;
 
     [SerializeField] private StoreFactory factory;
-    [SerializeField] private ProductFinder productFinder;
     [SerializeField] private Surface handSurface;
     [SerializeField] private Surface cartSurface;
+
+    [Inject] private ProductFinder productFinder;
 
     private NonPlacedFurnitureDataProvider nonPlacedFurnitureData;
     private PlacedFurnitureDataProvider placedFurnitureData;

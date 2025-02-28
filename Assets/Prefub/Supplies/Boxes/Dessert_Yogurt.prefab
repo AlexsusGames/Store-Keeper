@@ -140,8 +140,9 @@ MonoBehaviour:
   - {fileID: 9083408689355539153}
   - {fileID: 2740772220744758493}
   ProductName: Yogurt "Dessert" 60g.
+  ProductWeight: 0
   childPoint: {fileID: 0}
-  BoxType: 5
+  BoxType: 3
   FoldBtType: 0
 --- !u!1001 &3082788718834272652
 PrefabInstance:

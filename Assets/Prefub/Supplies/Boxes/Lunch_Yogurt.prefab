@@ -140,8 +140,9 @@ MonoBehaviour:
   - {fileID: 520900350388079884}
   - {fileID: 8800069024174147898}
   ProductName: Yogurt "Lunch" 30g.
+  ProductWeight: 0
   childPoint: {fileID: 0}
-  BoxType: 5
+  BoxType: 3
   FoldBtType: 0
 --- !u!1001 &863554002448494685
 PrefabInstance:
