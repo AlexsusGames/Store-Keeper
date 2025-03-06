@@ -25,4 +25,6 @@ public class ComputerCameraSwitcher : InteractiveManager
             }
         }
     }
+
+    public void PlayClick() => Core.Sound.PlayClip(AudioType.MouseClick);
 }

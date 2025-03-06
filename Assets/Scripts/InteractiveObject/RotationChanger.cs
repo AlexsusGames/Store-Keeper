@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class RotationChanger : InteractiveManager
@@ -19,15 +20,25 @@ public class RotationChanger : InteractiveManager
     public void SetStandart()
     {
         value = true;
-        Interact();
+        ChangeRotation();
     }
 
     public override void Interact()
+    {
+        ChangeRotation(true);
+    }
+
+    private void ChangeRotation(bool soundEnabled = false)
     {
         value = !value;
 
         Quaternion rotation = value ? angleRotation : currentRotation;
 
         transform.localRotation = rotation;
+
+        if(soundEnabled)
+        {
+            Core.Sound.PlayClip(AudioType.Door);
+        }
     }
 }

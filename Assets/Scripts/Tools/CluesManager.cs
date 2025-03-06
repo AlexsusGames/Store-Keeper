@@ -7,20 +7,15 @@ public class CluesManager : MonoBehaviour
 {
     [SerializeField] private CluesPanel[] clues;
 
-    public static CluesManager instance;
+    private void Awake() => Core.Clues = this;
 
-    private void Awake()
-    {
-        if (instance == null)
-            instance = this;
-    }
-
-    public void ShowClue(string text)
+    public void Show(string text)
     {
         for (int i = 0; i < clues.Length; i++)
         {
             if (!clues[i].gameObject.activeInHierarchy)
             {
+                Core.Sound.PlayClip(AudioType.UIAppearence);
                 clues[i].ShowClue(text);
                 return;
             }

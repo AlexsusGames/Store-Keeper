@@ -85,6 +85,7 @@ public class FurniturePositionEditor : MonoBehaviour
             rotation.y += 90;
 
             cachedView.transform.localRotation = Quaternion.Euler(rotation);
+            Core.Sound.PlayClip(AudioType.RotationSound);
         }
     }
 

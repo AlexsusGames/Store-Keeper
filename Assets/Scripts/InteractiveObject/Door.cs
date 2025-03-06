@@ -14,6 +14,9 @@ public class Door : InteractiveManager
         isOpen = !isOpen;
 
         animator.SetBool(nameof(isOpen), isOpen);
+
+        if (isOpen) Core.Sound.PlayClip(AudioType.Door);
+        else Core.Sound.PlayClip(AudioType.DoorClose);
     }
 
     public bool IsOpen => isOpen;

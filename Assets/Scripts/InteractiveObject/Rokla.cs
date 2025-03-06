@@ -10,6 +10,7 @@ public class Rokla : InteractiveManager
         if (delivetingManager.SwapObjectsPositions())
         {
             PlayAnimation();
+            Core.Sound.PlayClip(AudioType.Rokla);
         }
     }
 

@@ -67,7 +67,7 @@ public class StoreEditor : MonoBehaviour, IDataProvider
             furniturePositionEditor.SetEditStatus(true);
         }
 
-        else CluesManager.instance.ShowClue("First, confirm the storage container's placement");
+        else Core.Clues.Show("First, confirm the storage container's placement");
     }
 
     private void OnFurnitureSelected(FurniturePlacementView furnitureView)
@@ -86,9 +86,11 @@ public class StoreEditor : MonoBehaviour, IDataProvider
 
                 Destroy(furnitureView.gameObject);
                 isBeingPlaced = false;
+
+                Core.Sound.PlayClip(AudioType.StorageFold);
             }
 
-            else CluesManager.instance.ShowClue("Before editing the storage unit's placement, remove all products from it.");
+            else Core.Clues.Show("Before editing the storage unit's placement, remove all products from it.");
         };
 
         UnityAction confirmAction = () =>
@@ -98,6 +100,8 @@ public class StoreEditor : MonoBehaviour, IDataProvider
 
             placedFurnitureData.AddFurniture(furniturePositionEditor.GetNewPosition());
             isBeingPlaced = false;
+
+            Core.Sound.PlayClip(AudioType.StorageFold);
         };
 
         UnityAction editAction = () =>
@@ -107,7 +111,7 @@ public class StoreEditor : MonoBehaviour, IDataProvider
                 furniturePositionEditor.SetEditStatus(true);
             }
 
-            else CluesManager.instance.ShowClue("Before editing the storage unit's placement, remove all products from it.");
+            else Core.Clues.Show("Before editing the storage unit's placement, remove all products from it.");
         };
 
         furniturePositionEditor.DeselectAction = furnitureSelector.IsCreated ? new System.Action(storeAction) : null;

@@ -50,6 +50,8 @@ public class OrderManager : MonoBehaviour
         views[0].DrawUnit(currentIndex);
 
         notes.SetData(notesList[currentIndex]);
+
+        Core.Sound.PlayClip(AudioType.Tablet);
     }
 
     private void Note(float value)

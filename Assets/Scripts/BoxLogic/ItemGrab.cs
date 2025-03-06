@@ -61,6 +61,7 @@ public class ItemGrab : MonoBehaviour
                 currentRotation.y += 90f;
 
                 standartRotation = Quaternion.Euler(currentRotation);
+                Core.Sound.PlayClip(AudioType.RotationSound);
             }
 
             if (grabbedItem != null)
@@ -131,9 +132,11 @@ public class ItemGrab : MonoBehaviour
                 view.Hide();
                 editMode = false;
                 grabbedItem = null;
+
+                Core.Sound.PlayClip(AudioType.BoxFold);
             }
 
-            else CluesManager.instance.ShowClue("A drawer cannot be placed here.");
+            else Core.Clues.Show("A drawer cannot be placed here.");
         }
     }
 
@@ -195,8 +198,10 @@ public class ItemGrab : MonoBehaviour
 
                     SetStandartPosition();
                     view.ShowInfo(box);
+
+                    Core.Sound.PlayClip(AudioType.Grab);
                 }
-                else CluesManager.instance.ShowClue("First, remove the top drawer");
+                else Core.Clues.Show("First, remove the top drawer");
             }
         }
 
@@ -212,10 +217,12 @@ public class ItemGrab : MonoBehaviour
 
                         grabbedBox.RemoveItems(itemsToReplace);
                         box.AddItems(itemsToReplace);
+
+                        Core.Sound.PlayClip(AudioType.Transfer);
                     }
                 }
 
-                else CluesManager.instance.ShowClue("Products can only be transferred between identical drawers");
+                else Core.Clues.Show("Products can only be transferred between identical drawers");
             }
         }
     }

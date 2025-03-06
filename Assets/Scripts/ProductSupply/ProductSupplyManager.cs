@@ -79,8 +79,14 @@ public class ProductSupplyManager : MonoBehaviour
     {
         UnityAction action = () =>
         {
-            UnityAction supplyAction = () => StartSupply(slot.CarType);
+            UnityAction supplyAction = () =>
+            {
+                StartSupply(slot.CarType);
+                Core.Sound.PlayClip(AudioType.MouseClick);
+            };
+
             supplyPresenter.SetData(slot.CarType, slot.CarSprite, supplyAction);
+            Core.Sound.PlayClip(AudioType.MouseClick);
         };
 
         slot.AssignListener(action);
@@ -88,6 +94,8 @@ public class ProductSupplyManager : MonoBehaviour
 
     public void FinishSupply()
     {
+        Core.Sound.PlayClip(AudioType.MouseClick);
+
         if (!isSupplied)
             throw new Exception("Products hasn't been supplied");
 
@@ -104,7 +112,7 @@ public class ProductSupplyManager : MonoBehaviour
             lossesChecker.Check(orderManager.ActualOrder, orderManager.GetNotes());
         }
 
-        else CluesManager.instance.ShowClue("Before completing the delivery, make sure no products are left in the truck.");
+        else Core.Clues.Show("Before completing the delivery, make sure no products are left in the truck.");
     }
 
     private void SetCarSlotsEnabled(bool value)

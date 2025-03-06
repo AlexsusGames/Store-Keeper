@@ -18,6 +18,11 @@ public class Player : MonoBehaviour
         playerController.TabletActivity = false;
     }
 
+    public void SetCartActivity(bool value)
+    {
+        playerController.IsHasCart = value;
+    }
+
     public void BlockControl(bool value)
     {
         playerController.MovementBlockEnabled(value);

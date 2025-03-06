@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class StorageShop : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class StorageShop : MonoBehaviour
 
     private void ChangeCart(StoreFurnitureConfig config, int amount)
     {
+        Core.Sound.PlayClip(AudioType.MouseClick);
+
         cart[config] = amount;
 
         priceAmount.text = $"{GetOrderSum()}$";
@@ -54,6 +57,8 @@ public class StorageShop : MonoBehaviour
 
     public void Buy()
     {
+        Core.Sound.PlayClip(AudioType.MouseClick);
+
         var sum = GetOrderSum();
 
         if (sum == 0)

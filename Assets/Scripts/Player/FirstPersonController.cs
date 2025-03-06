@@ -6,6 +6,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private GameObject tablet;
 
     public float DampTime;
+    public bool IsHasCart { private get; set; }
 
     public bool TabletActivity
     {
@@ -41,6 +42,8 @@ public class FirstPersonController : MonoBehaviour
         moveBlock = enabled;
     }
 
+    public void PlayTabletSound() => Core.Sound.PlayClip(AudioType.Tablet);
+
     public void ShowHand()
     {
         if(TabletActivity)
@@ -49,24 +52,19 @@ public class FirstPersonController : MonoBehaviour
 
             int weigh = isHandShowed ? 1 : 0;
             animator.SetLayerWeight(1, weigh);
+            PlayTabletSound();
         }
     }
 
     private void FixedUpdate()
     {
-        if (moveBlock)
-        {
-            rb.velocity = Vector3.zero;
-            SetAnimationState(0);
-            return;
-        }
-
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        if (x == 0 && z == 0)
+        if (x == 0 && z == 0 ||  moveBlock)
         {
             SetAnimationState(0);
+            Core.Sound.EnableStepsSound(false, IsHasCart);
             rb.velocity = Vector3.zero;
             return;
         }
@@ -79,6 +77,8 @@ public class FirstPersonController : MonoBehaviour
 
         int animState = GetAnimationState(x, z, isRunning);
         SetAnimationState(animState);
+
+        Core.Sound.EnableStepsSound(true, IsHasCart, isRunning);
     }
 
     private int GetAnimationState(float x, float z, bool isRunning)

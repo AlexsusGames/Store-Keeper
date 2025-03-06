@@ -32,6 +32,8 @@ public class Calculator : MonoBehaviour
         UpdateView();
     }
 
+    public void PlayClick() => Core.Sound.PlayClip(AudioType.ButtonClick);
+
     public void RemoveLastSymbol()
     {
         if (calculatorText.Length > 0)
@@ -67,9 +69,10 @@ public class Calculator : MonoBehaviour
 
         if (float.TryParse(calculatorText, NumberStyles.Float, CultureInfo.InvariantCulture, out result))
         {
+            Core.Sound.PlayClip(AudioType.Note);
             OnNoted?.Invoke(result);
             ResetValue();
         }
-        else CluesManager.instance.ShowClue("Only result can be noted!");
+        else Core.Clues.Show("Only result can be noted!");
     }
 }
