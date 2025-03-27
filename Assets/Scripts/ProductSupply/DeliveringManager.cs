@@ -186,5 +186,6 @@ public class DeliveringManager : MonoBehaviour
     private void SetCarDrivingAnimation(bool value)
     {
         truckAnimator.SetBool("drivingInside", value);
+        truckView.PlaySound();
     }
 }

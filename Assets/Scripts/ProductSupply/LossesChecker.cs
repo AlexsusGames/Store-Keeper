@@ -16,17 +16,17 @@ public class LossesChecker : MonoBehaviour
 
     private List<string> messages;
 
-    public void Check(Dictionary<string, float> expected, Dictionary<string, float> noted)
+    public void Check(Dictionary<string, float> expected, Dictionary<string, float> noted, Action callBack)
     {
         gameObject.SetActive(true);
         messages = new();
         UpdateView();
 
-        StartCoroutine(Timer(expected, noted));
+        StartCoroutine(Timer(expected, noted, callBack));
     }
     public void Hide() => gameObject.SetActive(false);
 
-    private IEnumerator Timer(Dictionary<string, float> actual, Dictionary<string, float> noted)
+    private IEnumerator Timer(Dictionary<string, float> actual, Dictionary<string, float> noted, Action callBack)
     {
         foreach(var product in noted.Keys)
         {
@@ -41,6 +41,8 @@ public class LossesChecker : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
         }
+
+        callBack?.Invoke();
 
         yield return new WaitForSeconds(2f);
 

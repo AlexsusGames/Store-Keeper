@@ -69,12 +69,20 @@ public class StorageShop : MonoBehaviour
 
         if(isEnoughMoney)
         {
+            var data = Core.DataProviders.GetDataProvider<NonPlacedStoragesDataProvider>();
+
             msg = "Payment successful, units delivered to your warehouse!";
             color = Color.green;
 
             foreach (var config in cart.Keys)
             {
-                storeEditor.NonPlacedFurnitureData.AddFurniture(config.Name, cart[config]);
+                var amount = cart[config];
+
+                if(amount > 0)
+                {
+                    data.AddFurniture(config.Name, amount);
+                    Core.Quest.TryChangeQuest(QuestType.BuyStorage, amount);
+                }
             }
 
             for (int i = 0; i < views.Length; i++)
@@ -96,7 +104,8 @@ public class StorageShop : MonoBehaviour
         logText.color = color;
         logText.text = msg;
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
+
         logText.text = "";
     }
 }

@@ -7,6 +7,8 @@ public class GameSceneInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.Bind<ProductFinder>().FromInstance(productFinder);
-        Container.Bind<SoundDataProvider>().AsSingle();
+        Container.Bind<SettingsDataProvider>().AsSingle();
+        Container.Bind<StoreFurnitureConfigFinder>().AsSingle();
+        Container.Bind<QuestConfigFinder>().AsSingle();
     }
 }

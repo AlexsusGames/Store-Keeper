@@ -9,6 +9,7 @@ public class FurniturePositionEditor : MonoBehaviour
 
     private FurniturePlacementView cachedView;
     private GameObject editablePrefab => cachedView.gameObject;
+
     private Vector3 cachedPosition;
     private Quaternion cachedRotation;
 

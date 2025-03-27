@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ItemGrab : MonoBehaviour
@@ -25,13 +26,18 @@ public class ItemGrab : MonoBehaviour
         mCamera = Camera.main;
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
-        var savedObj = storeEditor.GetGrabbedSavedObject();
+        yield return null;
 
-        if (savedObj != null)
+        if(grabPoint.childCount > 0)
         {
-            Grab(savedObj);
+            grabPoint.GetChild(0).TryGetComponent(out PickupObject savedObj);
+
+            if (savedObj != null)
+            {
+                Grab(savedObj);
+            }
         }
     }
 

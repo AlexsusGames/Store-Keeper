@@ -1,20 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class GameEntryPoint : MonoBehaviour
 {
     [SerializeField] private GameObject[] dataProviders;
     [SerializeField] private ProductSupplyManager productSupplyManager;
+    [SerializeField] private PhoneController phoneController;
     [SerializeField] private SupplyConfig test;
+    [SerializeField] private DialogConfig testDialog;
+    [SerializeField] private Tutorial tutor;
 
-    private void Awake() => Time.timeScale = 1;
+    [Inject] private SettingsDataProvider settingsDataProvider;
+
+    private void Awake()
+    {
+        Core.Init();
+
+        settingsDataProvider.OnSettingsChanged += ApplySettings;
+    }
 
     private void Start()
     {
         Init();
 
-        Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
+        Core.Camera.Init();
+
+        settingsDataProvider.ApplySettings();
+
+        if(!tutor.IsCompleted)
+        {
+            if (Core.Camera.IsActive(CameraType.MainMenuCamera))
+            {
+                Core.Camera.StateChanged += StartDialog;
+            }
+            else tutor.StartTutor();
+        }
     }
 
     public void Init()
@@ -39,10 +61,26 @@ public class GameEntryPoint : MonoBehaviour
                 data.Save();
             }
         }
+
+        Core.SaveData();
     }
 
-    private void OnDisable()
+    private void ApplySettings(Settings settings)
     {
-        //SaveData();
+        Screen.fullScreen = settings.IsFullScreen;
+
+        QualitySettings.SetQualityLevel(settings.QualityIndex);
+
+        Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
+    }
+
+    private void StartDialog(CameraType type)
+    {
+        if(type == CameraType.GameplayCamera)
+        {
+            tutor.StartTutor();
+
+            Core.Camera.StateChanged -= StartDialog;
+        }
     }
 }

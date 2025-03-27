@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +10,26 @@ public class Player : MonoBehaviour
     [SerializeField] private InteractiveHandler interactiveHandler;
 
     [SerializeField] private Transform cartPoint;
+
+    public bool IsCameraPositionChanged;
     public Transform CartPoint => cartPoint;
     public FirstPersonCamera FirstPersonCamera => playerCamera;
-    public InteractiveHandler InteractiveHandler => interactiveHandler;
+
+    private HashSet<Type> interactivityBlockers = new();
+    private HashSet<Type> movementBlockers = new();
 
     private void Awake()
     {
-        playerController.TabletActivity = false;
+        playerController.ChangeClipboardEnabled(false);
+        Core.Camera.StateChanged += OnStateChanged;
+    }
+
+    private void OnStateChanged(CameraType type)
+    {
+        bool blockEnabled = type != CameraType.GameplayCamera;
+
+        BlockControl(blockEnabled, this);
+        BlockInteractivity(blockEnabled, this);
     }
 
     public void SetCartActivity(bool value)
@@ -23,12 +37,45 @@ public class Player : MonoBehaviour
         playerController.IsHasCart = value;
     }
 
+    public void BlockInteractivity(bool value, object blocker)
+    {
+        if(BlockHandle(interactivityBlockers, blocker, value))
+        {
+            interactiveHandler.ChangeEnabled(!value);
+        }
+    }
+
     public void BlockControl(bool value)
     {
-        playerController.MovementBlockEnabled(value);
-        FirstPersonCamera.SetCameraBlockEnabled(value);
+        BlockControl(value, playerCamera);
+    }
 
-        Cursor.visible = value;
-        Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
+    public void BlockControl(bool value, object blocker)
+    {
+        if(BlockHandle(movementBlockers, blocker, value))
+        {
+            playerController.MovementBlockEnabled(value);
+            FirstPersonCamera.SetCameraBlockEnabled(value);
+
+            Cursor.visible = value;
+            Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
+        }
+    }
+
+    private bool BlockHandle(HashSet<Type> set, object blocker, bool value)
+    {
+        if(value == false)
+        {
+            if (set.Contains(blocker.GetType()))
+            {
+                set.Remove(blocker.GetType());
+            }
+
+            return set.Count == 0;
+        }
+
+        set.Add(blocker.GetType());
+
+        return true;
     }
 }

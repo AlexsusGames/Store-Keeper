@@ -5,33 +5,27 @@ using UnityEngine;
 
 public class CameraViewChanger : MonoBehaviour, IWindow
 {
-    [SerializeField] private GameObject gameplayCanvas;
     [SerializeField] private Player player;
-    [SerializeField] private GameObject storeEditor;
-    [SerializeField] private Canvas computerUI;
 
     public bool storeEditorModeEnabled = false;
 
     public void SwitchTopDownCamera()
     {
         storeEditorModeEnabled = !storeEditorModeEnabled;
-        storeEditor.gameObject.SetActive(storeEditorModeEnabled);
 
-        player.InteractiveHandler.ChangeEnabled(!storeEditorModeEnabled);
-        computerUI.enabled = !storeEditorModeEnabled;
-    }
+        CameraType type = storeEditorModeEnabled
+            ? CameraType.StoreEditorCamera
+            : CameraType.GameplayCamera;
 
-    private void UIEnabled(bool value)
-    {
-        gameplayCanvas.SetActive(!value);
+        Core.Camera.SetCurrentCamera(type);
     }
 
     public bool IsWorking => player.FirstPersonCamera.IsWorking;
 
     public void MovePlayerCamera(Vector3 cords, Vector3 viewPoint)
     {
-        player.BlockControl(true);
-        UIEnabled(true);
+        player.BlockControl(true, this);
+        player.IsCameraPositionChanged = true;
 
         player.FirstPersonCamera.SetNewCameraPosition(cords, null);
     }
@@ -40,8 +34,8 @@ public class CameraViewChanger : MonoBehaviour, IWindow
     {
         Action callback = () =>
         {
-            UIEnabled(false);
-            player.BlockControl(false);
+            player.IsCameraPositionChanged = false;
+            player.BlockControl(false, this);
         };
 
         player.FirstPersonCamera.ResetCameraPosition(callback);
@@ -53,5 +47,10 @@ public class CameraViewChanger : MonoBehaviour, IWindow
         {
             SwitchTopDownCamera();
         }
+    }
+
+    public bool IsActive()
+    {
+        return storeEditorModeEnabled;
     }
 }

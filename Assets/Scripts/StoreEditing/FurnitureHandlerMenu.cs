@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Zenject;
 
 public class FurnitureHandlerMenu : MonoBehaviour
 {
@@ -12,9 +13,11 @@ public class FurnitureHandlerMenu : MonoBehaviour
 
     [SerializeField] private Image furnitureImage;
 
-    public void SetFurniture(Sprite sprite, UnityAction storeAction, UnityAction confirmAction, UnityAction replaceAction)
+    [Inject] private StoreFurnitureConfigFinder configFinder;
+
+    public void SetFurniture(string name, UnityAction storeAction, UnityAction confirmAction, UnityAction replaceAction)
     {
-        furnitureImage.sprite = sprite;
+        furnitureImage.sprite = configFinder.FindByName(name).shopSprite;
 
         gameObject.SetActive(true);
 

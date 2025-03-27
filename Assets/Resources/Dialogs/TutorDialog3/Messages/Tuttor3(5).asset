@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a3ab36364dd8b04787e60d793dfd3b7, type: 3}
+  m_Name: Tuttor3(5)
+  m_EditorClassIdentifier: 
+  IsPlayer: 0
+  Content:
+    Sprite: {fileID: 0}
+    Message: "Remember, before you exit the editor, don\u2019t forget to confirm
+      the changes with this button."

@@ -5,16 +5,16 @@ using Zenject;
 public class MusicClip : MonoBehaviour
 {
     [SerializeField] protected AudioSource musicSource;
-    [Inject] private SoundDataProvider dataProvider;
+    [Inject] private SettingsDataProvider dataProvider;
 
     public virtual void OnEnable()
     {
         UpdateVolume(dataProvider.GetData());
-        dataProvider.OnDataChanged += UpdateVolume;
+        dataProvider.OnSettingsChanged += UpdateVolume;
     }
-    public virtual void OnDisable() => dataProvider.OnDataChanged -= UpdateVolume;
+    public virtual void OnDisable() => dataProvider.OnSettingsChanged -= UpdateVolume;
 
-    public virtual void UpdateVolume(SoundData data)
+    public virtual void UpdateVolume(Settings data)
     {
         musicSource.volume = data.Music;
     }

@@ -9,6 +9,7 @@ public class TruckView : MonoBehaviour
     [SerializeField] private MeshRenderer[] renderers;
 
     [SerializeField] private UnityEvent OnSkinChange;
+    [SerializeField] private AudioSource sound;
 
     private Vector3 beckyardPosition = new Vector3(96.4199982f, 0, 140.399994f);
 
@@ -16,6 +17,8 @@ public class TruckView : MonoBehaviour
     {
         transform.localPosition = beckyardPosition;
     }
+
+    public void PlaySound() => sound.Play();
 
     public void ChangeSkin(CarType type)
     {

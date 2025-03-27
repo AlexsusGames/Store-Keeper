@@ -3,15 +3,22 @@ using UnityEngine;
 public class FirstPersonController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private GameObject tablet;
+    [SerializeField] private GameObject clipboard;
+
+    [SerializeField] private GameObject clipboardIcon;
 
     public float DampTime;
     public bool IsHasCart { private get; set; }
 
-    public bool TabletActivity
+    public bool TabletActivity => clipboard.activeInHierarchy;
+
+    public void ChangeClipboardEnabled(bool value)
     {
-        get => tablet.activeInHierarchy;
-        set => tablet.SetActive(value);
+        clipboard.SetActive(value);
+        clipboardIcon.SetActive(value);
+
+        if(value)
+            PlayTabletSound();
     }
 
     public float moveSpeed = 5f;
@@ -42,7 +49,10 @@ public class FirstPersonController : MonoBehaviour
         moveBlock = enabled;
     }
 
-    public void PlayTabletSound() => Core.Sound.PlayClip(AudioType.Tablet);
+    public void PlayTabletSound()
+    {
+        Core.Sound.PlayClip(AudioType.Tablet);
+    }
 
     public void ShowHand()
     {

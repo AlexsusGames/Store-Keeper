@@ -103,7 +103,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 557646721907854134}
-  - component: {fileID: 4164841858633220069}
   m_Layer: 0
   m_Name: StreatLight
   m_TagString: Untagged
@@ -126,24 +125,8 @@ Transform:
   - {fileID: 572284349032219740}
   - {fileID: 6863586295246197768}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4164841858633220069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7527470681497478824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfde6da1860725549b592f63e045b5af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lightOffMaterial: {fileID: 2100000, guid: 1a7cb7dea47badc44901d832e81d04d9, type: 2}
-  lightOnMaterial: {fileID: 2100000, guid: 94b35cbcf0b8353408c3625f52d46134, type: 2}
-  lightRenderer: {fileID: 5695777555202469735}
-  lightSource: {fileID: 1806888707345647098}
 --- !u!1001 &6398174863200023523
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -221,11 +204,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96f5e6fdb062c0d409aa57fe022a6c28, type: 3}
---- !u!23 &5695777555202469735 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 96f5e6fdb062c0d409aa57fe022a6c28, type: 3}
-  m_PrefabInstance: {fileID: 6398174863200023523}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6863586295246197768 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 96f5e6fdb062c0d409aa57fe022a6c28, type: 3}

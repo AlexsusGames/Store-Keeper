@@ -2,9 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Core 
+public static class Core
 {
     private static SoundManager soundManager;
+
+    public static InteractorsBase Interactors;
+    public static DataProviderBase DataProviders;
+
+    public static CameraType LastCamera;
+    public static CameraType StartCamera = CameraType.MainMenuCamera;
+
+    public static bool IsInitialized;
+    public static void Init()
+    {
+        DataProviders = new DataProviderBase();
+        Interactors = new InteractorsBase();
+
+        DataProviders.CreateAllDataProviders();
+        Interactors.CreateAllInteractors();
+
+        DataProviders.SendOnCreateAllDataProviders();
+        Interactors.SendOnCreateAllInteractors();
+
+        DataProviders.LoadAllDataProviders();
+        Interactors.InitializeAllInteractors();
+
+        DataProviders.SendOnStartAllDataProviders();
+        Interactors.SendOnStartAllInteractors();
+
+        IsInitialized = true;
+    }
+    public static void SaveData() => DataProviders.SaveAllDataProviders();
 
     public static SoundManager Sound
     {
@@ -14,7 +42,7 @@ public static class Core
             {
                 soundManager = GameObject.FindObjectOfType<SoundManager>();
             }
-            
+
             return soundManager;
         }
         set { soundManager = value; }
@@ -35,5 +63,33 @@ public static class Core
         }
 
         set { cluesManager = value; }
+    }
+
+    private static CameraStateChanger cameraStateChanger;
+
+    public static CameraStateChanger Camera
+    {
+        get
+        {
+            if (cameraStateChanger == null)
+                cameraStateChanger = GameObject.FindObjectOfType<CameraStateChanger>();
+
+            return cameraStateChanger;
+        }
+        set { cameraStateChanger = value; }
+    }
+
+    private static QuestCreator questCreator;
+
+    public static QuestCreator Quest
+    {
+        get
+        {
+            if(questCreator == null)
+                questCreator = GameObject.FindObjectOfType<QuestCreator>();
+
+            return questCreator;
+        }
+        set { questCreator = value; }
     }
 }

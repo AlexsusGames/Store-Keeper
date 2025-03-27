@@ -11,44 +11,21 @@ public class StoreEditor : MonoBehaviour, IDataProvider
     [SerializeField] private FurniturePositionEditor furniturePositionEditor;
     [SerializeField] private FurnitureInventoryView inventoryView;
     [SerializeField] private FurnitureHandlerMenu handleMenu;
-    [SerializeField] private Transform floorSurface;
-
     [SerializeField] private StoreFactory factory;
-    [SerializeField] private Surface handSurface;
-    [SerializeField] private Surface cartSurface;
 
-    [Inject] private ProductFinder productFinder;
+    [SerializeField] private List<Surface> staticSurfaces;
 
-    private NonPlacedFurnitureDataProvider nonPlacedFurnitureData;
-    private PlacedFurnitureDataProvider placedFurnitureData;
+    private StoragePlacementInteractor storagePlacement;
+    private ProductsSpawnInteractor productsManager; 
 
-    private StoreFurnitureConfigFinder configFinder;
-
-    private ProductsManager productsManager;
     private bool isBeingPlaced;
-    public NonPlacedFurnitureDataProvider NonPlacedFurnitureData => nonPlacedFurnitureData;
 
     private void Awake()
     {
-        productsManager = new ProductsManager(productFinder);
+        storagePlacement = Core.Interactors.GetInteractor<StoragePlacementInteractor>();
+        productsManager = Core.Interactors.GetInteractor<ProductsSpawnInteractor>();
 
-        nonPlacedFurnitureData = new();
-        configFinder = new();
-        placedFurnitureData = new();
-
-        factory.Init(configFinder);
-
-        nonPlacedFurnitureData.OnDataChange += UpdateInventoryView;
-
-        furnitureSelector.OnSelected += OnFurnitureSelected;
-        furnitureSelector.OnSelected += furniturePositionEditor.OnFurnitureSelected;
-
-        furnitureSelector.OnSelectionCanceled += handleMenu.Hide;
-        furnitureSelector.OnSelectionCanceled += furniturePositionEditor.OnDeselect;
-
-        furniturePositionEditor.IsAvailablePosition += handleMenu.ChangeConfirmButtonInterractable;
-
-        furnitureSelector.OnConfirmed += () => furniturePositionEditor.SetEditStatus(false);
+        Subscribe();
     }
 
     public void CreateNewFurniture(string name)
@@ -56,9 +33,8 @@ public class StoreEditor : MonoBehaviour, IDataProvider
         if(!isBeingPlaced && !furnitureSelector.IsSelected)
         {
             isBeingPlaced = true;
-            nonPlacedFurnitureData.RemoveFurniture(name);
 
-            string id = placedFurnitureData.GetFreeID();
+            string id = storagePlacement.GetFreeID();
             var obj = factory.Create(name);
 
             obj.FurnitureId = id;
@@ -72,17 +48,17 @@ public class StoreEditor : MonoBehaviour, IDataProvider
 
     private void OnFurnitureSelected(FurniturePlacementView furnitureView)
     {
-        var sprite = configFinder.FindByName(furnitureView.FurnitureName).shopSprite;
-
         UnityAction storeAction = () =>
         {
             if(!furnitureView.HasProducts())
             {
-                nonPlacedFurnitureData.AddFurniture(furnitureView.FurnitureName);
+                if(!furnitureSelector.IsCreated)
+                {
+                    storagePlacement.Remove(furnitureView.FurnitureName, furnitureView.FurnitureId);
+                }
+
                 furniturePositionEditor.SetEditStatus(false);
                 furnitureSelector.Deselect();
-
-                placedFurnitureData.RemoveById(furnitureView.FurnitureId);
 
                 Destroy(furnitureView.gameObject);
                 isBeingPlaced = false;
@@ -98,9 +74,12 @@ public class StoreEditor : MonoBehaviour, IDataProvider
             furniturePositionEditor.Confirm();
             furnitureSelector.Deselect();
 
-            placedFurnitureData.AddFurniture(furniturePositionEditor.GetNewPosition());
+            var data = furniturePositionEditor.GetNewPosition();
+            storagePlacement.Place(data, furnitureView.FurnitureName);
+
             isBeingPlaced = false;
 
+            Core.Quest.TryChangeQuest(QuestType.PlaceStorage);
             Core.Sound.PlayClip(AudioType.StorageFold);
         };
 
@@ -116,27 +95,23 @@ public class StoreEditor : MonoBehaviour, IDataProvider
 
         furniturePositionEditor.DeselectAction = furnitureSelector.IsCreated ? new System.Action(storeAction) : null;
 
-        if(furnitureSelector.IsCreated)
-        {
-            storeAction = () => { };
-        }
-
-        handleMenu.SetFurniture(sprite, storeAction, confirmAction, editAction);
+        handleMenu.SetFurniture(furnitureView.FurnitureName, storeAction, confirmAction, editAction);
     }
 
-    private void UpdateInventoryView()
+    private void UpdateInventoryView(List<FurnitureData> data)
     {
-        var data = nonPlacedFurnitureData.GetFurnitureList();
         UnityAction<string> action = CreateNewFurniture;
         inventoryView.SetData(data, action);
     }
 
     private void Init()
     {
-        var positions = placedFurnitureData.GetPositions();
+        var nonPlacedStorages = storagePlacement.NonPlacedStorages;
+        UpdateInventoryView(nonPlacedStorages);
 
-        productsManager.PlaceProducts(string.Empty, floorSurface);
-        productsManager.PlaceProducts(cartSurface.GetSurfaceId(), cartSurface.transform);
+        PlaceProductsOnStaticSurfaces();
+
+        var positions = storagePlacement.PlacedStorages;
 
         foreach(var position in positions)
         {
@@ -151,17 +126,12 @@ public class StoreEditor : MonoBehaviour, IDataProvider
         }
     }
 
-    public PickupObject GetGrabbedSavedObject()
+    private void PlaceProductsOnStaticSurfaces()
     {
-        productsManager.PlaceProducts(handSurface.GetSurfaceId(), handSurface.transform);
-        
-        if(handSurface.transform.childCount > 0)
+        for (int i = 0; i < staticSurfaces.Count; i++)
         {
-            handSurface.transform.GetChild(0).TryGetComponent(out PickupObject obj);
-            return obj;
+            productsManager.PlaceProducts(staticSurfaces[i].GetSurfaceId(), staticSurfaces[i].transform);
         }
-
-        return null;
     }
 
     public List<Surface> GetActiveSurfaces()
@@ -179,8 +149,7 @@ public class StoreEditor : MonoBehaviour, IDataProvider
             }
         }
 
-        result.Add(handSurface);
-        result.Add(cartSurface);
+        result.AddRange(staticSurfaces);
 
         return result;
     }
@@ -188,14 +157,21 @@ public class StoreEditor : MonoBehaviour, IDataProvider
     public void Save()
     {
         productsManager.SavePosition(GetActiveSurfaces());
-        placedFurnitureData.SaveData();
-        nonPlacedFurnitureData.SaveData();
     }
 
     public void Load()
     {
         Init();
+    }
 
-        UpdateInventoryView();
+    private void Subscribe()
+    {
+        storagePlacement.OnChanged += UpdateInventoryView;
+        furnitureSelector.OnSelected += OnFurnitureSelected;
+        furnitureSelector.OnSelected += furniturePositionEditor.OnFurnitureSelected;
+        furnitureSelector.OnSelectionCanceled += handleMenu.Hide;
+        furnitureSelector.OnSelectionCanceled += furniturePositionEditor.OnDeselect;
+        furniturePositionEditor.IsAvailablePosition += handleMenu.ChangeConfirmButtonInterractable;
+        furnitureSelector.OnConfirmed += () => furniturePositionEditor.SetEditStatus(false);
     }
 }

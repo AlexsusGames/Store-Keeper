@@ -7,16 +7,41 @@ public class WindowManager : MonoBehaviour
     [SerializeField] private GameObject[] windows;
     private void Update()
     {
-        if (Input.GetButton("Cancel"))
+        if (Input.GetButtonDown("Cancel"))
         {
-            for (int i = 0; i < windows.Length; i++)
+            if (TryCloseWindows() || Core.Camera.IsActive(CameraType.MainMenuCamera))
             {
-                if (windows[i].TryGetComponent(out IWindow window))
+                return;
+            }
+
+            else Core.Camera.SetCurrentCamera(CameraType.MainMenuCamera);
+        }
+    }
+
+    private bool TryCloseWindows()
+    {
+        bool closed = false;
+
+        for (int i = 0; i < windows.Length; i++)
+        {
+            if (windows[i].TryGetComponent(out IWindow window))
+            {
+                if(window.IsActive())
                 {
                     window.Close();
+                    closed = true;
                 }
-                else windows[i].SetActive(false);
+            }
+            else
+            {
+                if (windows[i].activeInHierarchy)
+                {
+                    windows[i].SetActive(false);
+                    closed = true;
+                }
             }
         }
+
+        return closed;
     }
 }

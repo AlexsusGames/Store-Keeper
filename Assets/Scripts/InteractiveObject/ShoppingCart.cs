@@ -22,7 +22,6 @@ public class ShoppingCart : InteractiveManager, IDataProvider
 
         Transform parent = isAttached ? player.CartPoint : null;
 
-        player.FirstPersonCamera.SetCartEnabled(isAttached);
         transform.SetParent(parent);
 
         if(isAttached)

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14960d5969c3bd74782c61fb61096cb7, type: 3}
+  m_Name: TutorDialog6
+  m_EditorClassIdentifier: 
+  CallerName: Andy
+  FirstAction: "Let\u2019s do this."
+  SecondAction: 
+  CallerSprite: {fileID: 21300000, guid: 4c0e223c1f4627548a9a53b9284a5c51, type: 3}
+  Messages:
+  - {fileID: 11400000, guid: 857a28ef495b5cf47a667c6462baf171, type: 2}
+  - {fileID: 11400000, guid: 56257928cde9ff74981c6f5c64ad0ffa, type: 2}
+  - {fileID: 11400000, guid: 88da70128b0fdb24c969fe17a7bd060e, type: 2}
+  - {fileID: 11400000, guid: 3a6b159f3ed34434ebb6e1ce88b5a682, type: 2}
+  - {fileID: 11400000, guid: 28fcd04bf74052244a2f8124fa280d27, type: 2}
+  - {fileID: 11400000, guid: add09cb459e0f1f428cb540623c76427, type: 2}
+  - {fileID: 11400000, guid: 73c66ff8ebf237541ae5ed85b387af38, type: 2}
+  - {fileID: 11400000, guid: c7983584dca4b644ab4da63021999c49, type: 2}
+  - {fileID: 11400000, guid: fdbf97057c260aa41abe10e999f4ea78, type: 2}
+  - {fileID: 11400000, guid: 732573aa463aeb049bb4fa27fcde22c9, type: 2}
+  - {fileID: 11400000, guid: 46160f16f8577ec47bfebcb87dd66bb9, type: 2}
+  - {fileID: 11400000, guid: 8865165fbc8a9084db90ff2a6e3b06fc, type: 2}
+  - {fileID: 11400000, guid: 3334c531a759a9640a10bbe144994569, type: 2}
+  - {fileID: 11400000, guid: 584d225b893aca941a409f8559c30a01, type: 2}
+  - {fileID: 11400000, guid: 68fe536718d4cfc4db2c53f55b3a5d7c, type: 2}
+  - {fileID: 11400000, guid: cb046acabed392145bd8c41e25787011, type: 2}

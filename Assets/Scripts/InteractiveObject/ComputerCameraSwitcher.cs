@@ -20,6 +20,7 @@ public class ComputerCameraSwitcher : InteractiveManager
                 if (isInteracting)
                 {
                     cameraChanger.MovePlayerCamera(cameraPoint.position, new Vector3(0f, -90f, 0f));
+                    Core.Quest.TryChangeQuest(QuestType.OpenComputer);
                 }
                 else cameraChanger.ResetCameraPosition();
             }

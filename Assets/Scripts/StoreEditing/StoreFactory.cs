@@ -1,22 +1,16 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using Zenject;
 
 public class StoreFactory : MonoBehaviour 
 {
-    private StoreFurnitureConfigFinder configFinder;
-    private Transform parent;
-
-    public void Init(StoreFurnitureConfigFinder configFinder)
-    {
-        parent = transform;
-        this.configFinder = configFinder;
-    }
+    [Inject] private StoreFurnitureConfigFinder configFinder;
 
     public FurniturePlacementView Create(string id)
     {
         var prefab = configFinder.FindByName(id).prefab;
 
-        var obj = Instantiate(prefab, parent);
+        var obj = Instantiate(prefab, transform);
 
         var furniture = obj.GetComponent<FurniturePlacementView>();
         return furniture;

@@ -9,11 +9,32 @@ public class SoundManager : MonoBehaviour
     [Header("Steps")]
     [SerializeField] private AudioSource stepsSource;
     [SerializeField] private AudioSource cartSource;
+    [Header("Music")]
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioClip gameMusic;
+    [SerializeField] private AudioClip menuMusic;
 
     [SerializeField] private float walkingPitch;
     [SerializeField] private float runningPitch;
 
-    private void Awake() => Core.Sound = this;
+    private void Awake()
+    {
+        Core.Sound = this;
+        Core.Camera.StateChanged += OnStateChanged;
+    }
+
+    private void OnStateChanged(CameraType state)
+    {
+        AudioClip clip = state == CameraType.MainMenuCamera
+            ? menuMusic
+            : gameMusic;
+
+        if(clip != musicSource.clip)
+        {
+            musicSource.clip = clip;
+            musicSource.Play();
+        }
+    }
 
     public void EnableStepsSound(bool isWalking, bool hasCart, bool isRunning = false)
     {
