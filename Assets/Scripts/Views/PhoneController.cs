@@ -52,14 +52,6 @@ public class PhoneController : MonoBehaviour, IWindow
         phone.OpenMessenger(config, first, second);
     }
 
-    public void OnGameOver()
-    {
-        UnityAction first = Replay;
-        UnityAction second = GoToMenu;
-
-        OpenMessenger(test, first, second);
-    }
-
     public void Close()
     {
         if(IsCanBeSkipped)

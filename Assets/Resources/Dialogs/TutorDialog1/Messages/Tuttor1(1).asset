@@ -16,3 +16,4 @@ MonoBehaviour:
   Content:
     Sprite: {fileID: 0}
     Message: Are you at the address yet?
+  TimeTillNextMessage: 1

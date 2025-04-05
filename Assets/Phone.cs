@@ -16,6 +16,9 @@ public class Phone : MonoBehaviour
     [SerializeField] private Image callerImage;
     [SerializeField] private TMP_Text callerName;
 
+    [SerializeField] private Sprite botSprite;
+    private string botName = "CheckBot";
+
     private DialogConfig cachedConfig;
 
     private UnityAction firstAction;
@@ -29,8 +32,14 @@ public class Phone : MonoBehaviour
         secondAction = second;
 
         cachedConfig = config;
-        callerImage.sprite = config.CallerSprite;
-        callerName.text = config.CallerName;
+
+        callerImage.sprite = config.CallerSprite == null
+            ? botSprite
+            : config.CallerSprite;
+
+        callerName.text = string.IsNullOrEmpty(config.CallerName)
+            ? botName
+            : config.CallerName;
 
         gameObject.SetActive(true);
         StartCoroutine(Timer(config.Messages));

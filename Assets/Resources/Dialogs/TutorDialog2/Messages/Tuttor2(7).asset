@@ -16,3 +16,4 @@ MonoBehaviour:
   Content:
     Sprite: {fileID: 0}
     Message: "You\u2019ll find them in the app installed on the computer."
+  TimeTillNextMessage: 1

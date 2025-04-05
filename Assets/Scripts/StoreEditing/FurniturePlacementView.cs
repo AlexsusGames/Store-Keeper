@@ -7,10 +7,12 @@ public class FurniturePlacementView : MonoBehaviour
     [SerializeField] private string furnitureName;
     [SerializeField] private Outline outline;
     [SerializeField] private int collidersAmount;
+    [SerializeField] private StorageType storageType;
 
     [SerializeField] private List<StorageSurface> surfaces;
 
     private BoxCollider bCollider;
+    public StorageType StorageType => storageType;
     public string FurnitureName => furnitureName;
     public string FurnitureId { get; set; }
 

@@ -13,17 +13,13 @@ public class StoreEditor : MonoBehaviour, IDataProvider
     [SerializeField] private FurnitureHandlerMenu handleMenu;
     [SerializeField] private StoreFactory factory;
 
-    [SerializeField] private List<Surface> staticSurfaces;
-
     private StoragePlacementInteractor storagePlacement;
-    private ProductsSpawnInteractor productsManager; 
 
     private bool isBeingPlaced;
 
     private void Awake()
     {
         storagePlacement = Core.Interactors.GetInteractor<StoragePlacementInteractor>();
-        productsManager = Core.Interactors.GetInteractor<ProductsSpawnInteractor>();
 
         Subscribe();
     }
@@ -98,18 +94,16 @@ public class StoreEditor : MonoBehaviour, IDataProvider
         handleMenu.SetFurniture(furnitureView.FurnitureName, storeAction, confirmAction, editAction);
     }
 
-    private void UpdateInventoryView(List<FurnitureData> data)
+    public void UpdateInventoryView()
     {
+        var data = storagePlacement.NonPlacedStorages;
         UnityAction<string> action = CreateNewFurniture;
         inventoryView.SetData(data, action);
     }
 
-    private void Init()
+    public void Init()
     {
-        var nonPlacedStorages = storagePlacement.NonPlacedStorages;
-        UpdateInventoryView(nonPlacedStorages);
-
-        PlaceProductsOnStaticSurfaces();
+        UpdateInventoryView();
 
         var positions = storagePlacement.PlacedStorages;
 
@@ -121,47 +115,7 @@ public class StoreEditor : MonoBehaviour, IDataProvider
 
             prefab.transform.localPosition = position.Position;
             prefab.transform.localRotation = Quaternion.Euler(position.Rotation);
-
-            productsManager.PlaceProducts(prefab.FurnitureId, prefab.GetFirstSurface());
         }
-    }
-
-    private void PlaceProductsOnStaticSurfaces()
-    {
-        for (int i = 0; i < staticSurfaces.Count; i++)
-        {
-            productsManager.PlaceProducts(staticSurfaces[i].GetSurfaceId(), staticSurfaces[i].transform);
-        }
-    }
-
-    public List<Surface> GetActiveSurfaces()
-    {
-        var childCount = transform.childCount;
-        List<Surface> result = new List<Surface>();
-
-        for (int i = 0; i < childCount; i++)
-        {
-            var child = transform.GetChild(i);
-
-            if (child.TryGetComponent(out Surface surface))
-            {
-                result.Add(surface);
-            }
-        }
-
-        result.AddRange(staticSurfaces);
-
-        return result;
-    }
-
-    public void Save()
-    {
-        productsManager.SavePosition(GetActiveSurfaces());
-    }
-
-    public void Load()
-    {
-        Init();
     }
 
     private void Subscribe()
@@ -173,5 +127,14 @@ public class StoreEditor : MonoBehaviour, IDataProvider
         furnitureSelector.OnSelectionCanceled += furniturePositionEditor.OnDeselect;
         furniturePositionEditor.IsAvailablePosition += handleMenu.ChangeConfirmButtonInterractable;
         furnitureSelector.OnConfirmed += () => furniturePositionEditor.SetEditStatus(false);
+    }
+
+    public void Save()
+    {  
+    }
+
+    public void Load()
+    {
+        Init();
     }
 }

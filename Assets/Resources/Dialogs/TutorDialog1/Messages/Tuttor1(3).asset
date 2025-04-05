@@ -17,3 +17,4 @@ MonoBehaviour:
     Sprite: {fileID: 0}
     Message: "Honestly, I thought you\u2019d bail on this. But trust me, if you put
       in the effort, you can go much further. I\u2019ll help you get started."
+  TimeTillNextMessage: 2

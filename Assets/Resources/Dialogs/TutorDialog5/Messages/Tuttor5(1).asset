@@ -17,3 +17,4 @@ MonoBehaviour:
     Sprite: {fileID: 0}
     Message: "Grab the clipboard\u2014it\u2019s on the table next to the computer.
       Take a look at what\u2019s inside."
+  TimeTillNextMessage: 1

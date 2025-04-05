@@ -87,6 +87,7 @@ public class DeliveredProducts : MonoBehaviour
         if(setStandart)
         {
             box.SetStandart();
+            box.IsSpoilt = false;
 
             var config = productFinder.FindByName(box.ProductName);
             box.ProductWeight = config.RandomWeight;

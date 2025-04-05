@@ -7,14 +7,31 @@ public class ProductFinder : ScriptableObject
 {
     [SerializeField] private List<ProductConfig> productConfigs;
 
-    public ProductConfig FindByName(string productName)
+    private Dictionary<string, ProductConfig> productMap;
+
+    private void CreateMap()
     {
+        productMap = new Dictionary<string, ProductConfig>();
+
         for (int i = 0; i < productConfigs.Count; i++)
         {
-            if (productConfigs[i].ProductName == productName)
-                return productConfigs[i];
+            var name = productConfigs[i].ProductName;
+            productMap[name] = productConfigs[i];
+        }
+    }
+
+    public ProductConfig FindByName(string productName)
+    {
+        if(productMap ==  null)
+        {
+            CreateMap();
         }
 
-        throw new System.Exception($"There is no such product with name: {productName}");
+        if (!productMap.ContainsKey(productName))
+        {
+            throw new System.Exception($"Config is missing. Product: {productName}");
+        }
+
+        return productMap[productName];
     }
 }

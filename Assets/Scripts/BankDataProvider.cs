@@ -5,15 +5,21 @@ using UnityEngine;
 public class BankDataProvider : DataProvider
 {
     private const string KEY = "BANK_SAVE";
+    private const string DAY_PROFIT_KEY = "DAY_PROFIT";
 
-    public int money {  get; set; }
+    private const float STANDART_AMOUNT = 5000f;
+
+    public float Money {  get; set; }
+    public float DayProfit { get; set; }
     public override void Load()
     {
-        money = PlayerPrefs.GetInt(KEY, 0);
+        Money = PlayerPrefs.GetFloat(KEY, STANDART_AMOUNT);
+        DayProfit = PlayerPrefs.GetFloat(DAY_PROFIT_KEY, 0);
     }
 
     public override void Save()
     {
-        PlayerPrefs.SetInt(KEY, money);
+        PlayerPrefs.SetFloat(KEY, Money);
+        PlayerPrefs.SetFloat(DAY_PROFIT_KEY, DayProfit);
     }
 }

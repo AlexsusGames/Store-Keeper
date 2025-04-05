@@ -15,5 +15,5 @@ MonoBehaviour:
   IsPlayer: 0
   Content:
     Sprite: {fileID: 0}
-    Message: "Alright\u2026 Buy a couple of storage units so you have space for the
-      boxes."
+    Message: Buy a couple of storage units so you have space for the boxes.
+  TimeTillNextMessage: 2

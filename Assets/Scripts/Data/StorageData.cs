@@ -7,6 +7,7 @@ public class StorageData
     public string ProductName;
     public int ProductCount;
     public float ProductWeight;
+    public bool IsSpoilt;
 
     public string StorageId;
 

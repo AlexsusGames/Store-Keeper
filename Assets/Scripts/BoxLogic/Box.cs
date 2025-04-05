@@ -6,6 +6,27 @@ public class Box : MonoBehaviour
 {
     [SerializeField] private GameObject[] items;
 
+    [SerializeField] private GameObject spoilEffect;
+
+    public bool IsSpoilt
+    {
+        get
+        {
+            if (spoilEffect != null)
+            {
+                return spoilEffect.activeInHierarchy;
+            }
+            return false;
+        }
+        set
+        {
+            if(spoilEffect != null)
+                spoilEffect.SetActive(value);
+        }
+    }
+
+    public bool IsCanBeSpoiled => spoilEffect != null || IsSpoilt == false;
+
     public string ProductName;
     public float ProductWeight;
     public float TotalWeight => ProductWeight * itemAmount;

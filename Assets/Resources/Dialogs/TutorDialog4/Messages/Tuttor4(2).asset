@@ -16,3 +16,4 @@ MonoBehaviour:
   Content:
     Sprite: {fileID: 0}
     Message: Now your warehouse is ready to receive its first shipments.
+  TimeTillNextMessage: 2

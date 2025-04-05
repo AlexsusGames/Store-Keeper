@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3ab36364dd8b04787e60d793dfd3b7, type: 3}
   m_Name: Tuttor6(13)
   m_EditorClassIdentifier: 
-  IsPlayer: 1
+  IsPlayer: 0
   Content:
     Sprite: {fileID: 0}
-    Message: "Uh\u2026 I think so."
+    Message: "Alright then, get moving\u2014the truck\u2019s already waiting in the
+      yard!"
+  TimeTillNextMessage: 1

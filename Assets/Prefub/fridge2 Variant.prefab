@@ -557,6 +557,7 @@ MonoBehaviour:
   furnitureName: fridge2
   outline: {fileID: 551494536337096092}
   collidersAmount: 9
+  storageType: 2
   surfaces:
   - {fileID: 4191168368810137001}
 --- !u!65 &5043566044002646487

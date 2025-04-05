@@ -16,3 +16,4 @@ MonoBehaviour:
   Content:
     Sprite: {fileID: 0}
     Message: Do I need to pick a specific one?
+  TimeTillNextMessage: 1

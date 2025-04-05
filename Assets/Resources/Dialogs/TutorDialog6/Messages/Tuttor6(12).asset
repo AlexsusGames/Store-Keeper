@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3ab36364dd8b04787e60d793dfd3b7, type: 3}
   m_Name: Tuttor6(12)
   m_EditorClassIdentifier: 
-  IsPlayer: 0
+  IsPlayer: 1
   Content:
     Sprite: {fileID: 0}
-    Message: Got it?
+    Message: Got it, I think.
+  TimeTillNextMessage: 1

@@ -16,3 +16,4 @@ MonoBehaviour:
   Content:
     Sprite: {fileID: 0}
     Message: "Yeah, I\u2019m here."
+  TimeTillNextMessage: 1

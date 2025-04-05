@@ -34,15 +34,18 @@ public class QuestInteractor : Interactor
 
     public void AddQuest(string questId)
     {
-        QuestData data = new QuestData()
+        if(!HasQuest(questId))
         {
-            Id = questId,
-            CurrenProgress = 0,
-        };
+            QuestData data = new QuestData()
+            {
+                Id = questId,
+                CurrenProgress = 0,
+            };
 
-        quests.Add(data);
+            quests.Add(data);
 
-        OnQuestAdded?.Invoke(questId);
+            OnQuestAdded?.Invoke(questId);
+        }
     }
 
     public void ChangeQuest(string questId, int value)

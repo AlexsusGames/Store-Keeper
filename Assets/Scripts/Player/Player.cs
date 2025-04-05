@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private FirstPersonCamera playerCamera;
     [SerializeField] private FirstPersonController playerController;
     [SerializeField] private InteractiveHandler interactiveHandler;
+    [SerializeField] private ItemGrab itemGrab;
 
     [SerializeField] private Transform cartPoint;
 
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
     public void SetCartActivity(bool value)
     {
         playerController.IsHasCart = value;
+        itemGrab.IsEnabled = !value;
     }
 
     public void BlockInteractivity(bool value, object blocker)

@@ -14,7 +14,6 @@ public class ProductsBlank : MonoBehaviour
     [SerializeField] private TMP_Text shopNameText;
 
     private readonly string[] companyNames = { "LLC \"MarketWay Distributors\"", "Inc. \"Bakery\"", "Corp. \"Dairy\"" };
-    private const string SHOP_COMPANY_NAME = "LLC \"Store Keeper\"";
 
     [SerializeField] private Color drawColor;
     [SerializeField] private Color transperentColor;
@@ -41,7 +40,7 @@ public class ProductsBlank : MonoBehaviour
 
         dateText.text = DateTime.Now.ToString("yyyy-MM-dd");
         supplierText.text = companyNames[(int)type];
-        shopNameText.text = SHOP_COMPANY_NAME;
+        shopNameText.text = Core.Statistic.GetCompanyName();
 
         foreach(var item in products.Keys)
         {

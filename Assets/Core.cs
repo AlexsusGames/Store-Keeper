@@ -30,6 +30,8 @@ public static class Core
         DataProviders.SendOnStartAllDataProviders();
         Interactors.SendOnStartAllInteractors();
 
+        Statistic = Interactors.GetInteractor<StatisticInteractor>();
+
         IsInitialized = true;
     }
     public static void SaveData() => DataProviders.SaveAllDataProviders();
@@ -92,4 +94,6 @@ public static class Core
         }
         set { questCreator = value; }
     }
+
+    public static StatisticInteractor Statistic;
 }

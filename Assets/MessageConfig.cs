@@ -7,6 +7,8 @@ public class MessageConfig : ScriptableObject
 {
     public bool IsPlayer;
     public MessageContent Content;
+
+    public float TimeTillNextMessage;
 }
 
 [System.Serializable]

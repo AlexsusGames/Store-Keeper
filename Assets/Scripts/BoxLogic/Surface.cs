@@ -16,4 +16,14 @@ public class Surface : MonoBehaviour
 
         else return surfaceId;
     }
+
+    public StorageType GetStorageType()
+    {
+        if (view != null)
+            return view.StorageType;
+
+        else return StorageType.None;
+    }
+
+    public Transform GetSurface() => surfaces[0];
 }

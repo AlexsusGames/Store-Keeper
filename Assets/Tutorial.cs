@@ -26,7 +26,6 @@ public class Tutorial : MonoBehaviour
         Action callback = () =>
         {
             inteructor.OnQuestCompleted -= Continue;
-            PlayerPrefs.SetInt(KEY, 0);
         };
 
         StartCoroutine(TutorialWay(callback));
@@ -73,9 +72,24 @@ public class Tutorial : MonoBehaviour
             SaveStage(stageIndex);
         }
 
+        if(stageIndex > 0)
+            computerButtonsController.ResetInteractable();
+
+        if (stageIndex == 1)
+        {
+            var inteructor = Core.Interactors.GetInteractor<DayProgressInteractor>();
+
+            Debug.Log(inteructor.GetCurrentLosses());
+
+            var dialogIndex = inteructor.GetCurrentLosses() < 10 ? 6 : 7;
+
+            AssignActions(QuestType.FinishSupply, dialogIndex);
+
+            yield return WaitForComplete();
+        }
+
         if (canContinue)
         {
-            computerButtonsController.ResetInteractable();
             callback?.Invoke();
         }
     }

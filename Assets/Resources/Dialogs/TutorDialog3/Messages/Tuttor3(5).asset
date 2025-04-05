@@ -17,3 +17,4 @@ MonoBehaviour:
     Sprite: {fileID: 0}
     Message: "Remember, before you exit the editor, don\u2019t forget to confirm
       the changes with this button."
+  TimeTillNextMessage: 2

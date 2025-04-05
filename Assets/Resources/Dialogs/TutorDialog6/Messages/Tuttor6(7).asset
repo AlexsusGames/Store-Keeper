@@ -15,4 +15,6 @@ MonoBehaviour:
   IsPlayer: 0
   Content:
     Sprite: {fileID: 0}
-    Message: Your job is to count each item and write it down in the notes.
+    Message: Your job is to unload the products into the warehouse and log the quantities
+      in the notes.
+  TimeTillNextMessage: 1

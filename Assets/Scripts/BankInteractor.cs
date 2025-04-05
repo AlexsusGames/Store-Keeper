@@ -1,7 +1,8 @@
 public class BankInteractor : Interactor
 {
     private BankDataProvider dataProvider;
-    public int MoneyAmount => dataProvider.money;
+    public float MoneyAmount => dataProvider.Money;
+    public float DayProfit => dataProvider.DayProfit;
 
     public override void Init()
     {
@@ -13,18 +14,25 @@ public class BankInteractor : Interactor
         dataProvider = Core.DataProviders.GetDataProvider<BankDataProvider>();
     }
 
-    public bool Has(int amount)
+    public bool Has(float amount)
     {
-        return dataProvider.money >= amount;
+        return dataProvider.Money >= amount;
     }
 
-    public void AddCoins(object sender, int  amount)
+    public void AddCoins(object sender, float  amount)
     {
-        dataProvider.money += amount;
+        dataProvider.Money += amount;
+        dataProvider.DayProfit += amount;
     }
 
-    public void Spend(object sender, int amount)
+    public void Spend(object sender, float amount)
     {
-        dataProvider.money -= amount;
+        dataProvider.Money -= amount;
+        dataProvider.DayProfit -= amount;
+    }
+
+    public void ResetDay()
+    {
+        dataProvider.DayProfit = 0;
     }
 }

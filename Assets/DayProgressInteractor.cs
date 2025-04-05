@@ -19,6 +19,8 @@ public class DayProgressInteractor : Interactor
     }
     public float GetCurrentLosses() => dataProvider.Data.CurrentLosses;
 
+    public void SetLosses(float value) => dataProvider.Data.CurrentLosses = value;
+
     public void SubstractCompletedCars(List<DeliveryConfig> configs)
     {
         var completedCars = dataProvider.Data.CompletedCars;

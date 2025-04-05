@@ -16,3 +16,4 @@ MonoBehaviour:
   Content:
     Sprite: {fileID: 0}
     Message: "I\u2019m at the computer."
+  TimeTillNextMessage: 1

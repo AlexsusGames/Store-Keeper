@@ -17,22 +17,19 @@ public class ProductSupplyManager : MonoBehaviour
     [SerializeField] private PhoneController phone;
     [SerializeField] private GameEntryPoint gameEntryPoint;
 
-    [Inject] private ProductFinder productFinder;
+    private DayProgressInteractor dayProgressInteractor;
 
     private List<DeliveryConfig> suppliers;
     private CarType cachedCarType;
-    private float maxLosses;
+
     private float currentLosses;
+    private float maxLosses;
 
-    private bool isSupplied;
-    private bool isLost;
-
-    public event Action OnLosed;
+    private bool isBeingSupplied;
 
     private void Awake()
     {
-        lossesChecker.OnChecked += UpdateLosses;
-        OnLosed += phone.OnGameOver;
+        lossesChecker.OnChecked += OnChecked;
     }
 
     public void SetData(SupplyConfig config)
@@ -40,15 +37,16 @@ public class ProductSupplyManager : MonoBehaviour
         suppliers = config.Suppliers.ToList();
         maxLosses = config.MaxLosses;
 
-        var dayInteractor = Core.Interactors.GetInteractor<DayProgressInteractor>();
+        dayProgressInteractor = Core.Interactors.GetInteractor<DayProgressInteractor>();
 
-        if(dayInteractor.IsHasSavedData())
+        if(dayProgressInteractor.IsHasSavedData())
         {
-            currentLosses = dayInteractor.GetCurrentLosses();
-            dayInteractor.SubstractCompletedCars(suppliers);
+            currentLosses = dayProgressInteractor.GetCurrentLosses();
+            dayProgressInteractor.SubstractCompletedCars(suppliers);
         }
 
         UpdateViews();
+
         deliveryManager.OpenGates(true);
         supplyPresenter.Hide();
         lossesChecker.Hide();
@@ -56,15 +54,15 @@ public class ProductSupplyManager : MonoBehaviour
 
     public void StartSupply(CarType carType)
     {
-        if (isSupplied)
-            throw new System.Exception("Products have already been supplied");
+        if (isBeingSupplied)
+            return;
 
         cachedCarType = carType;
 
         supplyPresenter.AssignListener(FinishSupply);
 
-        isSupplied = true;
-        supplyPresenter.IsSupplied(isSupplied);
+        isBeingSupplied = true;
+        supplyPresenter.IsSupplied(isBeingSupplied);
 
         DeliveryConfig config = null;
 
@@ -111,36 +109,62 @@ public class ProductSupplyManager : MonoBehaviour
     {
         Core.Sound.PlayClip(AudioType.MouseClick);
 
-        if (!isSupplied)
+        if (!orderManager.IsFilledIn())
+        {
+            Core.Clues.Show("Before completing the delivery, make sure that all notes in the invoice are filled in.");
+            return;
+        }
+
+        if (!isBeingSupplied)
             throw new Exception("Products hasn't been supplied");
 
         if(!deliveryManager.HasProducts())
         {
             SetCarSlotsEnabled(true);
             deliveryManager.FinishDelivering();
-            supplyPresenter.IsSupplied(isSupplied);
+            supplyPresenter.IsSupplied(isBeingSupplied);
 
             if (suppliers.Count == 0)
                 deliveryManager.OpenGates(false);
 
-            Action save = () =>
-            {
-                if (!isLost)
-                {
-                    var data = Core.Interactors.GetInteractor<DayProgressInteractor>();
-                    data.CompleteCar(cachedCarType);
-                    gameEntryPoint.SaveData();
-
-                    isSupplied = false;
-
-                    Core.Quest.TryChangeQuest(QuestType.FinishSupply);
-                }
-            };
-
-            lossesChecker.Check(orderManager.ActualOrder, orderManager.GetNotes(), save);
+            lossesChecker.Check(orderManager.ActualOrder, orderManager.GetNotes());
         }
 
         else Core.Clues.Show("Before completing the delivery, make sure no products are left in the truck.");
+    }
+
+    private void OnChecked(float losses, float total)
+    {
+        Core.Statistic.OnSupply(cachedCarType, total, losses);
+        Bank.Spend(this, total + losses);
+
+        currentLosses += losses;
+
+        lossesCounter.UpdateData(currentLosses, maxLosses);
+
+        UnityAction firstAction = SaveProgress;
+        UnityAction secondAction = currentLosses >= maxLosses ? phone.Replay : null;
+
+        BotDialogCreator dialogCreator = new BotDialogCreator();
+        var dialogConfig = dialogCreator.GetLossesReport(losses, maxLosses);
+
+        dayProgressInteractor.SetLosses(currentLosses);
+
+        lossesCounter.UpdateData(currentLosses, maxLosses);
+
+        phone.OpenMessenger(dialogConfig, firstAction, secondAction);
+    }
+
+    private void SaveProgress()
+    {
+        var data = Core.Interactors.GetInteractor<DayProgressInteractor>();
+        data.CompleteCar(cachedCarType);
+        gameEntryPoint.SaveData();
+
+        isBeingSupplied = false;
+
+        phone.ClosePhone();
+        Core.Quest.TryChangeQuest(QuestType.FinishSupply);
     }
 
     private void SetCarSlotsEnabled(bool value)
@@ -152,30 +176,6 @@ public class ProductSupplyManager : MonoBehaviour
 
         if (value)
             supplyPresenter.Hide();
-    }
-
-    private void UpdateLosses(string name, float amount)
-    {
-        float different = MathF.Abs(amount);
-
-        if(different >= 0.01f)
-        {
-            var product = productFinder.FindByName(name);
-            float losses = different * product.Price;
-
-            currentLosses += losses;
-
-            if (currentLosses >= maxLosses)
-            {
-                if (!isLost)
-                {
-                    OnLosed?.Invoke();
-                    isLost = true;
-                }
-            }
-
-            lossesCounter.UpdateData(currentLosses, maxLosses);
-        }
     }
 
     private void UpdateViews()
@@ -191,5 +191,7 @@ public class ProductSupplyManager : MonoBehaviour
             carSlotView[i].SetData(suppliers[index].pallets.Length, suppliers[i].carType);
             AssignListeners(carSlotView[index]);
         }
+
+        lossesCounter.UpdateData(currentLosses, maxLosses);
     }
 }

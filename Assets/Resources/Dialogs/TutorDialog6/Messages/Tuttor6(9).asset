@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3ab36364dd8b04787e60d793dfd3b7, type: 3}
   m_Name: Tuttor6(9)
   m_EditorClassIdentifier: 
-  IsPlayer: 0
+  IsPlayer: 1
   Content:
     Sprite: {fileID: 0}
-    Message: "Ideally, the numbers should match what\u2019s on the paper, but suppliers
-      make mistakes too."
+    Message: Why do we even need these notes?
+  TimeTillNextMessage: 1

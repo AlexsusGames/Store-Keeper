@@ -38,6 +38,7 @@ Transform:
   - {fileID: 6027903757025614057}
   - {fileID: 8450178689094359147}
   - {fileID: 3261447792829116007}
+  - {fileID: 2576679910278350309}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -139,11 +140,96 @@ MonoBehaviour:
   - {fileID: 6407701064685011539}
   - {fileID: 9083408689355539153}
   - {fileID: 2740772220744758493}
+  spoilEffect: {fileID: 6493942335728256778}
   ProductName: Yogurt "Dessert" 60g.
   ProductWeight: 0
   childPoint: {fileID: 0}
+  useWeight: 0
   BoxType: 3
   FoldBtType: 0
+--- !u!1001 &1120499061573730242
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4902816776653466784}
+    m_Modifications:
+    - target: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6166503007572113608, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+      propertyPath: m_Name
+      value: SmellEffect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+--- !u!4 &2576679910278350309 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3192765505664743975, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+  m_PrefabInstance: {fileID: 1120499061573730242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6493942335728256778 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6166503007572113608, guid: 14275ad41a1c4124f89b97ba6b6ddd19, type: 3}
+  m_PrefabInstance: {fileID: 1120499061573730242}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3082788718834272652
 PrefabInstance:
   m_ObjectHideFlags: 0

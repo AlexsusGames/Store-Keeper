@@ -16,3 +16,4 @@ MonoBehaviour:
   Content:
     Sprite: {fileID: 0}
     Message: I just sent you $5,000. Pay me back when you start making money.
+  TimeTillNextMessage: 2

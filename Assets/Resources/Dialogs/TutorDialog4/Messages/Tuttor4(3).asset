@@ -16,3 +16,4 @@ MonoBehaviour:
   Content:
     Sprite: {fileID: 0}
     Message: Open the "Shipments" app on the computer and pick a truck from the list.
+  TimeTillNextMessage: 1

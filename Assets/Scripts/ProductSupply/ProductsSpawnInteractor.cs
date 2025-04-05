@@ -68,6 +68,8 @@ public class ProductsSpawnInteractor : Interactor
             {
                 box.Init(data[i].ProductCount);
                 box.ProductWeight = data[i].ProductWeight;
+
+                box.IsSpoilt = data[i].IsSpoilt;
             }
 
             if (prefab.TryGetComponent(out PickupObject pickupObject))
@@ -120,6 +122,7 @@ public class ProductsSpawnInteractor : Interactor
             storageData.ProductName = box.ProductName;
             storageData.ProductCount = box.GetItemsAmount();
             storageData.ProductWeight = box.ProductWeight;
+            storageData.IsSpoilt = box.IsSpoilt;
 
             if(surface != null)
             {

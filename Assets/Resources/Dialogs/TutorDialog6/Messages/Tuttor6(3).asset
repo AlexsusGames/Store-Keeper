@@ -15,4 +15,5 @@ MonoBehaviour:
   IsPlayer: 0
   Content:
     Sprite: {fileID: 0}
-    Message: This is the list of what the supplier delivered.
+    Message: "Here\u2019s a list of the delivered products."
+  TimeTillNextMessage: 1

@@ -17,3 +17,4 @@ MonoBehaviour:
     Sprite: {fileID: 0}
     Message: "Any will do\u2014you\u2019ll be able to order all of them throughout
       the day."
+  TimeTillNextMessage: 2

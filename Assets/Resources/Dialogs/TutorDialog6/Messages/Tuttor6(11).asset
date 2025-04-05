@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPlayer: 0
   Content:
-    Sprite: {fileID: 21300000, guid: 1743181626436d34b840be93113f8a84, type: 3}
-    Message: '-'
+    Sprite: {fileID: 0}
+    Message: "Enter the quantity, then hit the \u201CNote\u201D button."
+  TimeTillNextMessage: 1

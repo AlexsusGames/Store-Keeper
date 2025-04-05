@@ -16,3 +16,4 @@ MonoBehaviour:
   Content:
     Sprite: {fileID: 0}
     Message: Later on, you can even supply your own stores.
+  TimeTillNextMessage: 1

@@ -15,8 +15,6 @@ public class StorageShop : MonoBehaviour
 
     [SerializeField] private StoreEditor storeEditor;
 
-    public bool isEnoughMoney;
-
     private Dictionary<StoreFurnitureConfig, int> cart;
 
     private void Awake()
@@ -67,7 +65,7 @@ public class StorageShop : MonoBehaviour
         string msg;
         Color color;
 
-        if(isEnoughMoney)
+        if(Bank.Has(sum))
         {
             var data = Core.DataProviders.GetDataProvider<NonPlacedStoragesDataProvider>();
 
@@ -85,10 +83,14 @@ public class StorageShop : MonoBehaviour
                 }
             }
 
+            storeEditor.UpdateInventoryView();
+
             for (int i = 0; i < views.Length; i++)
             {
                 views[i].ResetCart();
             }
+
+            Bank.Spend(this, sum);
         }
         else
         {

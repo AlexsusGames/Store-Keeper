@@ -15,4 +15,5 @@ MonoBehaviour:
   IsPlayer: 0
   Content:
     Sprite: {fileID: 0}
-    Message: Shall we continue?
+    Message: Got it?
+  TimeTillNextMessage: 1

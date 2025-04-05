@@ -98,10 +98,8 @@ public class PickupObject : InteractiveManager
 
     public bool CheckAvailableToPlace()
     {
-        Vector3 position = bCollider.bounds.center;
-        Vector3 halfExtents = bCollider.bounds.size / 2f;
 
-        Collider[] results = Physics.OverlapBox(position, halfExtents, Quaternion.identity);
+        Collider[] results = GetOverlappingColliders();
         print(results);
 
         var result = results.Length == countOfCollision;
@@ -121,6 +119,17 @@ public class PickupObject : InteractiveManager
         }
 
         Debug.Log(result);
+    }
+
+    private Collider[] GetOverlappingColliders()
+    {
+        Vector3 worldCenter = transform.TransformPoint(bCollider.center);
+
+        Vector3 halfExtents = Vector3.Scale(bCollider.size * 0.5f, transform.lossyScale);
+
+        Quaternion rotation = transform.rotation;
+
+        return Physics.OverlapBox(worldCenter, halfExtents, rotation);
     }
 
     public override void Interact()

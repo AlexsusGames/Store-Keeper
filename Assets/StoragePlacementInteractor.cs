@@ -10,7 +10,7 @@ public class StoragePlacementInteractor : Interactor
     public List<FurniturePositionData> PlacedStorages => placedStoragesData.Data.List;
     public List<FurnitureData> NonPlacedStorages => nonPlacedStoragesData.GetNonPlacedStoragesList();
 
-    public event Action<List<FurnitureData>> OnChanged;
+    public event Action OnChanged;
 
     public override void Init()
     {
@@ -23,7 +23,7 @@ public class StoragePlacementInteractor : Interactor
         placedStoragesData.AddFurniture(data);
         nonPlacedStoragesData.RemoveFurniture(name);
 
-        OnChanged?.Invoke(NonPlacedStorages);
+        OnChanged?.Invoke();
     }
 
     public void Remove(string storageName, string id)
@@ -31,7 +31,7 @@ public class StoragePlacementInteractor : Interactor
         placedStoragesData.RemoveById(id);
         nonPlacedStoragesData.AddFurniture(storageName);
 
-        OnChanged?.Invoke(NonPlacedStorages);
+        OnChanged?.Invoke();
     }
 
     public string GetFreeID()

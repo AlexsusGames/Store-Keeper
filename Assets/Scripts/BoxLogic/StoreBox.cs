@@ -22,6 +22,7 @@ public class StoreBox : Box
             return false;
         }
     }
+
     public StoreBox ChilBox
     {
         get

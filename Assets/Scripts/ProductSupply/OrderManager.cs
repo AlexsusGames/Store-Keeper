@@ -59,6 +59,8 @@ public class OrderManager : MonoBehaviour
         int index = currentIndex;
         var item = itemsList[index];
 
+        value = value > ExpectedOrder[itemsList[index]] ? ExpectedOrder[itemsList[index]] : value;
+
         notesList[index] = value;
         ChangeIndex();
 
@@ -94,6 +96,17 @@ public class OrderManager : MonoBehaviour
 
         UpdateViews(expectedOrder, type);
         ChangeIndex();
+    }
+
+    public bool IsFilledIn()
+    {
+        for ( int i = 0;i < notesList.Count;i++)
+        {
+            if (notesList[i] == 0)
+                return false;
+        }
+
+        return true;
     }
 
     private void UpdateViews(Dictionary<string, float> order, CarType type)

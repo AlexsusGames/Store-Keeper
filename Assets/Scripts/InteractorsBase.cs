@@ -17,6 +17,7 @@ public class InteractorsBase
         CreateInteractor<ProductsSpawnInteractor>();
         CreateInteractor<DayProgressInteractor>();
         CreateInteractor<QuestInteractor>();
+        CreateInteractor<StatisticInteractor>();
     }
 
     private void CreateInteractor<T>() where T : Interactor, new()

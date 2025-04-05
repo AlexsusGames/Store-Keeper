@@ -16,3 +16,4 @@ MonoBehaviour:
   Content:
     Sprite: {fileID: 0}
     Message: "You can do it from the same computer\u2014just open the right app."
+  TimeTillNextMessage: 1

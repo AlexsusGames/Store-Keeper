@@ -18,6 +18,7 @@ public class DataProviderBase
         CreateDataProvider<ProductsPositionDataProvider>();
         CreateDataProvider<DayProgressDataProvider>();
         CreateDataProvider<QuestDataProvider>();
+        CreateDataProvider<StatisticDataProvider>();
     }
 
     private void CreateDataProvider<T>() where T : DataProvider, new()

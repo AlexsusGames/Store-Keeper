@@ -450,7 +450,9 @@ MonoBehaviour:
   - {fileID: 4665993982385722834}
   - {fileID: 6540570083353740249}
   ProductName: Bread
+  ProductWeight: 0
   childPoint: {fileID: 5560516537824809735}
+  useWeight: 0
   BoxType: 0
   FoldBtType: 1
 --- !u!114 &2069358846399064929

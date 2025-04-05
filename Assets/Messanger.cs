@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -51,8 +52,6 @@ public class Messanger : MonoBehaviour
     {
         for (int i = 0; i < messages.Length; i++)
         {
-            yield return new WaitForSeconds(1);
-
             isRead = false;
             var message = messages[i];
 
@@ -76,6 +75,8 @@ public class Messanger : MonoBehaviour
             SendMessage(message.IsPlayer, message.Content);
 
             Core.Sound.PlayClip(AudioType.ButtonClick);
+
+            yield return new WaitForSeconds(message.TimeTillNextMessage);
         }
         OnChatFinished?.Invoke();
     }
@@ -101,18 +102,39 @@ public class Messanger : MonoBehaviour
 
             messageList.Add(message);
 
-            LayoutRebuilder.ForceRebuildLayoutImmediate(message);
-
             float yPosition = -messageView.MessageHeigh + yStartPosition;
             float xPosition = isPlayer ? xPlayerOffset : xCallerOffset;
 
-            currentContentHeight -= messageView.MessageHeigh;
+            float newSize = currentContentHeight - messageView.MessageHeigh;
 
-            content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, currentContentHeight);
+            StartCoroutine(ScrollToBottomSmooth(newSize));
+
+            currentContentHeight -= messageView.MessageHeigh;
 
             message.anchoredPosition = new Vector2(xPosition, yPosition);
         }
 
         else throw new System.Exception($"Object: {message.name} doesn't contain {nameof(MessageView)}");
+    }
+
+    private IEnumerator ScrollToBottomSmooth(float newHeigh)
+    {
+        float scrollSpeed = 0.3f;
+        float currentHeigh = currentContentHeight;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < scrollSpeed)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.SmoothStep(0, 1, elapsedTime / scrollSpeed);
+            float heigh = Mathf.Lerp(currentHeigh, newHeigh, t);
+
+            content.sizeDelta = new Vector2(content.sizeDelta.x, heigh);
+            scroll.verticalNormalizedPosition = 0;
+
+            yield return null;
+        }
+
+        content.sizeDelta = new Vector2(content.sizeDelta.x, newHeigh);
     }
 }

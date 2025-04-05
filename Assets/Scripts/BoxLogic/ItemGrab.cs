@@ -20,10 +20,12 @@ public class ItemGrab : MonoBehaviour
     private Camera mCamera;
 
     private bool editMode;
+    public bool IsEnabled { get; set; }
 
     private void Awake()
     {
         mCamera = Camera.main;
+        IsEnabled = true;
     }
 
     private IEnumerator Start()
@@ -43,6 +45,11 @@ public class ItemGrab : MonoBehaviour
 
     private void Update()
     {
+        if(!IsEnabled)
+        {
+            return;
+        }
+
         if(grabbedItem != null)
         {
             if (Input.GetMouseButtonDown(1))
@@ -193,6 +200,11 @@ public class ItemGrab : MonoBehaviour
 
     public void Grab(PickupObject obj)
     {
+        if(!IsEnabled)
+        {
+            return;
+        }
+
         if(grabbedItem == null)
         {
             if(obj.TryGetComponent(out StoreBox box))

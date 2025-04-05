@@ -29,5 +29,6 @@ public enum ComputerButton
 {
     StoreEdit,
     StorageShop,
-    Supplies
+    Supplies,
+    Management
 }

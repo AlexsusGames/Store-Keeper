@@ -17,3 +17,4 @@ MonoBehaviour:
     Sprite: {fileID: 0}
     Message: "Let me know when the truck arrives, and we\u2019ll move on to the hardest
       part!"
+  TimeTillNextMessage: 1

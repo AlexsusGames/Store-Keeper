@@ -16,3 +16,4 @@ MonoBehaviour:
   Content:
     Sprite: {fileID: 21300000, guid: 45d591d59b9128847918fdfea5426416, type: 3}
     Message: '-'
+  TimeTillNextMessage: 2

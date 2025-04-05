@@ -16,3 +16,4 @@ MonoBehaviour:
   Content:
     Sprite: {fileID: 0}
     Message: Now I need to place them, right?
+  TimeTillNextMessage: 1
