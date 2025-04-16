@@ -7,4 +7,16 @@ public class DeliveryConfig : ScriptableObject
 {
     public PalletConfig[] pallets;
     public CarType carType;
+
+    public float GetCost()
+    {
+        float cost = 0;
+
+        foreach (var p in pallets)
+        {
+            cost += p.GetCost();
+        }
+
+        return cost;
+    }
 }

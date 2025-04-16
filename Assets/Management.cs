@@ -9,20 +9,29 @@ public class Management : MonoBehaviour
     [SerializeField] private ProductManager productManager;
     [SerializeField] private GameEntryPoint gameEntryPoint;
 
+    [SerializeField] private DeliveringManager deliveryManager;
+
     [SerializeField] private TMP_Text dayText;
 
+    private void OnEnable() => Core.Quest.TryChangeQuest(QuestType.CheckMail);
     private void Start() => dayText.text = $"Day {Core.Statistic.GetDaysPassed() + 1}";
 
     public void StartNewDay()
     {
-        Bank.OnDayEnd();
+        if (!deliveryManager.isCarArrived)
+        {
+            Core.Quest.TryChangeQuest(QuestType.EndDay);
 
-        productManager.TrySpoilProducts();
+            Bank.OnDayEnd();
 
-        gameEntryPoint.SaveData();
+            productManager.TrySpoilProducts();
 
-        Core.StartCamera = CameraType.GameplayCamera;
+            gameEntryPoint.SaveData();
 
-        SceneManager.LoadScene(0);
+            Core.StartCamera = CameraType.GameplayCamera;
+
+            SceneManager.LoadScene(0);
+        }
+        else Core.Clues.Show("You cannot end the day while a truck is waiting to be loaded.");
     }
 }

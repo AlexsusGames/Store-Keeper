@@ -13,6 +13,7 @@ public class DeliveredProducts : MonoBehaviour
 
     private List<string> cachedNames;
     private int RandomNumber => Random.Range(1, 11);
+    public bool ConsistSpoilled { get; private set; }
 
     public void Init(bool fillBoxes = true)
     {
@@ -24,6 +25,25 @@ public class DeliveredProducts : MonoBehaviour
                 AddProduct(box, fillBoxes);
             }
         }
+    }
+
+    public float GetCost()
+    {
+        Init(true);
+
+        float cost = 0;
+
+        foreach (var item in products)
+        {
+            var product = productFinder.FindByName(item.ProductName);
+            var sum = product.MeasureType == MeasureType.pcs
+                ? product.Price * product.Capacity
+                : product.Price * product.Capacity * product.RandomWeight;
+
+            cost += sum;
+        }
+
+        return cost;
     }
 
     public bool HasProducts()
@@ -52,7 +72,9 @@ public class DeliveredProducts : MonoBehaviour
                 products[i].RemoveItems(amounToChange);
 
                 if (RandomNumber < difficulty)
+                {
                     products[i].RemoveAll();
+                }
 
                 cachedNames.Add(products[i].ProductName);
             }
@@ -66,6 +88,9 @@ public class DeliveredProducts : MonoBehaviour
         for(int i = 0;i < products.Count;i++)
         {
             var product = products[i];
+
+            if (product.IsSpoilt)
+                continue;
 
             float boxAmount = product.UseWeight ? product.GetWeight() : product.GetItemsAmount();
 
@@ -94,6 +119,11 @@ public class DeliveredProducts : MonoBehaviour
         }
 
         products.Add(box);
+
+        if(box.IsSpoilt)
+        {
+            ConsistSpoilled = true;
+        }
 
         if (box.IsHasChild)
         {

@@ -18,5 +18,6 @@ MonoBehaviour:
   Price: 1.79
   StorageType: 1
   MeasureType: 0
+  CompanyTypes: 0000000002000000
   minWeight: 0.03
   maxWeight: 0.03

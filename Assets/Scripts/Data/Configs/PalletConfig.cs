@@ -9,12 +9,14 @@ public class PalletConfig : ScriptableObject
     [Range(0,10)] public int Difficulty;
     private GameObject Prefab => Products.gameObject;
 
+    public float GetCost() => Products.GetCost();
+
     public DeliveredProducts GetOrderDelivered(Transform parent)
     {
         var obj = Instantiate(Prefab, parent);
 
         obj.TryGetComponent(out DeliveredProducts products);
-        products.Init();
+        products.Init(true);
 
         return products;
     }

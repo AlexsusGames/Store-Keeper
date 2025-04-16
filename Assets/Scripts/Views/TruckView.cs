@@ -37,4 +37,4 @@ public class TruckView : MonoBehaviour
         }
     }
 }
-public enum CarType { Grocceries = 0, Bread = 1, Milk = 2 };
+public enum CarType { Grocceries = 0, Bread = 1, Milk = 2, Delivery = 3, Chemical = 4, Applience = 5};

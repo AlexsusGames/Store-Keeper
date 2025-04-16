@@ -13,6 +13,7 @@ public class ProductConfig : ScriptableObject
     public float Price;
     public StorageType StorageType;
     public MeasureType MeasureType;
+    public CompanyType[] CompanyTypes;
 
     [SerializeField] private float minWeight;
     [SerializeField] private float maxWeight;

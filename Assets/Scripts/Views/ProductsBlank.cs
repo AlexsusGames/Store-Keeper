@@ -13,7 +13,7 @@ public class ProductsBlank : MonoBehaviour
     [SerializeField] private TMP_Text supplierText;
     [SerializeField] private TMP_Text shopNameText;
 
-    private readonly string[] companyNames = { "LLC \"MarketWay Distributors\"", "Inc. \"Bakery\"", "Corp. \"Dairy\"" };
+    private readonly string[] companyNames = { "LLC \"MarketWay Distributors\"", "Inc. \"Bakery\"", "Corp. \"Dairy\"", "Inc. \"Brillex\"", "Corp. \"Nordwell\""};
 
     [SerializeField] private Color drawColor;
     [SerializeField] private Color transperentColor;
@@ -39,8 +39,11 @@ public class ProductsBlank : MonoBehaviour
         Clear();
 
         dateText.text = DateTime.Now.ToString("yyyy-MM-dd");
-        supplierText.text = companyNames[(int)type];
-        shopNameText.text = Core.Statistic.GetCompanyName();
+
+        supplierText.text = type == CarType.Delivery ? Core.Statistic.GetCompanyName() : companyNames[(int)type];
+        shopNameText.text = type == CarType.Delivery ? "_________" : Core.Statistic.GetCompanyName();
+
+        bool isDelivering = type == CarType.Delivery;
 
         foreach(var item in products.Keys)
         {
@@ -51,10 +54,12 @@ public class ProductsBlank : MonoBehaviour
 
             var product = productFinder.FindByName(item);
 
+            float price = isDelivering ? product.Price * 2 : product.Price;
+
             unit.SetName(item)
                 .SetNumber(GetRandomNumber())
                 .SetEqualStatus(false)
-                .SetPcsPriceAndQty(product.Price, products[item], product.MeasureType);
+                .SetPcsPriceAndQty(price, products[item], product.MeasureType);
         }
     }
 

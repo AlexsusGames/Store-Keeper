@@ -14,11 +14,10 @@ public class StatisticInteractor : Interactor
 
     public float GetSupplierRating(CarType carType)
     {
-        var suppliesRating = dataProvider.Data.SuppliersRating;
+        if (dataProvider.Data.SuppliersRating == null)
+            dataProvider.Data.SuppliersRating = CreateData();
 
-        CheckData(ref suppliesRating);
-
-        return suppliesRating[(int)carType];
+        return dataProvider.Data.SuppliersRating[(int)carType];
     }
 
     public string GetCompanyName()
@@ -39,8 +38,10 @@ public class StatisticInteractor : Interactor
     public float GetTotalEarned() => dataProvider.Data.TotalEarned;
     public List<float> GetIncomeWeek()
     {
-        if (dataProvider.Data.IncomeWeek == null)
+        if (dataProvider.Data.IncomeWeek == null || dataProvider.Data.IncomeWeek.Count == 0)
             dataProvider.Data.IncomeWeek = CreateIncomeWeek();
+
+        Debug.Log(dataProvider.Data.IncomeWeek.Count);
 
         return dataProvider.Data.IncomeWeek;
     }
@@ -51,16 +52,13 @@ public class StatisticInteractor : Interactor
     {
         dataProvider.Data.TotalEarned += earned;
         dataProvider.Data.BoxesSold += boxCound;
+
+        Core.Quest.TryChangeQuest(QuestType.EarnMoney, (int)earned);
     }
 
     public void OnDayPassed(float income)
     {
         dataProvider.Data.DaysPassed++;
-
-        Debug.Log($"Income: {income}");
-
-        if (dataProvider.Data.IncomeWeek == null)
-            dataProvider.Data.IncomeWeek = CreateIncomeWeek();
 
         dataProvider.Data.IncomeWeek.RemoveAt(0);
         dataProvider.Data.IncomeWeek.Add(income);
@@ -82,26 +80,24 @@ public class StatisticInteractor : Interactor
 
     private void AddSupplierRating(CarType carType, float price)
     {
-        var suppliesRating = dataProvider.Data.SuppliersRating;
-
-        CheckData(ref suppliesRating);
+        if (dataProvider.Data.SuppliersRating == null)
+            dataProvider.Data.SuppliersRating = CreateData();
 
         float rating = price / 10000;
 
-        suppliesRating[(int)carType] += rating;
+        dataProvider.Data.SuppliersRating[(int)carType] += rating;
     }
 
-    private void CheckData(ref List<float> data)
+    private List<float> CreateData()
     {
-        if (data == null || data.Count == 0)
-        {
-            data = new();
+        List<float> data = new();
 
-            for (int i = 0; i < Enum.GetValues(typeof(CarType)).Length; i++)
-            {
-                data.Add(0);
-            }
+        for (int i = 0; i < Enum.GetValues(typeof(CarType)).Length; i++)
+        {
+            data.Add(0);
         }
+
+        return data;
     }
 
     private List<float> CreateIncomeWeek()

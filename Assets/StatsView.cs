@@ -18,9 +18,9 @@ public class StatsView : MonoBehaviour
     {
         totalShipments.text = $"{actions[1]} {Core.Statistic.GetTotalSupplies()}";
         perfectShipments.text = $"{actions[0]} {Core.Statistic.GetPerfectSupplies()}";
-        totalEarned.text = $"{actions[5]} {Core.Statistic.GetTotalEarned()}";
+        totalEarned.text = $"{actions[5]} ${Core.Statistic.GetTotalEarned()}";
         boxesSpoilded.text = $"{actions[4]} {Core.Statistic.GetProductsSpoiled()}";
         boxSold.text = $"{actions[3]} {Core.Statistic.GetBoxSold()}";
-        totalLosses.text = $"{actions[2]} {Core.Statistic.GetTotalLosses()}";
+        totalLosses.text = $"{actions[2]} ${Core.Statistic.GetTotalLosses()}";
     }
 }

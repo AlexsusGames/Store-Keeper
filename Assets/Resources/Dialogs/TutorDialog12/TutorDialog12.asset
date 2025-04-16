@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14960d5969c3bd74782c61fb61096cb7, type: 3}
+  m_Name: TutorDialog12
+  m_EditorClassIdentifier: 
+  CallerName: Andy
+  FirstAction: Good luck, Andy!
+  SecondAction: 
+  CallerSprite: {fileID: 21300000, guid: 4c0e223c1f4627548a9a53b9284a5c51, type: 3}
+  Messages:
+  - {fileID: 11400000, guid: 085da328302d8b0409b7836e243907d4, type: 2}
+  - {fileID: 11400000, guid: 5df4dc7d11272db4aa64e207bb95bb5c, type: 2}
+  - {fileID: 11400000, guid: ba7b9dd3ddfd0264583cab04fc433add, type: 2}
+  - {fileID: 11400000, guid: 71b94e9cc78b5424d96928597f41a507, type: 2}
+  - {fileID: 11400000, guid: 5083b17219390484eb51521583789815, type: 2}

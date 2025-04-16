@@ -36,17 +36,17 @@ public class ProductsSpawnInteractor : Interactor
         }
     }
 
-    public void PlaceProducts(string id, Transform parent)
+    public void PlaceProducts(string id, Transform parent, List<string> names = null)
     {
         if (!storageProductsMap.ContainsKey(id))
             return;
 
         var products = storageProductsMap[id];
 
-        SpawnProduct(parent, products);
+        SpawnProduct(parent, products, names);
     }
 
-    private void SpawnProduct(Transform parent, List<StorageData> data)
+    private void SpawnProduct(Transform parent, List<StorageData> data, List<string> list = null)
     {
         for (int i = 0;i < data.Count;i++)
         {
@@ -55,7 +55,10 @@ public class ProductsSpawnInteractor : Interactor
                 continue;
             }
 
-            Debug.Log($"Product Data Child is null - {data[i].Childs == null}");
+            if(list != null && data[i].ProductCount > 0)
+            {
+                list.Add(data[i].ProductName);
+            }
 
             var config = productFinder.FindByName(data[i].ProductName);
 
@@ -64,12 +67,14 @@ public class ProductsSpawnInteractor : Interactor
             prefab.transform.position = data[i].Position;
             prefab.transform.localRotation = data[i].Rotation;
 
-            if (prefab.TryGetComponent(out Box box))
+            if (prefab.TryGetComponent(out StoreBox box))
             {
                 box.Init(data[i].ProductCount);
                 box.ProductWeight = data[i].ProductWeight;
 
                 box.IsSpoilt = data[i].IsSpoilt;
+
+                Core.ProductList.AddProduct(box);
             }
 
             if (prefab.TryGetComponent(out PickupObject pickupObject))
@@ -82,7 +87,7 @@ public class ProductsSpawnInteractor : Interactor
                 var childData = data[i].Childs;
                 var storeBox = prefab.GetComponent<StoreBox>();
 
-                SpawnProduct(storeBox.ChildPoint, childData);
+                SpawnProduct(storeBox.ChildPoint, childData, list);
             }
         }
     }

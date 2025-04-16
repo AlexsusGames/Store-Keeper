@@ -8,6 +8,7 @@ public class ProductFinder : ScriptableObject
     [SerializeField] private List<ProductConfig> productConfigs;
 
     private Dictionary<string, ProductConfig> productMap;
+    public List<ProductConfig> AllConfigs => productConfigs;
 
     private void CreateMap()
     {

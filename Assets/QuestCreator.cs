@@ -43,5 +43,9 @@ public enum QuestType
     PlaceStorage,
     OrderShipment,
     GrabClipboard,
-    FinishSupply
+    FinishSupply,
+    EndDay,
+    CheckMail,
+    FinishDelivery,
+    EarnMoney
 }

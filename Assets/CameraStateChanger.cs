@@ -66,8 +66,6 @@ public class CameraStateChanger : MonoBehaviour
         if (state.UI[0].enabled && !isInitial && state.Type != CameraType.MainMenuCamera)
             Core.LastCamera = state.Type;
 
-        Debug.Log(Core.LastCamera);
-
         if (state.Root != null)
         {
             state.Root.SetActive(enabled);

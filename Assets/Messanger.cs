@@ -16,6 +16,8 @@ public class Messanger : MonoBehaviour
     [SerializeField] private float xPlayerOffset;
     [SerializeField] private float xCallerOffset;
 
+    [SerializeField] private bool isTested;
+
     private float currentContentHeight;
     public event Action OnChatFinished;
 
@@ -52,6 +54,8 @@ public class Messanger : MonoBehaviour
     {
         for (int i = 0; i < messages.Length; i++)
         {
+            if (isTested) continue;
+
             isRead = false;
             var message = messages[i];
 

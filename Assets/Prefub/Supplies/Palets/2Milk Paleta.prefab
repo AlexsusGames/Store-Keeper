@@ -8,9 +8,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2617353074641263955}
     m_Modifications:
+    - target: {fileID: 1289733804732146200, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1507467823901788354, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_Name
       value: Milk_MilkyBottles
+      objectReference: {fileID: 0}
+    - target: {fileID: 4983016890670948145, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
+      propertyPath: ProductWeight
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5267339173153377979, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_RootOrder
@@ -86,6 +94,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8008474701541109223}
     m_Modifications:
+    - target: {fileID: 3980755412925606306, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
+      propertyPath: ProductWeight
+      value: 0.71
+      objectReference: {fileID: 0}
     - target: {fileID: 4867669995534460470, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -215,6 +227,10 @@ PrefabInstance:
     - target: {fileID: 1657602752632537038, guid: b7202b37bdf3af64ea636f53d0d37776, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726780260769110054, guid: b7202b37bdf3af64ea636f53d0d37776, type: 3}
+      propertyPath: ProductWeight
+      value: 0.71
       objectReference: {fileID: 0}
     - target: {fileID: 6525243825307404317, guid: b7202b37bdf3af64ea636f53d0d37776, type: 3}
       propertyPath: m_Name
@@ -395,6 +411,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 258974586597614001}
     m_Modifications:
+    - target: {fileID: 3980755412925606306, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
+      propertyPath: ProductWeight
+      value: 0.71
+      objectReference: {fileID: 0}
     - target: {fileID: 4867669995534460470, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -461,6 +481,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6956082179600134267}
     m_Modifications:
+    - target: {fileID: 3980755412925606306, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
+      propertyPath: ProductWeight
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4867669995534460470, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -594,6 +618,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2726780260769110054, guid: b7202b37bdf3af64ea636f53d0d37776, type: 3}
+      propertyPath: ProductWeight
+      value: 0.71
+      objectReference: {fileID: 0}
     - target: {fileID: 6525243825307404317, guid: b7202b37bdf3af64ea636f53d0d37776, type: 3}
       propertyPath: m_Name
       value: Milk_Dessert (1)
@@ -668,6 +696,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6493942335728256778, guid: 07ff3228e638a2a4fba34b481c1a11c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6827403907204699372, guid: 07ff3228e638a2a4fba34b481c1a11c3, type: 3}
+      propertyPath: ProductWeight
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 8334817494780121374, guid: 07ff3228e638a2a4fba34b481c1a11c3, type: 3}
       propertyPath: m_Name
       value: Dessert_Yogurt
@@ -734,6 +770,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6493942335728256778, guid: 07ff3228e638a2a4fba34b481c1a11c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6827403907204699372, guid: 07ff3228e638a2a4fba34b481c1a11c3, type: 3}
+      propertyPath: ProductWeight
+      value: 0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 8334817494780121374, guid: 07ff3228e638a2a4fba34b481c1a11c3, type: 3}
       propertyPath: m_Name
       value: Dessert_Yogurt (1)
@@ -756,6 +800,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4389618192449907848}
     m_Modifications:
+    - target: {fileID: 3980755412925606306, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
+      propertyPath: ProductWeight
+      value: 0.72
+      objectReference: {fileID: 0}
     - target: {fileID: 4867669995534460470, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -830,9 +878,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2617353074641263955}
     m_Modifications:
+    - target: {fileID: 1289733804732146200, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1507467823901788354, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_Name
       value: Milk_MilkyBottles (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4983016890670948145, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
+      propertyPath: ProductWeight
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5267339173153377979, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_RootOrder

@@ -3,16 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
     private const string KEY = "TUTOR_COMPLETED";
     private const int LAST_STAGE_NUMBER = 6;
 
+    [SerializeField] private bool isDemo;
+
     [SerializeField] private ComputerButtonsController computerButtonsController;
     [SerializeField] private PhoneController phoneController;
 
     [SerializeField] private DialogConfig[] tutorDialogs;
+    [SerializeField] private Button signoutBtn;
     public bool IsCompleted => PlayerPrefs.GetInt(KEY) == LAST_STAGE_NUMBER;
 
     private bool canContinue;
@@ -77,15 +81,58 @@ public class Tutorial : MonoBehaviour
 
         if (stageIndex == 1)
         {
+            signoutBtn.interactable = false;
+            
             var inteructor = Core.Interactors.GetInteractor<DayProgressInteractor>();
-
-            Debug.Log(inteructor.GetCurrentLosses());
 
             var dialogIndex = inteructor.GetCurrentLosses() < 10 ? 6 : 7;
 
             AssignActions(QuestType.FinishSupply, dialogIndex);
 
             yield return WaitForComplete();
+
+            stageIndex++;
+
+            SaveStage(stageIndex);
+
+            signoutBtn.interactable = true;
+        }
+
+        if(stageIndex == 2)
+        {
+            AssignActions(QuestType.EndDay, 8);
+
+            yield return WaitForComplete();
+
+            stageIndex++;
+
+            SaveStage(stageIndex);
+        }
+
+        if(stageIndex == 3 || isDemo)
+        {
+            signoutBtn.interactable = false;
+        }
+
+        if(stageIndex == 3)
+        {
+            AssignActions(QuestType.CheckMail, 9);
+
+            yield return WaitForComplete();
+
+            AssignActions(QuestType.FinishDelivery, 10);
+
+            yield return WaitForComplete();
+
+            AssignActions(QuestType.FinishDelivery, 11);
+
+            yield return WaitForComplete();
+
+            stageIndex++;
+
+            SaveStage(stageIndex);
+
+            if (!isDemo) signoutBtn.interactable = true;
         }
 
         if (canContinue)

@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class DeliveringManager : MonoBehaviour
 {
-    [SerializeField] private Animator gateAnimator;
-    [SerializeField] private Animator truckAnimator;
-    [SerializeField] private TruckView truckView;
     [SerializeField] private OrderManager orderManager;
 
     [SerializeField] private Transform[] paletaPoints;
@@ -16,14 +13,21 @@ public class DeliveringManager : MonoBehaviour
     [SerializeField] private GameObject playersTablet;
     [SerializeField] private GameObject tableTablet;
 
-    private Coroutine cachedCoroutine;
-    public bool isDelivering {  get; private set; }
+    [SerializeField] private DeliveredProducts palletPrefab;
+
     private List<DeliveredProducts> pallets;
 
-    public void OpenGates(bool value)
-    {
-        gateAnimator.SetBool("isOpen", value);
-    }
+    public event Action<Dictionary<string, float>, bool> DeliveryReport;
+    public event Action<CarType> OnCarArrived;
+    public event Action OnCarDelivered;
+
+    private Coroutine cachedCoroutine;
+
+    private Dictionary<string, float> expectedProducts;
+    private Dictionary<string, float> actualProducts;
+
+    public bool isCarArrived;
+    private bool isDelivering;
 
     public bool HasProducts()
     {
@@ -34,7 +38,6 @@ public class DeliveringManager : MonoBehaviour
         }
 
         return false;
-
     }
 
     private void ClearPallets()
@@ -45,20 +48,114 @@ public class DeliveringManager : MonoBehaviour
         }
     }
 
-    public void DeliverProducts(DeliveryConfig deliveryData)
+    private void CarArrive(CarType type, bool isDelivering)
     {
         if (pallets != null)
             ClearPallets();
 
-        truckView.ChangeSkin(deliveryData.carType);
+        OnCarArrived?.Invoke(type);
+
         tableTablet.SetActive(true);
 
-        Dictionary<string, float> expectedProducts = new();
-        Dictionary<string, float> actualProducts = new ();
+        expectedProducts = new();
+        actualProducts = new();
 
-        SetCarDrivingAnimation(true);
-        isDelivering = true;
+        isCarArrived = true;
+
+        this.isDelivering = isDelivering;
+
         pallets = new();
+    }
+
+    public bool TryDeliverProducts(DeliveryData deliveryData)
+    {
+        if (isCarArrived)
+        {
+            Core.Clues.Show("You cannot start a delivery during a shipment.");
+            return false;
+        }
+
+        CarArrive(CarType.Delivery, true);
+
+        for(int i = 0;i < deliveryData.OrderedProducts.Count; i++)
+        {
+            var order = deliveryData.OrderedProducts[i];
+
+            expectedProducts[order.Product] = order.Amount;
+        }
+
+        actualProducts = expectedProducts;
+
+        for(int i = 0; i < paletaPoints.Length; i++)
+        {
+            var pallet = Instantiate(palletPrefab.gameObject, paletaPoints[i]);
+            pallets.Add(pallet.GetComponent<DeliveredProducts>());
+        }
+
+        orderManager.Init(expectedProducts, actualProducts, CarType.Delivery);
+
+        return true;
+    }
+
+    private bool FinishDelivery()
+    {
+        Dictionary<string, float> report = new();
+        bool isHasSpoiledProducts = false;
+
+        for(int i = 0; i < pallets.Count ; i++)
+        {
+            pallets[i].Init(false);
+
+            if (pallets[i].ConsistSpoilled)
+                isHasSpoiledProducts = true;
+
+            var order = pallets[i].GetOrder();
+
+            foreach(var unit in order.Keys)
+            {
+                if (!expectedProducts.ContainsKey(unit))
+                {
+                    Core.Clues.Show("Before sending the delivery, unload any extra goods");
+
+                    return false;
+                }
+                else report[unit] = report.GetValueOrDefault(unit, 0) + order[unit];
+            }
+        }
+
+        foreach(var item  in report.Keys)
+        {
+            Core.ProductList.RemoveProduct(item, report[item]);
+        }
+
+        if(report.Count == 0 && !isHasSpoiledProducts)
+        {
+            Core.Clues.Show("You cannot send out an empty truck.");
+
+            return false;
+        }
+
+        foreach(var unit in expectedProducts.Keys)
+        {
+            report[unit] = report.GetValueOrDefault(unit, 0) - expectedProducts[unit];
+        }
+
+        DeliveryReport?.Invoke(report, isHasSpoiledProducts);
+
+        Print(report);
+
+        return true;
+    }
+
+    public bool TrySupplyProducts(DeliveryConfig deliveryData)
+    {
+        if(isCarArrived)
+        {
+            Core.Clues.Show("You cannot start a shipment during a delivery.");
+            return false;
+        }
+
+        CarArrive(deliveryData.carType, false);
 
         for(int i = 0; i < deliveryData.pallets.Length; i++)
         {
@@ -76,8 +173,6 @@ public class DeliveringManager : MonoBehaviour
                 expectedProducts[item] = MathF.Round(order[item] + current, 2);
             }
 
-            Print(expectedProducts);
-
             var changedOrder = deliveryData.pallets[i].GetChangedOrderByDifficult(delivery);
 
             foreach(var item in changedOrder.Keys)
@@ -87,13 +182,15 @@ public class DeliveringManager : MonoBehaviour
                 if (actualProducts.ContainsKey(item))
                     current = actualProducts[item];
 
+                Core.ProductList.AddProduct(item, changedOrder[item]);
+
                 actualProducts[item] = MathF.Round(changedOrder[item] + current, 2);
             }
-
-            Print(actualProducts);
         }
 
         orderManager.Init(expectedProducts, actualProducts, deliveryData.carType);
+
+        return true;
     }
 
     public bool SwapObjectsPositions()
@@ -173,19 +270,21 @@ public class DeliveringManager : MonoBehaviour
         Debug.Log(debug);
     }
 
-    public void FinishDelivering()
+    public void OnCarGone()
     {
         if (isDelivering)
         {
-            playersTablet.SetActive(false);
-            SetCarDrivingAnimation(false);
-            isDelivering = false;
+            if (!FinishDelivery())
+                return;
         }
-    }
 
-    private void SetCarDrivingAnimation(bool value)
-    {
-        truckAnimator.SetBool("drivingInside", value);
-        truckView.PlaySound();
+        if (isCarArrived)
+        {
+            playersTablet.SetActive(false);
+
+            OnCarDelivered?.Invoke();
+
+            isCarArrived = false;
+        }
     }
 }

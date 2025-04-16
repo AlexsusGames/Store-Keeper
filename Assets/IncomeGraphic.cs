@@ -14,8 +14,6 @@ public class IncomeGraphic : MonoBehaviour
 
         int highest = 1000;
 
-        Print(week);
-
         for (int i = 0; i < week.Count; i++)
         {
             if(week[i] > highest)

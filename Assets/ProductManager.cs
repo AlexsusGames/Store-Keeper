@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,10 +8,18 @@ public class ProductManager : MonoBehaviour, IDataProvider
 {
     [SerializeField] private Surface[] staticSurfaces;
     [SerializeField] private Transform storagesParent;
+    [SerializeField] private OrderCreator orderManager;
 
     [Inject] private ProductFinder productFinder;
 
+    public Action<List<string>> OnInitialized;
+
     private ProductsSpawnInteractor productSpawner;
+
+    private void Awake()
+    {
+        OnInitialized += orderManager.Init;
+    }
 
     public void Init()
     {
@@ -18,10 +27,14 @@ public class ProductManager : MonoBehaviour, IDataProvider
 
         var surfaces = GetActiveSurfaces();
 
+        List<string> products = new();
+
         for (int i = 0; i < surfaces.Count; i++)
         {
-            productSpawner.PlaceProducts(surfaces[i].GetSurfaceId(), surfaces[i].GetSurface());
+            productSpawner.PlaceProducts(surfaces[i].GetSurfaceId(), surfaces[i].GetSurface(), products);
         }
+
+        OnInitialized?.Invoke(products);
     }
 
     public void Load()

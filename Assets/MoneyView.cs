@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,6 +15,6 @@ public class MoneyView : MonoBehaviour
 
     private void UpdateView()
     {
-        moneyText.text = $"${Bank.MoneyAmount}";
+        moneyText.text = $"${MathF.Round(Bank.MoneyAmount, 2)}";
     }
 }

@@ -18,6 +18,8 @@ public static class Core
         DataProviders = new DataProviderBase();
         Interactors = new InteractorsBase();
 
+        ProductList = new ProductList();
+
         DataProviders.CreateAllDataProviders();
         Interactors.CreateAllInteractors();
 
@@ -96,4 +98,5 @@ public static class Core
     }
 
     public static StatisticInteractor Statistic;
+    public static ProductList ProductList;
 }

@@ -13,42 +13,69 @@ public class LossesChecker : MonoBehaviour
 
     [Inject] private ProductFinder productFinder;
 
-    public event Action<float, float> OnChecked;
+    public event Action<float, float, float> OnChecked;
 
     private const string RED_COLOR = "<color=red>";
     private const string GREEN_COLOR = "<color=green>";
 
     private List<string> messages;
 
-    public void Check(Dictionary<string, float> expected, Dictionary<string, float> noted)
+    public void Check(Dictionary<string, float> actual, Dictionary<string, float> noted, Dictionary<string, float> expected)
     {
         gameObject.SetActive(true);
         messages = new();
         UpdateView();
 
-        StartCoroutine(Timer(expected, noted));
+        StartCoroutine(Timer(actual, noted, expected));
     }
     public void Hide() => gameObject.SetActive(false);
 
-    private IEnumerator Timer(Dictionary<string, float> actual, Dictionary<string, float> noted)
+    private IEnumerator Timer(Dictionary<string, float> actual, Dictionary<string, float> noted, Dictionary<string, float> expected)
     {
         float totalLosses = 0;
         float totalPrice = 0;
+        float savedMoney = 0;
 
-        foreach(var product in noted.Keys)
+        foreach (var product in noted.Keys)
         {
-            string result = actual[product] == noted[product] ? $"{GREEN_COLOR}Successful" : $"{RED_COLOR}Failure";
-            string newItem = $"{product} {noted[product]} / {actual[product]} - {result}";
+            float actualQty = actual[product];
+            float notedQty = noted[product];
+            float expectedQty = expected[product];
 
-            float different = actual[product] - noted[product];
-            float loss = productFinder.FindByName(product).Price * different;
+            float difference = actualQty - notedQty;
 
-            float price = actual[product] * productFinder.FindByName(product).Price;
+            var productData = productFinder.FindByName(product);
+            float pricePerUnit = productData.Price;
 
-            loss = Math.Abs(loss);
+            float itemTotalPrice = actualQty * pricePerUnit;
 
-            totalLosses += loss;
-            totalPrice += price;
+            string result = Math.Abs(difference) < 0.1f ? $"{GREEN_COLOR}Successful" : $"{RED_COLOR}Failure";
+            string newItem = $"{product} [{notedQty} / {actualQty}] - {result}";
+
+            float saved = 0;
+            float losses = 0;
+
+            if (Math.Abs(difference) < 0.1f)
+            {
+                saved = (expectedQty - actualQty) * pricePerUnit;
+            }
+            else
+            {
+                if (notedQty > actualQty)
+                {
+                    losses = (notedQty - actualQty) * pricePerUnit;
+                    saved = (expectedQty - notedQty) * pricePerUnit;
+                }
+                else
+                {
+                    losses = (expectedQty - actualQty) * pricePerUnit;
+                }
+            }
+
+            totalLosses += losses;
+            savedMoney += saved;
+
+            totalPrice += itemTotalPrice;
 
             messages.Insert(0, newItem);
             UpdateView();
@@ -56,13 +83,9 @@ public class LossesChecker : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
-        totalLosses = MathF.Round(totalLosses, 2);
-        totalPrice = MathF.Round(totalPrice, 2);
-
-        OnChecked?.Invoke(totalLosses, totalPrice);
+        OnChecked?.Invoke(MathF.Round(savedMoney, 2), MathF.Round(totalPrice, 2), MathF.Round(totalLosses, 2));
 
         yield return new WaitForSeconds(2f);
-
         Hide();
     }
 

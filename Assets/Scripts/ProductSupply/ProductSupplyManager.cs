@@ -9,9 +9,10 @@ public class ProductSupplyManager : MonoBehaviour
 {
     [SerializeField] private DeliveringManager deliveryManager;
     [SerializeField] private OrderManager orderManager;
+    [SerializeField] private CompanyRating companyRating;
+    [SerializeField] private OrderCreator orderCreator;
 
     [SerializeField] private SupplyPresenter supplyPresenter;
-    [SerializeField] private LossesCounter lossesCounter;
     [SerializeField] private LossesChecker lossesChecker;
     [SerializeField] private CarSlotView[] carSlotView;
     [SerializeField] private PhoneController phone;
@@ -47,7 +48,6 @@ public class ProductSupplyManager : MonoBehaviour
 
         UpdateViews();
 
-        deliveryManager.OpenGates(true);
         supplyPresenter.Hide();
         lossesChecker.Hide();
     }
@@ -56,13 +56,6 @@ public class ProductSupplyManager : MonoBehaviour
     {
         if (isBeingSupplied)
             return;
-
-        cachedCarType = carType;
-
-        supplyPresenter.AssignListener(FinishSupply);
-
-        isBeingSupplied = true;
-        supplyPresenter.IsSupplied(isBeingSupplied);
 
         DeliveryConfig config = null;
 
@@ -74,31 +67,48 @@ public class ProductSupplyManager : MonoBehaviour
                 break;
             }
         }
-        
-        if(config == null)
-            throw new Exception($"CarType: {carType} is missing");
 
-        suppliers.Remove(config);
+        if (deliveryManager.TrySupplyProducts(config))
+        {
+            cachedCarType = carType;
 
-        deliveryManager.DeliverProducts(config);
-        UpdateViews();
+            supplyPresenter.AssignListener(FinishSupply);
 
-        SetCarSlotsEnabled(false);
+            isBeingSupplied = true;
+            supplyPresenter.IsSupplied(isBeingSupplied);
 
-        Core.Quest.TryChangeQuest(QuestType.OrderShipment, 1);
+            if (config == null)
+                throw new Exception($"CarType: {carType} is missing");
+
+            suppliers.Remove(config);
+
+            UpdateViews();
+
+            SetCarSlotsEnabled(false);
+
+            orderCreator.UpdateView();
+
+            Core.Quest.TryChangeQuest(QuestType.OrderShipment, 1);
+        }
     }
 
-    private void AssignListeners(CarSlotView slot)
+    private void AssignListeners(CarSlotView slot, float price)
     {
         UnityAction action = () =>
         {
             UnityAction supplyAction = () =>
             {
-                StartSupply(slot.CarType);
+                if (price <= Bank.MoneyAmount)
+                {
+                    StartSupply(slot.CarType);
+                    Bank.Spend(this, price);
+                }
+                else Core.Clues.Show("Not enough money to pay for the shipment.");
+
                 Core.Sound.PlayClip(AudioType.MouseClick);
             };
 
-            supplyPresenter.SetData(slot.CarType, slot.CarSprite, supplyAction);
+            supplyPresenter.SetData(slot.CarType, slot.CarSprite, supplyAction, price);
             Core.Sound.PlayClip(AudioType.MouseClick);
         };
 
@@ -121,36 +131,26 @@ public class ProductSupplyManager : MonoBehaviour
         if(!deliveryManager.HasProducts())
         {
             SetCarSlotsEnabled(true);
-            deliveryManager.FinishDelivering();
-            supplyPresenter.IsSupplied(isBeingSupplied);
+            deliveryManager.OnCarGone();
 
-            if (suppliers.Count == 0)
-                deliveryManager.OpenGates(false);
-
-            lossesChecker.Check(orderManager.ActualOrder, orderManager.GetNotes());
+            lossesChecker.Check(orderManager.ActualOrder, orderManager.GetNotes(), orderManager.ExpectedOrder);
         }
 
         else Core.Clues.Show("Before completing the delivery, make sure no products are left in the truck.");
     }
 
-    private void OnChecked(float losses, float total)
+    private void OnChecked(float saved, float totalPrice, float losses)
     {
-        Core.Statistic.OnSupply(cachedCarType, total, losses);
-        Bank.Spend(this, total + losses);
-
-        currentLosses += losses;
-
-        lossesCounter.UpdateData(currentLosses, maxLosses);
+        Core.Statistic.OnSupply(cachedCarType, totalPrice, losses);
+        Bank.AddCoins(this, saved);
 
         UnityAction firstAction = SaveProgress;
-        UnityAction secondAction = currentLosses >= maxLosses ? phone.Replay : null;
+        UnityAction secondAction = losses >= maxLosses ? phone.Replay : null;
 
         BotDialogCreator dialogCreator = new BotDialogCreator();
         var dialogConfig = dialogCreator.GetLossesReport(losses, maxLosses);
 
         dayProgressInteractor.SetLosses(currentLosses);
-
-        lossesCounter.UpdateData(currentLosses, maxLosses);
 
         phone.OpenMessenger(dialogConfig, firstAction, secondAction);
     }
@@ -163,8 +163,12 @@ public class ProductSupplyManager : MonoBehaviour
 
         isBeingSupplied = false;
 
+        supplyPresenter.IsSupplied(isBeingSupplied);
+
         phone.ClosePhone();
         Core.Quest.TryChangeQuest(QuestType.FinishSupply);
+
+        companyRating.UpdateView(cachedCarType);
     }
 
     private void SetCarSlotsEnabled(bool value)
@@ -189,9 +193,7 @@ public class ProductSupplyManager : MonoBehaviour
         {
             int index = i;
             carSlotView[i].SetData(suppliers[index].pallets.Length, suppliers[i].carType);
-            AssignListeners(carSlotView[index]);
+            AssignListeners(carSlotView[index], suppliers[index].GetCost());
         }
-
-        lossesCounter.UpdateData(currentLosses, maxLosses);
     }
 }
