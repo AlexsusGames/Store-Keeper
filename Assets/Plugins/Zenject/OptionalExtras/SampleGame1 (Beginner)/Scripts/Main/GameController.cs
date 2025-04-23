@@ -43,7 +43,6 @@ namespace Zenject.Asteroids
         {
             Physics.gravity = Vector3.zero;
 
-            Cursor.visible = false;
 
             _signalBus.Subscribe<ShipCrashedSignal>(OnShipCrashed);
         }

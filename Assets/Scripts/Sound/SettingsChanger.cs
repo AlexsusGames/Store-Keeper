@@ -12,6 +12,7 @@ public class SettingsChanger : MonoBehaviour
 
     [SerializeField] private TMP_Dropdown qualityDropdown;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
+    [SerializeField] private TMP_Dropdown localizationDropdown;
 
     [SerializeField] private Toggle fullScreenToggle;
 
@@ -34,6 +35,7 @@ public class SettingsChanger : MonoBehaviour
         resolutionDropdown.onValueChanged.AddListener(ChangeResolution);
         qualityDropdown.onValueChanged.AddListener(dataProvider.ChangeQuality);
         fullScreenToggle.onValueChanged.AddListener(dataProvider.ChangeFullScreen);
+        localizationDropdown.onValueChanged.AddListener(ChangeLocalization);
     }
 
     private void OnEnable()
@@ -45,6 +47,12 @@ public class SettingsChanger : MonoBehaviour
         sensivitySlider.value = data.MouseSensivity;
         fullScreenToggle.SetIsOnWithoutNotify(data.IsFullScreen);
         qualityDropdown.SetValueWithoutNotify(data.QualityIndex);
+        localizationDropdown.SetValueWithoutNotify(Core.Localization.LocalizationIndex);
+    }
+
+    private void ChangeLocalization(int index)
+    {
+        Core.Localization.LocalizationIndex = index;
     }
 
     public void CreateResolutionOptions()

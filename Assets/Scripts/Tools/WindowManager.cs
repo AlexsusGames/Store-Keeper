@@ -20,8 +20,6 @@ public class WindowManager : MonoBehaviour
 
     private bool TryCloseWindows()
     {
-        bool closed = false;
-
         for (int i = 0; i < windows.Length; i++)
         {
             if (windows[i].TryGetComponent(out IWindow window))
@@ -29,7 +27,7 @@ public class WindowManager : MonoBehaviour
                 if(window.IsActive())
                 {
                     window.Close();
-                    closed = true;
+                    return true;
                 }
             }
             else
@@ -37,11 +35,11 @@ public class WindowManager : MonoBehaviour
                 if (windows[i].activeInHierarchy)
                 {
                     windows[i].SetActive(false);
-                    closed = true;
+                    return true;
                 }
             }
         }
 
-        return closed;
+        return false;
     }
 }

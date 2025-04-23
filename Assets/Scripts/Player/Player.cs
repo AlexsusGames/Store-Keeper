@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        playerController.ChangeClipboardEnabled(false);
         Core.Camera.StateChanged += OnStateChanged;
     }
 

@@ -5,22 +5,15 @@ using UnityEngine.Events;
 
 public class PickupObject : InteractiveManager
 {
-    [SerializeField] private MeshRenderer[] renderers;
-
-    [SerializeField] private Material enablePreviewMat;
-    [SerializeField] private Material disablePreviewMat;
-
-    [SerializeField] private UnityEvent OnGrabbed;
-    [SerializeField] private UnityEvent OnPlaced;
-
-    [SerializeField] private int countOfCollision;
-    [SerializeField] private GameObject cap;
+    [SerializeField] private BoxSettings settings;
+    private MeshRenderer[] renderers => settings.Renderers;
+    private GameObject cap => settings.capObject;
 
     private List<Material[]> cachedMaterials = new();
-    private BoxCollider bCollider;
 
+    private BoxCollider bCollider;
     private StoreBox box;
-    public bool IsFreeToPlace;
+    public bool IsFreeToPlace => settings.IsFreeToPlace;
     public StoreBox StoreBox => box;
 
     private void Awake()
@@ -52,16 +45,31 @@ public class PickupObject : InteractiveManager
 
     public void Grab()
     {
+        CollidersEnabled(false);
+
         OutlineEnabled(false);
         OutlineBlock = true;
-        OnGrabbed?.Invoke();
     }
     public void Place()
     {
-        OnPlaced?.Invoke();
+        CollidersEnabled(true);
+
         SetDefaut();
         OutlineBlock = false;
     }
+
+    private void CollidersEnabled(bool enabled)
+    {
+        var surfaceCollider = settings.SurfaceCollider;
+
+        if(surfaceCollider != null)
+        {
+            surfaceCollider.enabled = enabled;
+        }
+
+        settings.CollisionCollider.enabled = enabled;
+    }
+
     public void SetDefaut()
     {
         OutlineEnabled(false);
@@ -79,7 +87,7 @@ public class PickupObject : InteractiveManager
     {
         OutlineEnabled(false);
 
-        Material mat = value ? enablePreviewMat : disablePreviewMat;
+        Material mat = value ? settings.BluePreviewMaterial : settings.RedPreviewMaterial;
 
         for (int i = 0;i < renderers.Length; i++)
         {
@@ -98,28 +106,17 @@ public class PickupObject : InteractiveManager
 
     public bool CheckAvailableToPlace()
     {
-
         Collider[] results = GetOverlappingColliders();
-        print(results);
 
-        var result = results.Length == countOfCollision;
+        var result = results.Length == 1;
 
         Draw(result);
+
+        Priint(results);
 
         return result;
     }
 
-    private void print(Collider[] colls)
-    {
-        string result = "";
-
-        for (int i = 0; i < colls.Length; i++)
-        {
-            result += $"{colls[i].name} ";
-        }
-
-        Debug.Log(result);
-    }
 
     private Collider[] GetOverlappingColliders()
     {
@@ -132,8 +129,20 @@ public class PickupObject : InteractiveManager
         return Physics.OverlapBox(worldCenter, halfExtents, rotation);
     }
 
+    private void Priint(Collider[] colliers)
+    {
+        string result = "";
+
+        for (int i = 0; i < colliers.Length; i++)
+        {
+            result += colliers[i].name;
+            result += ", ";
+        }
+
+        Debug.Log(result);
+    }
+
     public override void Interact()
     {
-        Debug.Log("interacting");
     }
 }

@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df2f7196643b1d46a295b8e680efa51, type: 3}
   m_Name: Vegetables
   m_EditorClassIdentifier: 
-  Products: {fileID: 3796944497264396460, guid: ce9782fd1363e2a40b52a15bb5127b7a, type: 3}
+  Products: {fileID: 5805, guid: cd000133b8e69294fb62c5653613b0e8, type: 3}
   Difficulty: 3
-  CarType: 0

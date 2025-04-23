@@ -12,13 +12,6 @@ public class NonPlacedStoragesDataProvider : DataProvider
         Data = new FurnitureDataList()
         {
             FurnitureList = new List<FurnitureData>()
-            {
-                new FurnitureData()
-                {
-                    FurnitureId = "stand",
-                    Amount = 2
-                }
-            }
         };
     }
 

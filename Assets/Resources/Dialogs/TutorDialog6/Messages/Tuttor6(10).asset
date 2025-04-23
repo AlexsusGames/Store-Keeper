@@ -15,6 +15,6 @@ MonoBehaviour:
   IsPlayer: 0
   Content:
     Sprite: {fileID: 0}
-    Message: "Suppliers can make mistakes too\u2014they might list items on paper
-      but forget to load them."
+    Message: Suppliers can make mistakes too - they might list items on paper but
+      forget to load them.
   TimeTillNextMessage: 2

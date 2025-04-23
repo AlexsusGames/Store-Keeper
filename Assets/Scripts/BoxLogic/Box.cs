@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Box : MonoBehaviour
 {
-    [SerializeField] private GameObject[] items;
-
-    [SerializeField] private GameObject spoilEffect;
-
+    [SerializeField] protected BoxSettings settings;
+    private GameObject spoilEffect => settings.spoilEffect;
+    private GameObject[] items => settings.Products;
     public bool IsSpoilt
     {
         get
@@ -20,25 +19,17 @@ public class Box : MonoBehaviour
         }
         set
         {
-            if(spoilEffect != null)
+            if (spoilEffect != null)
                 spoilEffect.SetActive(value);
         }
     }
 
+    public float ProductWeight { get; set; }
     public bool IsCanBeSpoiled => spoilEffect != null && IsSpoilt == false;
-
-    public string ProductName;
-    public float ProductWeight;
+    public string ProductName {get => settings.ProductName; set => settings.ProductName = value; }
     public float TotalWeight => ProductWeight * itemAmount;
 
     protected int itemAmount;
-
-    protected BoxCollider bCollider;
-
-    private void Awake()
-    {
-        bCollider = GetComponent<BoxCollider>();
-    }
 
     public void SetStandart()
     {

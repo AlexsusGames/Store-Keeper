@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4983016890670948145, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: ProductWeight
-      value: 0.7
+      value: 0.71
       objectReference: {fileID: 0}
     - target: {fileID: 5267339173153377979, guid: 6119019ae4b5f7d499b60c86d1c7c392, type: 3}
       propertyPath: m_RootOrder
@@ -230,7 +230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2726780260769110054, guid: b7202b37bdf3af64ea636f53d0d37776, type: 3}
       propertyPath: ProductWeight
-      value: 0.71
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 6525243825307404317, guid: b7202b37bdf3af64ea636f53d0d37776, type: 3}
       propertyPath: m_Name
@@ -348,10 +348,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7731474314330109274, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3796944497264396460}
+      addedObject: {fileID: 4655}
     - targetCorrespondingSourceObject: {fileID: 9122595141881088430, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1458512211181237673}
+      addedObject: {fileID: 4253}
   m_SourcePrefab: {fileID: 100100000, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
 --- !u!4 &2617353074641263955 stripped
 Transform:
@@ -363,7 +363,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9122595141881088430, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
   m_PrefabInstance: {fileID: 2138437073045829178}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1458512211181237673
+--- !u!65 &4253
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -389,7 +389,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7731474314330109274, guid: 3b49e6ee7eb0ee945aeb340efd97fed6, type: 3}
   m_PrefabInstance: {fileID: 2138437073045829178}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3796944497264396460
+--- !u!114 &4655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -413,7 +413,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3980755412925606306, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
       propertyPath: ProductWeight
-      value: 0.71
+      value: 0.72
       objectReference: {fileID: 0}
     - target: {fileID: 4867669995534460470, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
       propertyPath: m_RootOrder
@@ -483,7 +483,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3980755412925606306, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
       propertyPath: ProductWeight
-      value: 0.7
+      value: 0.72
       objectReference: {fileID: 0}
     - target: {fileID: 4867669995534460470, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
       propertyPath: m_RootOrder
@@ -802,7 +802,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3980755412925606306, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
       propertyPath: ProductWeight
-      value: 0.72
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4867669995534460470, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
       propertyPath: m_RootOrder

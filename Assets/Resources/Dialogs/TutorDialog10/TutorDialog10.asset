@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TutorDialog10
   m_EditorClassIdentifier: 
   CallerName: Andy
-  FirstAction: On it.
+  FirstAction: On it!
   SecondAction: 
   CallerSprite: {fileID: 21300000, guid: 4c0e223c1f4627548a9a53b9284a5c51, type: 3}
   Messages:

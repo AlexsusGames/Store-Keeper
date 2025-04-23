@@ -34,6 +34,7 @@ public class InteractiveHandler : MonoBehaviour
         {
             if (currentInteractable is PickupObject obj)
                 itemGrabbing.Grab(obj);
+
             currentInteractable.Interact();
         }
     }

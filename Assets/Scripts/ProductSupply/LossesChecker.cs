@@ -49,11 +49,10 @@ public class LossesChecker : MonoBehaviour
 
             float itemTotalPrice = actualQty * pricePerUnit;
 
-            string result = Math.Abs(difference) < 0.1f ? $"{GREEN_COLOR}Successful" : $"{RED_COLOR}Failure";
-            string newItem = $"{product} [{notedQty} / {actualQty}] - {result}";
-
             float saved = 0;
             float losses = 0;
+
+            var newItem = StringBuilder(product, notedQty, actualQty);
 
             if (Math.Abs(difference) < 0.1f)
             {
@@ -87,6 +86,20 @@ public class LossesChecker : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         Hide();
+    }
+
+    private string StringBuilder(string productName, float notedQty, float actualQty)
+    {
+        float difference = actualQty - notedQty;
+
+        string translatedProduct = Core.Localization.Translate(productName);
+        string translatedSuccess = Core.Localization.Translate("Successful");
+        string translatedFailure = Core.Localization.Translate("Failure");
+
+        string result = Math.Abs(difference) < 0.1f ? $"{GREEN_COLOR}{translatedSuccess}" : $"{RED_COLOR}{translatedFailure}";
+        string newItem = $"{translatedProduct} [{notedQty} / {actualQty}] - {result}";
+
+        return newItem;
     }
 
     private void UpdateView()

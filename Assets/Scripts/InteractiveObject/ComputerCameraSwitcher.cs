@@ -15,6 +15,8 @@ public class ComputerCameraSwitcher : InteractiveManager
         {
             if (!cameraChanger.storeEditorModeEnabled)
             {
+                isInteracting = cameraChanger.cameraSwitched;
+
                 isInteracting = !isInteracting;
 
                 if (isInteracting)

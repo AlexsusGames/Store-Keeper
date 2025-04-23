@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 5226580064838745052, guid: 893d90fa495ee7e4c93f41fac75b879e, type: 3}
   Capacity: 35
-  ProductName: Cheese "Milky" 40g.
+  ProductName: Cheese 'Milky' 40g.
   Price: 3.99
   StorageType: 1
   MeasureType: 0

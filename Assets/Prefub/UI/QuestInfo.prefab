@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6464899388845415688}
   - component: {fileID: 7104954009991777847}
   - component: {fileID: 8453236068078153042}
+  - component: {fileID: 1904180425979718940}
   m_Layer: 5
   m_Name: QuestName
   m_TagString: Untagged
@@ -68,8 +69,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 632902261000f344c94872902e5f4fb3, type: 2}
-  m_sharedMaterial: {fileID: 464390047738567431, guid: 632902261000f344c94872902e5f4fb3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 25cfed9fcf7a1c54194c20522571f013, type: 2}
+  m_sharedMaterial: {fileID: 8948566045272151192, guid: 25cfed9fcf7a1c54194c20522571f013, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -135,6 +136,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1904180425979718940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175306910313087358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b956d7b2dc75f8449de5dd72298dcb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1260774406178169746
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,6 +392,7 @@ GameObject:
   - component: {fileID: 8302675894242650905}
   - component: {fileID: 7022205329439364365}
   - component: {fileID: 2634723252057992040}
+  - component: {fileID: 5065503765033637080}
   m_Layer: 5
   m_Name: QuestDescribtion
   m_TagString: Untagged
@@ -503,6 +517,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5065503765033637080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5748017036125012284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b956d7b2dc75f8449de5dd72298dcb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5929600977834156120
 GameObject:
   m_ObjectHideFlags: 0

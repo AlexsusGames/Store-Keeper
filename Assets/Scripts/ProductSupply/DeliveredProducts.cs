@@ -17,6 +17,8 @@ public class DeliveredProducts : MonoBehaviour
 
     public void Init(bool fillBoxes = true)
     {
+        ConsistSpoilled = false;
+
         products = new();
         for (int i = 0; i < parent.childCount; i++)
         {

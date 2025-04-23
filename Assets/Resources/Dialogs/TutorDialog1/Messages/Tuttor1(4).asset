@@ -15,6 +15,6 @@ MonoBehaviour:
   IsPlayer: 0
   Content:
     Sprite: {fileID: 0}
-    Message: "First, head to the office\u2014it\u2019s down the left hallway. Find
-      the computer, and we\u2019ll go from there!"
+    Message: "First, head to the office - it\u2019s down the left hallway. Find the
+      computer, and we\u2019ll go from there!"
   TimeTillNextMessage: 1

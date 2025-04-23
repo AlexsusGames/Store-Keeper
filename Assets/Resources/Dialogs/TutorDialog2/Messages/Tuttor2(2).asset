@@ -15,5 +15,5 @@ MonoBehaviour:
   IsPlayer: 0
   Content:
     Sprite: {fileID: 0}
-    Message: "Long story short\u2014you\u2019ll be storing goods until you find buyers."
+    Message: "Long story short - you\u2019ll be storing goods until you find buyers."
   TimeTillNextMessage: 2

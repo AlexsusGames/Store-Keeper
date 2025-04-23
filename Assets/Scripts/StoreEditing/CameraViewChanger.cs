@@ -7,6 +7,7 @@ public class CameraViewChanger : MonoBehaviour, IWindow
 {
     [SerializeField] private Player player;
 
+    public bool cameraSwitched;
     public bool storeEditorModeEnabled = false;
 
     public void SwitchTopDownCamera()
@@ -24,6 +25,7 @@ public class CameraViewChanger : MonoBehaviour, IWindow
 
     public void MovePlayerCamera(Vector3 cords, Vector3 viewPoint)
     {
+        cameraSwitched = true;
         player.BlockControl(true, this);
         player.IsCameraPositionChanged = true;
 
@@ -36,6 +38,7 @@ public class CameraViewChanger : MonoBehaviour, IWindow
         {
             player.IsCameraPositionChanged = false;
             player.BlockControl(false, this);
+            cameraSwitched = false;
         };
 
         player.FirstPersonCamera.ResetCameraPosition(callback);
@@ -46,11 +49,18 @@ public class CameraViewChanger : MonoBehaviour, IWindow
         if (storeEditorModeEnabled)
         {
             SwitchTopDownCamera();
+            return;
+        }
+
+        if (cameraSwitched)
+        {
+            cameraSwitched = false;
+            ResetCameraPosition();
         }
     }
 
     public bool IsActive()
     {
-        return storeEditorModeEnabled;
+        return storeEditorModeEnabled || cameraSwitched;
     }
 }

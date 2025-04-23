@@ -10,7 +10,7 @@ public class DeliveringManager : MonoBehaviour
 
     [SerializeField] private Transform[] paletaPoints;
 
-    [SerializeField] private GameObject playersTablet;
+    [SerializeField] private Tablet playersTablet;
     [SerializeField] private GameObject tableTablet;
 
     [SerializeField] private DeliveredProducts palletPrefab;
@@ -270,6 +270,21 @@ public class DeliveringManager : MonoBehaviour
         Debug.Log(debug);
     }
 
+    public bool CancelDelivering()
+    {
+        if (HasProducts())
+        {
+            Core.Clues.Show("To cancel the delivery, you need to unload the products you just loaded.");
+            return false;
+        }
+
+        isDelivering = false;
+
+        OnCarGone();
+
+        return true;
+    }
+
     public void OnCarGone()
     {
         if (isDelivering)
@@ -280,7 +295,8 @@ public class DeliveringManager : MonoBehaviour
 
         if (isCarArrived)
         {
-            playersTablet.SetActive(false);
+            playersTablet.ChangeClipboardEnabled(false);
+            tableTablet.SetActive(false);
 
             OnCarDelivered?.Invoke();
 

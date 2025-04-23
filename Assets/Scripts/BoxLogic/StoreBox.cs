@@ -4,37 +4,24 @@ using UnityEngine;
 
 public class StoreBox : Box
 {
-    [SerializeField] private Transform childPoint;
-    [SerializeField] private bool useWeight;
-
-    public BoxType BoxType;
-    public bool FoldBtType;
-    public bool UseWeight => useWeight;
+    public BoxType BoxType => settings.BoxType;
+    public bool FoldBtType => settings.FoldByType;
+    public bool UseWeight => settings.UseWeigh;
     public bool IsHasChild
     {
         get
         {
-            if(childPoint != null)
+            if(ChildPoint != null)
             {
-                return childPoint.childCount > 0;
+                return ChildPoint.childCount > 0;
             }
 
             return false;
         }
     }
 
-    public StoreBox ChilBox
-    {
-        get
-        {
-            if(IsHasChild) return childPoint.GetComponentInChildren<StoreBox>();
-
-            return null;
-        }
-    }
-
     public float GetWeight() => GetItemsAmount() * ProductWeight;
-    public Transform ChildPoint => childPoint;
+    public Transform ChildPoint => settings.ChildPoint;
 }
 public enum BoxType
 {

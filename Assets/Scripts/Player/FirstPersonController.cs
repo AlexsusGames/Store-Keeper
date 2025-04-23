@@ -3,30 +3,18 @@ using UnityEngine;
 public class FirstPersonController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private GameObject clipboard;
-
-    [SerializeField] private GameObject clipboardIcon;
+    [SerializeField] private Tablet clipboard;
 
     public float DampTime;
     public bool IsHasCart { private get; set; }
 
-    public bool TabletActivity => clipboard.activeInHierarchy;
-
-    public void ChangeClipboardEnabled(bool value)
-    {
-        clipboard.SetActive(value);
-        clipboardIcon.SetActive(value);
-
-        if(value)
-            PlayTabletSound();
-    }
+    public bool TabletActivity => clipboard.gameObject.activeInHierarchy;
 
     public float moveSpeed = 5f;
 
     private Rigidbody rb;
     private float speed;
     private int cachedState;
-    private bool isHandShowed;
 
     private bool moveBlock = false;
 
@@ -54,16 +42,15 @@ public class FirstPersonController : MonoBehaviour
         Core.Sound.PlayClip(AudioType.Tablet);
     }
 
-    public void ShowHand()
+    public void ShowTablet()
     {
-        if(TabletActivity)
+        if (TabletActivity)
         {
-            isHandShowed = !isHandShowed;
-
-            int weigh = isHandShowed ? 1 : 0;
-            animator.SetLayerWeight(1, weigh);
             PlayTabletSound();
+
+            clipboard.Interact();
         }
+        else Core.Clues.Show("To show the clipboard, pick it up from the table when the truck arrives.");
     }
 
     private void FixedUpdate()
@@ -107,9 +94,9 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && moveBlock == false)
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            ShowHand();
+            ShowTablet();
         }
     }
 

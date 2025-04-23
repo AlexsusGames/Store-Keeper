@@ -98,7 +98,9 @@ public class StorageShop : MonoBehaviour
             color = Color.red;
         }
 
-        StartCoroutine(LogAppearence(msg, color));
+        var translatedMsg = Core.Localization.Translate(msg);
+
+        StartCoroutine(LogAppearence(translatedMsg, color));
     }
 
     public IEnumerator LogAppearence(string msg, Color color)

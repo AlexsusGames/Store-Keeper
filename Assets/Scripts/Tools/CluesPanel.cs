@@ -14,7 +14,9 @@ public class CluesPanel : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        clueText.text = text;
+        string translated = Core.Localization.Translate(text);
+
+        clueText.text = translated;
         StartCoroutine(Animation(animDuration));
     }
 

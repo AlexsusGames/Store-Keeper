@@ -163,8 +163,6 @@ public class ProductSupplyManager : MonoBehaviour
 
         isBeingSupplied = false;
 
-        supplyPresenter.IsSupplied(isBeingSupplied);
-
         phone.ClosePhone();
         Core.Quest.TryChangeQuest(QuestType.FinishSupply);
 

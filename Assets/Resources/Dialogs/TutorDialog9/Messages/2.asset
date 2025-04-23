@@ -15,5 +15,5 @@ MonoBehaviour:
   IsPlayer: 1
   Content:
     Sprite: {fileID: 0}
-    Message: Ok.
+    Message: Okay.
   TimeTillNextMessage: 1

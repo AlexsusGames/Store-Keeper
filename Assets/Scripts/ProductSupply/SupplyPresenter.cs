@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,7 +18,7 @@ public class SupplyPresenter : MonoBehaviour
     [SerializeField] private Color greenColor;
     [SerializeField] private Color redColor;
 
-    private readonly string[] companyNames = { "LLC \"MarketWay Distributors\"", "Inc. \"Bakery\"", "Corp. \"Dairy\"", "Inc. \"Brillex\"", "Corp. \"Nordwell\"" };
+    private readonly string[] companyNames = { "LLC 'MarketWay Distributors'", "Inc. 'Bakery'", "Corp. 'Dairy'", "Inc. 'Brillex'", "Corp. 'Nordwell'" };
 
     public void AssignListener(UnityAction action)
     {
@@ -28,11 +29,13 @@ public class SupplyPresenter : MonoBehaviour
     public void IsSupplied(bool value)
     {
         Color color = value ? redColor : greenColor;
-        string action = value ? "Finish" : "Supply";
+        string action = value ? "Complete" : "Supply";
+
+        string translated = Core.Localization.Translate(action);
 
         cost.gameObject.SetActive(!value);
 
-        SetButtonView(color, action);
+        SetButtonView(color, translated);
     }
 
     private void SetButtonView(Color color, string actionText)
@@ -45,8 +48,16 @@ public class SupplyPresenter : MonoBehaviour
         Hide();
         gameObject.SetActive(true);
 
+        IsSupplied(false);
+
         image.sprite = sprite;
-        companyName.text = companyNames[(int)carType];
+
+        var translatedCompanyName = Core.Localization.Translate(companyNames[(int)carType]);
+
+        companyName.text = translatedCompanyName;
+
+        price = MathF.Round(price, 2);
+
         cost.text = $"${price}";
 
         AssignListener(action);

@@ -13,7 +13,7 @@ public class ProductsBlank : MonoBehaviour
     [SerializeField] private TMP_Text supplierText;
     [SerializeField] private TMP_Text shopNameText;
 
-    private readonly string[] companyNames = { "LLC \"MarketWay Distributors\"", "Inc. \"Bakery\"", "Corp. \"Dairy\"", "Inc. \"Brillex\"", "Corp. \"Nordwell\""};
+    private readonly string[] companyNames = { "LLC 'MarketWay Distributors'", "Inc. 'Bakery'", "Corp. 'Dairy'", "Inc. 'Brillex'", "Corp. 'Nordwell'"};
 
     [SerializeField] private Color drawColor;
     [SerializeField] private Color transperentColor;
@@ -40,7 +40,9 @@ public class ProductsBlank : MonoBehaviour
 
         dateText.text = DateTime.Now.ToString("yyyy-MM-dd");
 
-        supplierText.text = type == CarType.Delivery ? Core.Statistic.GetCompanyName() : companyNames[(int)type];
+        string companyName = Core.Localization.Translate(companyNames[(int)type]);
+
+        supplierText.text = type == CarType.Delivery ? Core.Statistic.GetCompanyName() : companyName;
         shopNameText.text = type == CarType.Delivery ? "_________" : Core.Statistic.GetCompanyName();
 
         bool isDelivering = type == CarType.Delivery;

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 6975383823758899945, guid: d73343e0eb3fcb449b3038579c7bdbfb, type: 3}
   Capacity: 10
-  ProductName: Milk "Milky" 700ml.
+  ProductName: Milk 'Milky' 700ml.
   Price: 6.99
   StorageType: 0
   MeasureType: 0

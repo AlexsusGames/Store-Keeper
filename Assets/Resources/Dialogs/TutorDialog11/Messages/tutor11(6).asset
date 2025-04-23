@@ -15,5 +15,5 @@ MonoBehaviour:
   IsPlayer: 1
   Content:
     Sprite: {fileID: 0}
-    Message: Just like a delivery, but the other way around.
+    Message: Like a delivery, in reverse.
   TimeTillNextMessage: 1

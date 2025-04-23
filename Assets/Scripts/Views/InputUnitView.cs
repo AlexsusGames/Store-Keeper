@@ -16,7 +16,10 @@ public class InputUnitView : MonoBehaviour
         gameObject.SetActive(true);
 
         image.sprite = config.InputSprite;
-        action.text = config.InputName;
+
+        string translatedText = Core.Localization.Translate(config.InputName);
+
+        action.text = translatedText;
 
         cachedConfig = config;
     }

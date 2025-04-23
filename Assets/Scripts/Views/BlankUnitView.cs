@@ -34,7 +34,9 @@ public class BlankUnitView : MonoBehaviour
 
     public BlankUnitView SetName(string name)
     {
-        nameText.text = name;
+        var translatedName = Core.Localization.Translate(name);
+
+        nameText.text = translatedName;
         return this;
     }
 
@@ -44,8 +46,10 @@ public class BlankUnitView : MonoBehaviour
         float qtyRounded = MathF.Round(qty, 2);
         float allPrice = MathF.Round(price * qty, 2);
 
+        string translatedMeasure = Core.Localization.Translate(measure);
+
         pcsPriceText.text = $"{price}$";
-        qtyText.text = $"{qtyRounded}{measure}.";
+        qtyText.text = $"{qtyRounded}{translatedMeasure}.";
         allPriceText.text = $"{allPrice}$";
         
         return this;

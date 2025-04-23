@@ -15,6 +15,6 @@ MonoBehaviour:
   IsPlayer: 0
   Content:
     Sprite: {fileID: 0}
-    Message: "Alright then, get moving\u2014the truck\u2019s already waiting in the
+    Message: "Alright then, get moving - the truck\u2019s already waiting in the
       yard!"
   TimeTillNextMessage: 1
