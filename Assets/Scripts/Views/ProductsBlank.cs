@@ -20,6 +20,8 @@ public class ProductsBlank : MonoBehaviour
 
     [Inject] private ProductFinder productFinder;
 
+    private PricingInteractor pricingInteractor;
+
     public void DrawUnit(int index)
     {
         for (int i = 0; i < units.Length; i++)
@@ -36,6 +38,9 @@ public class ProductsBlank : MonoBehaviour
 
     public void SetData(Dictionary<string, float> products, CarType type)
     {
+        if (pricingInteractor == null)
+            pricingInteractor = Core.Interactors.GetInteractor<PricingInteractor>();
+
         Clear();
 
         dateText.text = DateTime.Now.ToString("yyyy-MM-dd");
@@ -56,7 +61,7 @@ public class ProductsBlank : MonoBehaviour
 
             var product = productFinder.FindByName(item);
 
-            float price = isDelivering ? product.Price * 2 : product.Price;
+            float price = isDelivering ? pricingInteractor.GetDeliveryPrice(item) : product.Price;
 
             unit.SetName(item)
                 .SetNumber(GetRandomNumber())

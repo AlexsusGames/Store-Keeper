@@ -33,8 +33,12 @@ public class Delivery : MonoBehaviour
 
     private void StartDelivery(DeliveryData deliveryData)
     {
+        var interactor = Core.Interactors.GetInteractor<DeliveryInteractor>();
+
         if (deliveryManager.TryDeliverProducts(deliveryData))
         {
+            interactor.OnStartDelivery(deliveryData);
+
             currentDelivery = deliveryData;
             orderPresenter.ChangeDeliveryButtonEnabled(true);
         }
@@ -46,7 +50,7 @@ public class Delivery : MonoBehaviour
         {
             var interactor = Core.Interactors.GetInteractor<DeliveryInteractor>();
 
-            interactor.FinishDelivery(currentDelivery, false);
+            interactor.CancelDelivery(currentDelivery);
 
             orderCreator.UpdateView();
 
@@ -54,17 +58,14 @@ public class Delivery : MonoBehaviour
         }
     }
 
-    private void OnFinishDelivery(Dictionary<string, float> report, bool wereSpoiled)
+    private void OnFinishDelivery(Dictionary<string, float> report, bool wereSpoiled, bool wereChanged)
     {
         var price = CalculatePrice(report);
 
-        var dialog = botDialogCreator.GetDeliveryReport(report, wereSpoiled, orderPresenter.CurrentCompany, callerSprite);
-        var interactor = Core.Interactors.GetInteractor<DeliveryInteractor>();
+        var dialog = botDialogCreator.GetDeliveryReport(report, wereSpoiled, wereChanged, orderPresenter.CurrentCompany, callerSprite);
 
         UnityAction first = () =>
         {
-            interactor.FinishDelivery(currentDelivery);
-
             orderCreator.UpdateView();
 
             Bank.AddCoins(this, price);
@@ -89,7 +90,9 @@ public class Delivery : MonoBehaviour
     private float CalculatePrice(Dictionary<string, float> report)
     {
         float losses = 0;
-        float price = currentDelivery.GetPrice(productFinder);
+        float price = currentDelivery.GetPrice();
+
+        var interactor = Core.Interactors.GetInteractor<PricingInteractor>();
 
         foreach(var item in report.Keys)
         {
@@ -97,13 +100,16 @@ public class Delivery : MonoBehaviour
             {
                 var config = productFinder.FindByName(item);
 
-                float sum = config.Price * Math.Abs(report[item]);
+                if (report[item] < 0)
+                {
+                    float sum = interactor.GetDeliveryPrice(item) * Math.Abs(report[item]);
 
-                losses += sum;
+                    losses += sum;
+                }
             }
         }
 
-        price -= (losses * 2);
+        price -= losses;
 
         return price;
     }

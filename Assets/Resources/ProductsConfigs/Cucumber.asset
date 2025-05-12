@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Cucumber
   m_EditorClassIdentifier: 
   prefab: {fileID: 7220510554047739671, guid: 7790d9a828ecf724b9da1bab15ff7bf1, type: 3}
-  Capacity: 17
+  Capacity: 3
   ProductName: Cucumber
-  Price: 7.99
+  Price: 39.75
+  BoxType: 1
   StorageType: 0
   MeasureType: 4
   CompanyTypes: 0000000001000000

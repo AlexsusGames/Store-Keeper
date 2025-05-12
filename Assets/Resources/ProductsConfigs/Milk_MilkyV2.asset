@@ -16,6 +16,7 @@ MonoBehaviour:
   Capacity: 6
   ProductName: Milk 'Milky' 500ml.
   Price: 6
+  BoxType: 5
   StorageType: 1
   MeasureType: 0
   CompanyTypes: 0000000002000000

@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 5124505835305900984, guid: c900171bba7fb244eaf74522c02bd42d, type: 3}
   Capacity: 12
   ProductName: Bread
-  Price: 2.33
+  Price: 2.25
+  BoxType: 0
   StorageType: 0
   MeasureType: 0
   CompanyTypes: 00000000

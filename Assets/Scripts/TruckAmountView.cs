@@ -6,10 +6,11 @@ using UnityEngine;
 public class TruckAmountView : MonoBehaviour
 {
     [SerializeField] private TMP_Text text;
+    [SerializeField] private GameObject[] trucks;
 
     private DeliveryInteractor interactor;
 
-    private void Start()
+    public void Init()
     {
         interactor = Core.Interactors.GetInteractor<DeliveryInteractor>();
         UpdateView();
@@ -17,8 +18,24 @@ public class TruckAmountView : MonoBehaviour
         interactor.OnTruckAmountChanged += UpdateView;
     }
 
+    private void SetActiveTrucksAmount(int amount)
+    {
+        for (int i = 0; i < trucks.Length; i++)
+        {
+            if(amount <= i)
+            {
+                trucks[i].SetActive(false);
+            }
+            else trucks[i].SetActive(true);
+        }
+    }
+
     private void UpdateView()
     {
-        text.text = $"{interactor.GetRemainingTrucks()} / {interactor.TotalCars}";
+        int truckAmount = interactor.GetRemainingTrucks();
+
+        text.text = $"{truckAmount} / {interactor.TotalCars}";
+
+        SetActiveTrucksAmount(truckAmount);
     }
 }

@@ -1,6 +1,7 @@
 public class BankInteractor : Interactor
 {
     private BankDataProvider dataProvider;
+    private DayProgressInteractor progressInteractor;
     public float MoneyAmount => dataProvider.Money;
     public float DayProfit => dataProvider.DayProfit;
 
@@ -12,6 +13,7 @@ public class BankInteractor : Interactor
     public override void OnCreate()
     {
         dataProvider = Core.DataProviders.GetDataProvider<BankDataProvider>();
+        progressInteractor = Core.Interactors.GetInteractor<DayProgressInteractor>();
     }
 
     public bool Has(float amount)
@@ -23,6 +25,8 @@ public class BankInteractor : Interactor
     {
         dataProvider.Money += amount;
         dataProvider.DayProfit += amount;
+
+        progressInteractor.ChangeRating((int)amount);
     }
 
     public void Spend(object sender, float amount)

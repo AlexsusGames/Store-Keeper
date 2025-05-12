@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,47 +6,43 @@ using UnityEngine;
 public class DayProgressInteractor : Interactor
 {
     private DayProgressDataProvider dataProvider;
+
+    public event Action OnRatingChanged;
+
     public override void Init()
     {
         dataProvider = Core.DataProviders.GetDataProvider<DayProgressDataProvider>();
     }
 
-    public bool IsHasSavedData()
+    public bool IsHasSavedData(int day)
     {
-        if(dataProvider.Data.CompletedCars == null)
+        if(dataProvider.Data.DayCarsID == null)
             return false;
 
-        return dataProvider.Data.CompletedCars.Count > 0;
-    }
-    public float GetCurrentLosses() => dataProvider.Data.CurrentLosses;
-
-    public void SetLosses(float value) => dataProvider.Data.CurrentLosses = value;
-
-    public void SubstractCompletedCars(List<DeliveryConfig> configs)
-    {
-        var completedCars = dataProvider.Data.CompletedCars;
-
-        if (completedCars == null)
-            completedCars = new();
-
-        for(int i = 0; i < completedCars.Count; i++)
-        {
-            for(int j = 0; j < configs.Count; j++)
-            {
-                if (configs[j].carType == completedCars[i])
-                {
-                    configs.RemoveAt(j);
-                    break;
-                }
-            }
-        }
+        return dataProvider.Data.Day == day;
     }
 
-    public void CompleteCar(CarType carType)
-    {
-        if(dataProvider.Data.CompletedCars == null)
-            dataProvider.Data.CompletedCars = new();
+    public int GetRating() => dataProvider.Data.Rating;
 
-        dataProvider.Data.CompletedCars.Add(carType);
+    public void ChangeRating(int rating)
+    {
+        dataProvider.Data.Rating += rating;
+        OnRatingChanged?.Invoke();
+    }
+
+    public void CompleteCar(string deliveryId)
+    {
+        dataProvider.Data.DayCarsID.Remove(deliveryId);
+    }
+
+    public void SetData(List<string> data, int day)
+    {
+        dataProvider.Data.DayCarsID = data;
+        dataProvider.Data.Day = day;
+    }
+
+    public List<string> GetData()
+    {
+        return dataProvider.Data.DayCarsID;
     }
 }

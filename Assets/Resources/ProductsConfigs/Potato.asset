@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 7329823548449161855, guid: bf7e66c72c6114e49a4f7f6f6a81a8c6, type: 3}
   Capacity: 9
   ProductName: Potato
-  Price: 1.05
+  Price: 15.25
+  BoxType: 1
   StorageType: 0
   MeasureType: 4
   CompanyTypes: 0000000001000000

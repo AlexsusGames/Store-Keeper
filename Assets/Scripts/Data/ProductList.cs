@@ -55,4 +55,6 @@ public class ProductList
     }
     public bool Has(string name) => productsMap.ContainsKey(name);
     public float GetProductAmount(string name) => productsMap[name];
+
+    public Dictionary<string, float> GetProductMap() => productsMap;
 }

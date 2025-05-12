@@ -18,13 +18,13 @@ public class ProductSupplyManager : MonoBehaviour
     [SerializeField] private PhoneController phone;
     [SerializeField] private GameEntryPoint gameEntryPoint;
 
+    [Inject] private SupplyCreator supplyCreator;
+
     private DayProgressInteractor dayProgressInteractor;
 
     private List<DeliveryConfig> suppliers;
-    private CarType cachedCarType;
 
-    private float currentLosses;
-    private float maxLosses;
+    private DeliveryConfig cachedDeliveryConfig;
 
     private bool isBeingSupplied;
 
@@ -33,18 +33,24 @@ public class ProductSupplyManager : MonoBehaviour
         lossesChecker.OnChecked += OnChecked;
     }
 
-    public void SetData(SupplyConfig config)
+    public void SetData(List<string> suppliersID)
     {
-        suppliers = config.Suppliers.ToList();
-        maxLosses = config.MaxLosses;
-
         dayProgressInteractor = Core.Interactors.GetInteractor<DayProgressInteractor>();
+        var day = Core.Statistic.GetDaysPassed();
 
-        if(dayProgressInteractor.IsHasSavedData())
+        List<string> data;
+
+        if (dayProgressInteractor.IsHasSavedData(day))
         {
-            currentLosses = dayProgressInteractor.GetCurrentLosses();
-            dayProgressInteractor.SubstractCompletedCars(suppliers);
+            data = dayProgressInteractor.GetData();
         }
+        else
+        {
+            data = suppliersID;
+            dayProgressInteractor.SetData(data, day);
+        }
+
+        CreateSuppliersList(data);
 
         UpdateViews();
 
@@ -61,24 +67,25 @@ public class ProductSupplyManager : MonoBehaviour
 
         for (int i = 0; i < suppliers.Count; i++)
         {
-            if (suppliers[i].carType == carType)
+            config = suppliers[i];
+
+            if (config.carType == carType)
             {
-                config = suppliers[i];
                 break;
             }
         }
 
+        if (config == null)
+            throw new Exception($"CarType: {carType} is missing");
+
         if (deliveryManager.TrySupplyProducts(config))
         {
-            cachedCarType = carType;
+            cachedDeliveryConfig = config;
 
             supplyPresenter.AssignListener(FinishSupply);
 
             isBeingSupplied = true;
             supplyPresenter.IsSupplied(isBeingSupplied);
-
-            if (config == null)
-                throw new Exception($"CarType: {carType} is missing");
 
             suppliers.Remove(config);
 
@@ -89,6 +96,17 @@ public class ProductSupplyManager : MonoBehaviour
             orderCreator.UpdateView();
 
             Core.Quest.TryChangeQuest(QuestType.OrderShipment, 1);
+        }
+    }
+
+    private void CreateSuppliersList(List<string> suppliers)
+    {
+        this.suppliers = new();
+
+        foreach (string supplier in suppliers)
+        {
+            var config = supplyCreator.GetConfigByID(supplier);
+            this.suppliers.Add(config);
         }
     }
 
@@ -141,16 +159,14 @@ public class ProductSupplyManager : MonoBehaviour
 
     private void OnChecked(float saved, float totalPrice, float losses)
     {
-        Core.Statistic.OnSupply(cachedCarType, totalPrice, losses);
+        Core.Statistic.OnSupply(cachedDeliveryConfig.carType, totalPrice, losses);
         Bank.AddCoins(this, saved);
 
         UnityAction firstAction = SaveProgress;
-        UnityAction secondAction = losses >= maxLosses ? phone.Replay : null;
+        UnityAction secondAction = losses > 0 ? phone.Replay : null;
 
         BotDialogCreator dialogCreator = new BotDialogCreator();
-        var dialogConfig = dialogCreator.GetLossesReport(losses, maxLosses);
-
-        dayProgressInteractor.SetLosses(currentLosses);
+        var dialogConfig = dialogCreator.GetLossesReport(losses, totalPrice / 10);
 
         phone.OpenMessenger(dialogConfig, firstAction, secondAction);
     }
@@ -158,7 +174,7 @@ public class ProductSupplyManager : MonoBehaviour
     private void SaveProgress()
     {
         var data = Core.Interactors.GetInteractor<DayProgressInteractor>();
-        data.CompleteCar(cachedCarType);
+        data.CompleteCar(cachedDeliveryConfig.DeliveryID);
         gameEntryPoint.SaveData();
 
         isBeingSupplied = false;
@@ -166,7 +182,7 @@ public class ProductSupplyManager : MonoBehaviour
         phone.ClosePhone();
         Core.Quest.TryChangeQuest(QuestType.FinishSupply);
 
-        companyRating.UpdateView(cachedCarType);
+        companyRating.UpdateView(cachedDeliveryConfig.carType);
     }
 
     private void SetCarSlotsEnabled(bool value)

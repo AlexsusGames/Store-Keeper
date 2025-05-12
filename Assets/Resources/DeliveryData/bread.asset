@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e08398170406934f82833bac17e8064, type: 3}
   m_Name: bread
   m_EditorClassIdentifier: 
+  DeliveryLevel: 50
+  DeliveryID: allDonuts
   pallets:
-  - {fileID: 11400000, guid: 339b1d180be50a74788b3590bc8e4138, type: 2}
+  - {fileID: 11400000, guid: 01152343f953dfc43b42ed99920853ad, type: 2}
   carType: 1

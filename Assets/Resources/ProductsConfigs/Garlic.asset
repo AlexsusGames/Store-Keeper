@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 4089306506155955470, guid: a06a13ba310df9d4b89d391028096321, type: 3}
   Capacity: 8
   ProductName: Garlic
-  Price: 12.5
+  Price: 95.5
+  BoxType: 1
   StorageType: 0
   MeasureType: 4
   CompanyTypes: 0000000001000000

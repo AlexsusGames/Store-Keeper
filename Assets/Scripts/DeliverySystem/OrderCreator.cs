@@ -13,38 +13,41 @@ public class OrderCreator : MonoBehaviour
     private const int MIN_ORDER_SIZE = 1;
     private const int MAX_ORDER_SIZE = 6;
 
-    private const int MIN_BOX_COUNT = 2;
-    private const int MAX_BOX_COUNT = 5;
-
     [Inject] private ProductFinder productFinder;
     [SerializeField] private OrderPresenter orderPresenter;
     [SerializeField] private OrderButton[] orderViews;
 
     private DeliveryInteractor deliveryInteractor;
+    private PricingInteractor pricingInteractor;
     private Dictionary<CompanyType, List<string>> productMap;
 
     private List<string> cachedNames;
 
     private void CreateMap(List<string> availableProducts)
     {
+        var interactor = Core.Interactors.GetInteractor<PricingInteractor>();
+
         productMap = new();
 
         for (int i = 0; i < availableProducts.Count; i++)
         {
             var config = productFinder.FindByName(availableProducts[i]);
 
-            for (int j = 0; j < config.CompanyTypes.Length; j++)
+            if(interactor.IsForSale(config.ProductName))
             {
-                CompanyType companyType = config.CompanyTypes[j];
-
-                if (productMap.ContainsKey(companyType))
+                for (int j = 0; j < config.CompanyTypes.Length; j++)
                 {
-                    if (!productMap[companyType].Contains(config.ProductName))
+                    CompanyType companyType = config.CompanyTypes[j];
+
+                    if (productMap.ContainsKey(companyType))
                     {
-                        productMap[companyType].Add(config.ProductName);
+                        if (!productMap[companyType].Contains(config.ProductName))
+                        {
+                            productMap[companyType].Add(config.ProductName);
+                        }
                     }
+                    else productMap[companyType] = new List<string>() { config.ProductName };
                 }
-                else productMap[companyType] = new List<string>() { config.ProductName };
             }
         }
     }
@@ -52,6 +55,8 @@ public class OrderCreator : MonoBehaviour
     public void Init(List<string> availableProducts)
     {
         deliveryInteractor = Core.Interactors.GetInteractor<DeliveryInteractor>();
+        pricingInteractor = Core.Interactors.GetInteractor<PricingInteractor>(); 
+
         var day = Core.Interactors.GetInteractor<StatisticInteractor>().GetDaysPassed();
 
         List<DeliveryData> deliveryData;
@@ -163,21 +168,25 @@ public class OrderCreator : MonoBehaviour
         }
 
         List<OrderData> orders = new List<OrderData>();
+
         int boxCount = 0;
 
         for (int i = 0; i < cachedNames.Count; i++)
         {
-            float randomAmount = UnityEngine.Random.Range(MIN_BOX_COUNT, MAX_BOX_COUNT);
+            int maxValue = pricingInteractor.GetDeliveryMultiplier(cachedNames[i]) + 1;
+
+            float randomBoxCount = UnityEngine.Random.Range(1, maxValue);
+
             var product = productFinder.FindByName(cachedNames[i]);
 
-            boxCount += (int)randomAmount;
+            boxCount += (int)randomBoxCount;
 
-            randomAmount = product.MeasureType == MeasureType.pcs ? randomAmount * product.Capacity : product.Capacity * product.RandomWeight * randomAmount;
+            var amount = product.MeasureType == MeasureType.pcs ? randomBoxCount * product.Capacity : product.Capacity * product.RandomWeight * randomBoxCount;
 
             OrderData data = new()
             {
                 Product = cachedNames[i],
-                Amount = randomAmount,
+                Amount = amount,
             };
 
             orders.Add(data);

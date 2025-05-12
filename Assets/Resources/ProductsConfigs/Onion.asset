@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 8361579543108458885, guid: 29c6717162bc14344be783d094d66746, type: 3}
   Capacity: 7
   ProductName: Onion
-  Price: 3.67
+  Price: 42.75
+  BoxType: 1
   StorageType: 0
   MeasureType: 4
   CompanyTypes: 0000000001000000

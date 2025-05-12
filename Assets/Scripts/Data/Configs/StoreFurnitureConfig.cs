@@ -9,4 +9,6 @@ public class StoreFurnitureConfig : ScriptableObject
     public Sprite shopSprite;
     public GameObject prefab;
     public int Price;
+
+    public bool isStatic;
 }

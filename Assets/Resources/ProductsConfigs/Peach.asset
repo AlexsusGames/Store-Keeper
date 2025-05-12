@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 1116682107502427477, guid: 2bbbb397801a045459c802f850d5d163, type: 3}
   Capacity: 15
   ProductName: Peach
-  Price: 17.25
+  Price: 183.5
+  BoxType: 1
   StorageType: 0
   MeasureType: 4
   CompanyTypes: 0000000001000000

@@ -17,6 +17,16 @@ public class ComputerButtonsController : MonoBehaviour
         }
     }
 
+    public void MakeTheOnlyBlocked(ComputerButton type)
+    {
+        int index = (int)type;
+
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].interactable = i != index;
+        }
+    }
+
     public void ResetInteractable()
     {
         for (int i = 0;i < buttons.Length;i++)
@@ -30,5 +40,6 @@ public enum ComputerButton
     StoreEdit,
     StorageShop,
     Supplies,
-    Management
+    Management,
+    Goods
 }

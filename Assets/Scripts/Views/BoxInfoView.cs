@@ -20,13 +20,20 @@ public class BoxInfoView : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        nameText.text = box.ProductName;
+        string translatedName = Core.Localization.Translate(box.ProductName);
+
+        nameText.text = translatedName;
         countText.text = box.UseWeight ? "??? - kg." : $"{box.GetItemsAmount()}/{box.GetCapacity()}";
 
         var conditionIndex = (int)productFinder.FindByName(box.ProductName).StorageType;
-        keepingText.text = keepConditions[conditionIndex];
+
+        string translatedKeepCondition = Core.Localization.Translate(keepConditions[conditionIndex]);
+
+        keepingText.text = translatedKeepCondition;
 
         spoiltText.text = box.IsSpoilt ? status[0] : status[1];
+
+        spoiltText.text = Core.Localization.Translate(spoiltText.text);
     }
 
     public void Hide() => gameObject.SetActive(false);

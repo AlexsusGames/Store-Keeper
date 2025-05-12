@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 7137691555743641613, guid: eb6ab60f21bddd540ad9288a93e771c0, type: 3}
   Capacity: 15
   ProductName: Red Bell Peper
-  Price: 7.75
+  Price: 54.5
+  BoxType: 1
   StorageType: 0
   MeasureType: 4
   CompanyTypes: 0000000001000000

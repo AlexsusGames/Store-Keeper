@@ -7,15 +7,15 @@ public class DayProgressDataProvider : DataProvider
 {
     private const string KEY = "DAY_PROGRESS";
 
-    public DailyRoutineData Data { get; private set; }
+    public SupplyData Data { get; private set; }
     public override void Load()
     {
         if (PlayerPrefs.HasKey(KEY))
         {
             string save = PlayerPrefs.GetString(KEY);
-            Data = JsonUtility.FromJson<DailyRoutineData>(save);
+            Data = JsonUtility.FromJson<SupplyData>(save);
         }
-        else { Data = new DailyRoutineData(); }
+        else { Data = new SupplyData(); }
     }
 
     public override void Save()
@@ -25,8 +25,10 @@ public class DayProgressDataProvider : DataProvider
     }
 }
 [System.Serializable]
-public class DailyRoutineData
+public class SupplyData
 {
-    public List<CarType> CompletedCars;
-    public float CurrentLosses;
+    public List<string> DayCarsID;
+    public int Day;
+
+    public int Rating;
 }

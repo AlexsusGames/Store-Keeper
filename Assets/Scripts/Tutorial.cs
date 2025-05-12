@@ -13,7 +13,9 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private bool isDemo;
 
     [SerializeField] private ComputerButtonsController computerButtonsController;
+    [SerializeField] private GameObject demoWindow;
     [SerializeField] private PhoneController phoneController;
+    [SerializeField] private SupplyConditions supplyConditions;
 
     [SerializeField] private DialogConfig[] tutorDialogs;
     [SerializeField] private Button signoutBtn;
@@ -77,15 +79,19 @@ public class Tutorial : MonoBehaviour
         }
 
         if(stageIndex > 0)
+        {
             computerButtonsController.ResetInteractable();
+        }
 
         if (stageIndex == 1)
         {
-            signoutBtn.interactable = false;
-            
-            var inteructor = Core.Interactors.GetInteractor<DayProgressInteractor>();
+            computerButtonsController.MakeTheOnlyBlocked(ComputerButton.Goods);
 
-            var dialogIndex = inteructor.GetCurrentLosses() < 10 ? 6 : 7;
+            signoutBtn.interactable = false;
+
+            var losses = Core.Statistic.GetTotalLosses();
+
+            var dialogIndex = losses < 10 ? 6 : 7;
 
             AssignActions(QuestType.FinishSupply, dialogIndex);
 
@@ -100,6 +106,8 @@ public class Tutorial : MonoBehaviour
 
         if(stageIndex == 2)
         {
+            computerButtonsController.MakeTheOnlyBlocked(ComputerButton.Goods);
+
             AssignActions(QuestType.EndDay, 8);
 
             yield return WaitForComplete();
@@ -109,13 +117,12 @@ public class Tutorial : MonoBehaviour
             SaveStage(stageIndex);
         }
 
-        if(stageIndex == 3 || isDemo)
-        {
-            signoutBtn.interactable = false;
-        }
-
         if(stageIndex == 3)
         {
+            computerButtonsController.ResetInteractable();
+
+            signoutBtn.interactable = false;
+
             AssignActions(QuestType.CheckMail, 9);
 
             yield return WaitForComplete();
@@ -124,24 +131,54 @@ public class Tutorial : MonoBehaviour
 
             yield return WaitForComplete();
 
-            AssignActions(QuestType.EarnMoney, 11);
-
-            if (!isDemo)
+            Action action = () =>
             {
-                signoutBtn.interactable = true;
+                if (isDemo)
+                {
+                    stageIndex = LAST_STAGE_NUMBER;
+                    SaveStage(stageIndex);
 
-                stageIndex++;
+                    signoutBtn.interactable = true;
 
-                SaveStage(stageIndex);
-            }
-            else Core.Quest.StartQuest(QuestType.Demo);
-        }
-        if(stageIndex == 4)
-        {
-            Core.Quest.TryChangeQuest(QuestType.Demo);
+                    demoWindow.SetActive(true);
+                }
+                else canContinue = true;
+            };
+
+            AssignActions(QuestType.EarnMoney, 11, action);
+
+            yield return WaitForComplete();
+
+            yield return new WaitForSeconds(2);
+
+            UnityAction firstAction = () =>
+            {
+                phoneController.ClosePhone();
+            };
+
+            phoneController.OpenMessenger(tutorDialogs[12], firstAction, null);
 
             canContinue = false;
 
+            stageIndex++;
+
+            SaveStage(stageIndex);
+
+            signoutBtn.interactable = true;
+        }
+
+        if(stageIndex >= 4)
+        {
+            yield return null;
+
+            if(!isDemo)
+            {
+                supplyConditions.UnlockSystems(new int[] { 0, 1, 2, 3 });
+            }
+        }
+
+        if(stageIndex == 4)
+        {
             yield return WaitForComplete();
         }
 
@@ -158,7 +195,7 @@ public class Tutorial : MonoBehaviour
 
     private int GetSavedIndex() => PlayerPrefs.GetInt(KEY);
 
-    private void AssignActions(QuestType type, int dialogIndix)
+    private void AssignActions(QuestType type, int dialogIndix, Action callback = null)
     {
         canContinue = false;
 
@@ -166,6 +203,8 @@ public class Tutorial : MonoBehaviour
         {
             Core.Quest.StartQuest(type);
             phoneController.ClosePhone();
+
+            callback?.Invoke();
         };
 
         phoneController.OpenMessenger(tutorDialogs[dialogIndix], firstAction, null);

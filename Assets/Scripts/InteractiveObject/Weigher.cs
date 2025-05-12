@@ -9,15 +9,7 @@ public class Weigher : MonoBehaviour
     [SerializeField] private TMP_Text textLine;
     [SerializeField] private Transform parent;
 
-    private Dictionary<BoxType, float> boxWeights = new Dictionary<BoxType, float>()
-    {
-        { BoxType.YellowBox, 1.5f },
-        { BoxType.BlackBox, 1f },
-        { BoxType.CartonBox, 0.3f },
-        { BoxType.CartonPlane, 0.3f },
-        { BoxType.CartonOpened, 0.3f },
-        { BoxType.Other, 0.5f }
-    };
+    private PricingInteractor interactor;
 
     private int calculatedCount;
     private float cachedWeight;
@@ -25,6 +17,11 @@ public class Weigher : MonoBehaviour
     private void FixedUpdate()
     {
         CalculateWeight();
+    }
+
+    private void Start()
+    {
+        interactor = Core.Interactors.GetInteractor<PricingInteractor>();
     }
 
     private void CalculateWeight()
@@ -93,7 +90,7 @@ public class Weigher : MonoBehaviour
     private float CheckWeight(StoreBox box)
     {
         float result = box.TotalWeight;
-        result += boxWeights[box.BoxType];
+        result += interactor.GetBoxWeigh(box.BoxType);
 
         if (box.IsHasChild)
         {

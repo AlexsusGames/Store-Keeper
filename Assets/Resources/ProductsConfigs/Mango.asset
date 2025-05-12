@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 7139119607756656570, guid: a354b35818ea80f4a98dea7648ee0228, type: 3}
   Capacity: 10
   ProductName: Mango
-  Price: 17.75
+  Price: 132.25
+  BoxType: 1
   StorageType: 0
   MeasureType: 4
   CompanyTypes: 0000000001000000

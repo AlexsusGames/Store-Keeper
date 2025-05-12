@@ -7,12 +7,25 @@ using UnityEngine;
 
 public class BotDialogCreator 
 {
+    private DayProgressInteractor progressInteractor;
+
     private string ContinueText = "Continue";
     private string ReplayText = "Load last save";
 
     private DialogConfig config;
+
+    private void Init()
+    {
+        if(progressInteractor == null)
+        {
+            progressInteractor = Core.Interactors.GetInteractor<DayProgressInteractor>();
+        }
+    }
+
     public DialogConfig GetLossesReport(float losses, float maxLosses)
     {
+        Init();
+
         List<string> list = new List<string>();
 
         list.Add("Calculating losses...");
@@ -31,8 +44,10 @@ public class BotDialogCreator
         return CreateDialog(list);
     }
 
-    public DialogConfig GetDeliveryReport(Dictionary<string, float> report, bool wereSpoilt, string name, Sprite sprite)
+    public DialogConfig GetDeliveryReport(Dictionary<string, float> report, bool wereSpoilt, bool wereChanged, string name, Sprite sprite)
     {
+        Init();
+
         bool wereMistakes = false;
 
         List<string> list = new List<string>()
@@ -51,17 +66,31 @@ public class BotDialogCreator
                     list.Add($"{unit} - {Math.Abs(report[unit])}");
                 }
                 else list.Add($"{unit} - {Math.Abs(report[unit])}");
+
+                progressInteractor.ChangeRating(-100);
             }
         }
 
         if (wereSpoilt)
         {
             list.Add("Some items were spoiled—this is unacceptable!");
+
+            progressInteractor.ChangeRating(-500);
+
             wereMistakes = true;
         }
 
+        if (wereChanged)
+        {
+            progressInteractor.ChangeRating(-500);
+
+            list.Add("Raising the price without prior agreement is unacceptable!");
+        }
+
         string lastMessage = wereMistakes ? "The payment will reflect that." : "The quantity and quality are just right. Thank you!";
-        list.Add(lastMessage);
+
+        if(!wereChanged)
+            list.Add(lastMessage);
 
         var dialog = CreateDialog(list);
 

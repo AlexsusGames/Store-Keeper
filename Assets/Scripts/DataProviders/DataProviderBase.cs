@@ -20,6 +20,7 @@ public class DataProviderBase
         CreateDataProvider<QuestDataProvider>();
         CreateDataProvider<StatisticDataProvider>();
         CreateDataProvider<DeliveryDataProvider>();
+        CreateDataProvider<PriceListDataProvider>();
     }
 
     private void CreateDataProvider<T>() where T : DataProvider, new()

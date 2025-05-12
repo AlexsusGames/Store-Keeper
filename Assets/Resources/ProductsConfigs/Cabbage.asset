@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 5900951998190495086, guid: 070af300102fded45a22f5217798fb90, type: 3}
   Capacity: 9
   ProductName: Cabbage
-  Price: 3.7
+  Price: 20
+  BoxType: 1
   StorageType: 0
   MeasureType: 4
   CompanyTypes: 0000000001000000

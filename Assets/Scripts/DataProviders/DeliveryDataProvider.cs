@@ -43,17 +43,18 @@ public class DeliveryData
 
     public int BoxCount;
 
-    public float GetPrice(ProductFinder productFinder)
+    public float GetPrice()
     {
+        var interactor = Core.Interactors.GetInteractor<PricingInteractor>();
+
         float price = 0;
 
         foreach (OrderData order in OrderedProducts)
         {
-            var sum = productFinder.FindByName(order.Product).Price * order.Amount;
+            var sum = interactor.GetDeliveryPrice(order.Product) * order.Amount;
             price += sum;
         }
 
-        price *= 2;
 
         return MathF.Round(price, 2);
     }

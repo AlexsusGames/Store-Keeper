@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 4651140589018441240, guid: afa39ce678b679e45a1985cc8266551d, type: 3}
   Capacity: 6
   ProductName: Carrot
-  Price: 6.1
+  Price: 31.5
+  BoxType: 1
   StorageType: 0
   MeasureType: 4
   CompanyTypes: 0000000001000000

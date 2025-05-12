@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 615736293978740983, guid: 7c7395c3f1e3f2e4c826936ae8847706, type: 3}
   Capacity: 6
   ProductName: Orange
-  Price: 13.99
+  Price: 75.25
+  BoxType: 1
   StorageType: 0
   MeasureType: 4
   CompanyTypes: 0000000001000000

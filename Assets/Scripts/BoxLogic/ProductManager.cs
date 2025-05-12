@@ -25,6 +25,9 @@ public class ProductManager : MonoBehaviour, IDataProvider
     {
         productSpawner = Core.Interactors.GetInteractor<ProductsSpawnInteractor>();
 
+        var interactor = Core.Interactors.GetInteractor<PricingInteractor>();
+        interactor.Setup(productFinder);
+
         var surfaces = GetActiveSurfaces();
 
         List<string> products = new();

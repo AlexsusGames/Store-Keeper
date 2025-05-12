@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Management : MonoBehaviour
 {
@@ -14,7 +15,10 @@ public class Management : MonoBehaviour
 
     [SerializeField] private TMP_Text dayText;
 
-    private void OnEnable() => Core.Quest.TryChangeQuest(QuestType.CheckMail);
+    private void OnEnable()
+    {
+        Core.Quest.TryChangeQuest(QuestType.CheckMail);
+    }
     private void Start() => dayText.text = $"{Core.Localization.Translate("Day")} {Core.Statistic.GetDaysPassed() + 1}";
 
     public void StartNewDay()

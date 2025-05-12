@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ShoppingCart : InteractiveManager, IDataProvider
+public class ShoppingCart : InteractiveManager, IDataProvider, IWindow
 {
     [SerializeField] private Player player;
+    [SerializeField] private GameObject cartIcon;
 
     private const string KEY = "shopping_cart";
 
@@ -15,6 +16,8 @@ public class ShoppingCart : InteractiveManager, IDataProvider
     public override void Interact()
     {
         isAttached = !isAttached;
+
+        cartIcon.SetActive(isAttached);
 
         Core.Sound.PlayClip(AudioType.ShoppingCart);
 
@@ -29,7 +32,17 @@ public class ShoppingCart : InteractiveManager, IDataProvider
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
         }
+    }
 
+    private void Update()
+    {
+        if(isAttached)
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                Interact();
+            }
+        }
     }
 
     public void Load()
@@ -52,5 +65,18 @@ public class ShoppingCart : InteractiveManager, IDataProvider
         data.Rotation = transform.rotation;
 
         dataLoader.Save(data, KEY);
+    }
+
+    public void Close()
+    {
+        if (isAttached)
+        {
+            Interact();
+        }
+    }
+
+    public bool IsActive()
+    {
+        return isAttached;
     }
 }

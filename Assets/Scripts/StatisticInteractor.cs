@@ -6,10 +6,12 @@ using UnityEngine;
 public class StatisticInteractor : Interactor
 {
     private StatisticDataProvider dataProvider;
+    private DayProgressInteractor interactor;
 
     public override void Init()
     {
         dataProvider = Core.DataProviders.GetDataProvider<StatisticDataProvider>();
+        interactor = Core.Interactors.GetInteractor<DayProgressInteractor>();
     }
 
     public float GetSupplierRating(CarType carType)
@@ -70,6 +72,8 @@ public class StatisticInteractor : Interactor
         if (losses == 0)
         {
             data.PerfectSupplies++;
+
+            interactor.ChangeRating(100);
         }
 
         data.TotalSupplies++;
@@ -83,6 +87,7 @@ public class StatisticInteractor : Interactor
         if (dataProvider.Data.SuppliersRating == null)
             dataProvider.Data.SuppliersRating = CreateData();
 
+        interactor.ChangeRating((int)price);
         float rating = price / 10000;
 
         dataProvider.Data.SuppliersRating[(int)carType] += rating;

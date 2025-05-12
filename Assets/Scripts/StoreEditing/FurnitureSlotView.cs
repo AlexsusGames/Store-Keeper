@@ -9,6 +9,8 @@ public class FurnitureSlotView : MonoBehaviour
     [SerializeField] private TMP_Text textCount;
     [SerializeField] private Image furnitureImage;
 
+
+    private bool isActive;
     public string ItemId;
 
     public void SetData(Sprite sprite, int count)
@@ -18,11 +20,16 @@ public class FurnitureSlotView : MonoBehaviour
 
         textCount.enabled = true;
         furnitureImage.enabled = true;
+        isActive = true;
     }
+
+    public bool Enabled => isActive;
 
     public void Hide()
     {
         furnitureImage.enabled = false;
         textCount.enabled = false;
+
+        isActive = false;
     }
 }

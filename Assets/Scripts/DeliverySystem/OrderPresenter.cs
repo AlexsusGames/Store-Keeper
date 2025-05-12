@@ -43,7 +43,7 @@ public class OrderPresenter : MonoBehaviour
         string translatedWePay = Core.Localization.Translate("We pay:");
 
         companyName.text = translatedCompanyName;
-        companyMessage.text = $"{translatedCompanyMessage} \n{translatedWePay} $<color=green>{data.GetPrice(productFinder)}";
+        companyMessage.text = $"{translatedCompanyMessage} \n{translatedWePay} $<color=green>{data.GetPrice()}";
 
         for (int i = 0; i < data.OrderedProducts.Count; i++)
         {

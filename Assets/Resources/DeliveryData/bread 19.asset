@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e08398170406934f82833bac17e8064, type: 3}
+  m_Name: bread 19
+  m_EditorClassIdentifier: 
+  DeliveryLevel: 90
+  DeliveryID: bread19
+  pallets:
+  - {fileID: 11400000, guid: 8a377459745393d4abfe771c3231453f, type: 2}
+  - {fileID: 11400000, guid: 88867bd7b014b3243a3236b1463e0837, type: 2}
+  - {fileID: 11400000, guid: 75160fad5e768b7419f08149d7bf99c9, type: 2}
+  carType: 1

@@ -13,6 +13,8 @@ public class StorageShop : MonoBehaviour
     [SerializeField] private TMP_Text moneyAmount;
     [SerializeField] private TMP_Text priceAmount;
 
+    [SerializeField] private SupplyConditions supplyConditions;
+
     [SerializeField] private StoreEditor storeEditor;
 
     private Dictionary<StoreFurnitureConfig, int> cart;
@@ -35,7 +37,8 @@ public class StorageShop : MonoBehaviour
 
     private void ChangeCart(StoreFurnitureConfig config, int amount)
     {
-        Core.Sound.PlayClip(AudioType.MouseClick);
+        if (amount != cart[config])
+            Core.Sound.PlayClip(AudioType.MouseClick);
 
         cart[config] = amount;
 
@@ -55,12 +58,12 @@ public class StorageShop : MonoBehaviour
 
     public void Buy()
     {
-        Core.Sound.PlayClip(AudioType.MouseClick);
-
         var sum = GetOrderSum();
 
         if (sum == 0)
             return;
+
+        Core.Sound.PlayClip(AudioType.MouseClick);
 
         string msg;
         Color color;
@@ -84,6 +87,7 @@ public class StorageShop : MonoBehaviour
             }
 
             storeEditor.UpdateInventoryView();
+            supplyConditions.CheckData();
 
             for (int i = 0; i < views.Length; i++)
             {

@@ -11,6 +11,7 @@ public class ProductConfig : ScriptableObject
     public int Capacity;
     public string ProductName;
     public float Price;
+    public BoxType BoxType;
     public StorageType StorageType;
     public MeasureType MeasureType;
     public CompanyType[] CompanyTypes;

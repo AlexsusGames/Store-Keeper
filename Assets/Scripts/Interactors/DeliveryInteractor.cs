@@ -54,16 +54,21 @@ public class DeliveryInteractor : Interactor
         OnTruckAmountChanged?.Invoke();
     }
 
-    public void FinishDelivery(DeliveryData deliveryData, bool carLost = true)
+    public void CancelDelivery(DeliveryData deliveryData)
+    {
+        dataProvider.DeliveryData.List.Add(deliveryData);
+        dataProvider.DeliveryData.RemainingTrucks++;
+
+        OnTruckAmountChanged?.Invoke();
+    }
+
+    public void OnStartDelivery(DeliveryData deliveryData)
     {
         dataProvider.DeliveryData.List.Remove(deliveryData);
-        
-        if(carLost)
-        {
-            dataProvider.DeliveryData.RemainingTrucks--;
 
-            OnTruckAmountChanged?.Invoke();
-        }
+        dataProvider.DeliveryData.RemainingTrucks--;
+
+        OnTruckAmountChanged?.Invoke();
     }
 
     public int GetRemainingTrucks() => dataProvider.DeliveryData.RemainingTrucks;
@@ -72,5 +77,6 @@ public enum CompanyType
 {
     ProductShop,
     Grocceries,
-    MilkShop
+    MilkShop,
+    CityHall
 }

@@ -287,7 +287,8 @@ public class Localization
         {"Got it, I think.", new string[] { "Got it, I think.", "Кажется, понял.." } },
 
         {"Alright then, get moving - the truck’s already waiting in the yard!", 
-            new string[] { "Alright then, get moving - the truck’s already waiting in the yard!", "Ну тогда вперёд — грузовик уже ждёт во дворе!" } },
+            new string[] { "Alright then, get moving — the truck’s already waiting in the yard! Remember, you need to complete the delivery through the computer.",
+                "Ну тогда вперёд — грузовик уже ждёт во дворе! Помни, поставку нужно завершить через компьютер." } },
 
         {"See you then!", new string[] { "See you then!", "Увидимся!" } },
 
@@ -370,10 +371,72 @@ public class Localization
         {"Demo", new string[] { "Demo", "Демо" } },
 
         {"You've reached the end of the demo. Thank you for playing!", 
-            new string[] { "You've reached the end of the demo. Thank you for playing!", "Вы дошли до конца демо-версии. Спасибо, что сыграли!" } },
+            new string[] { "You've reached the end of the demo.", "Вы дошли до конца демо-версии." } },
 
         {"To show the clipboard, pick it up from the table when the truck arrives.",
             new string[] { "To show the clipboard, pick it up from the table when the truck arrives.", "Чтобы показать планшет, возьмите его со стола, когда приедет грузовик." } },
+
+        {"Unknown", new string[] { "Unknown", "Неизвестно" } },
+        {"Alright, I’ll take a look!", new string[] { "Alright, I’ll take a look!", "Хорошо, я посмотрю!" } },
+        {"Hello! You’ve bought storage units from us before.", new string[] { "Hello! You’ve bought storage units from us before.", "Здравствуйте! Вы покупали у нас хранилища." } },
+        {"Yes, I remember.", new string[] { "Yes, I remember.", "Да, я помню." } },
+
+        {"I just wanted to let you know we’ve got some special offers for your warehouse!", 
+            new string[] { "I just wanted to let you know we’ve got some special offers for your warehouse!",
+                "Я просто хотел сообщить, что у нас есть специальные предложения для вашего склада!" } },
+
+        {"Like what?", new string[] { "Like what?", "Например?" } },
+
+        {"For example, you can now buy a freight scale — it’s a must-have for receiving vegetables!",
+            new string[] { "For example, you can now buy a freight scale — it’s a must-have for receiving vegetables!",
+                "Например, теперь вы можете купить грузовые весы — это незаменимая вещь для приёмки овощей!" } },
+
+        {"Store in <color=blue>a dry place", new string[] { "Store in <color=blue>a dry place", "Хранить в <color=blue>сухом месте" } },
+        {"Keep <color=blue>refrigerated", new string[] { "Keep <color=blue>refrigerated", "Хранить в <color=blue>холодильнике" } },
+        {"Keep <color=blue>frozen", new string[] { "Keep <color=blue>frozen", "Хранить в <color=blue>замороженном виде" } },
+        {"<color=red>Spoiled", new string[] { "<color=red>Spoiled", "<color=red>Испорчено" } },
+        {"<color=green>Fresh", new string[] { "<color=green>Fresh", "<color=green>Свежее" } },
+        {"Scales", new string[] { "Scales", "Весы" } },
+        {"Ventilation", new string[] { "Ventilation", "Вентиляция" } },
+        {"Security", new string[] { "Security", "Безопасность" } },
+
+        {"You can continue playing with limited content. Please note that progress will be reset in the full version. Thanks for trying the demo — we hope you enjoyed it!", 
+            new string[] { "You can continue playing with limited content. Please note that progress will be reset in the full version. Thanks for trying the demo — we hope you enjoyed it!",
+                "Вы можете продолжить игру с ограниченным контентом. Обратите внимание: в полной версии прогресс будет сброшен. Спасибо, что попробовали демо — надеемся, вам понравилось!" } },
+
+        {"Products", new string[] { "Goods", "Товары" } },
+        {"pcs", new string[] { "pcs.", "шт." } },
+        {"Store", new string[] { "Store", "Склад" } },
+        {"Retail outlets", new string[] { "Retail outlets", "Торговые точки" } },
+        {"Pricing", new string[] { "Pricing", "Ценообразование" } },
+        {"Product not selected", new string[] { "No product selected", "Продукт не выбран" } },
+        {"Price on delivery:", new string[] { "Price on delivery:", "Цена при доставке:" } },
+        {"Retail price:", new string[] { "Retail price:", "Цена в магазинах:" } },
+        {"Supplier price:", new string[] { "Supplier price:", "Цена поставщика:" } },
+        {"Box weight:", new string[] { "Box weight:", "Вес коробки:" } },
+        {"Raising the price without prior agreement is unacceptable!", 
+            new string[] { "Raising the price without prior agreement is unacceptable!", "Повышение цены без согласования - это неприемлемо!" } },
+
+        {"Rating", new string[] {"Rating", "Рейтинг" } },
+        {"Cheese 'Luxury' 40g.", new string[] { "Cheese 'Luxury' 40g.", "Сыр 'Luxury' 40г." } },
+        {"Yogurt 'Luxury'' 30g.", new string[] { "Yogurt 'Luxury'' 30g.", "Йогурт 'Luxury'' 30г." } },
+        {"Milk 'Luxury' 700ml.", new string[] { "Milk 'Luxury' 700ml.", "Молоко 'Luxury' 700мл." } },
+        {"Milk 'Luxury' 500ml.", new string[] { "Milk 'Luxury' 500ml.", "Молоко 'Luxury' 500мл." } },
+
+        {"CityHall", new string[] { "City Hall", "Мэрия" } },
+
+        {"Baguette", new string[] { "Baguette", "Мэрия" } },
+        {"Bread roll", new string[] { "Bread roll", "Мэрия" } },
+        {"Donut 'Donato' Blueb", new string[] { "Donut 'Donato' Blueb.", "Пончик 'Donato' Черн." } },
+        {"Donut 'Donato' Rasp", new string[] { "Donut 'Donato' Rasp", "Пончик 'Donato' Малина" } },
+        {"Donut 'Donato' Strawb", new string[] { "Donut 'Donato' Strawb.", "Пончик 'Donato' Клубн." } },
+        {"Donut 'Donni' Сaramel", new string[] { "Donut 'Donni' Сaramel", "Пончик 'Donni' Карамель" } },
+        {"Donut 'Donni' Chocolate", new string[] { "Donut 'Donni' Chocolate", "Пончик 'Donni' Шок." } },
+        {"Donut 'Donni' Lime", new string[] { "Donut 'Donni' Lime", "Пончик 'Donni' Лайм" } },
+        {"Donut 'Luxury' Lemon", new string[] { "Donut 'Luxury' Lemon", "Пончик 'Luxury' Лимон" } },
+        {"Donut 'Luxury' Kiwi", new string[] { "Donut 'Luxury' Kiwi", "Пончик 'Luxury' Киви" } },
+
+        {"For Sale:", new string[] { "For Sale:", "В продаже:" } },
     };
 
     public string Translate(string text)

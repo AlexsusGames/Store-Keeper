@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BoxObject: {fileID: 2497810086325618094}
   ProductName: Yogurt 'Dessert' 60g.
-  BoxType: 5
+  BoxType: 3
   FoldByType: 0
   UseWeigh: 0
   IsFreeToPlace: 1

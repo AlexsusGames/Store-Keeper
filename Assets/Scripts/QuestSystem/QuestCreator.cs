@@ -48,5 +48,4 @@ public enum QuestType
     CheckMail,
     FinishDelivery,
     EarnMoney,
-    Demo
 }

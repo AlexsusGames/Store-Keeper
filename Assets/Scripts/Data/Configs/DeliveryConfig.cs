@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Config/DeliveryConfig", fileName = "DeliveryConfig")]
 public class DeliveryConfig : ScriptableObject
 {
+    [Range(0,100)] public int DeliveryLevel;
+    public string DeliveryID;
+
     public PalletConfig[] pallets;
     public CarType carType;
 

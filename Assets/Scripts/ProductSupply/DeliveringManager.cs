@@ -17,7 +17,7 @@ public class DeliveringManager : MonoBehaviour
 
     private List<DeliveredProducts> pallets;
 
-    public event Action<Dictionary<string, float>, bool> DeliveryReport;
+    public event Action<Dictionary<string, float>, bool, bool> DeliveryReport;
     public event Action<CarType> OnCarArrived;
     public event Action OnCarDelivered;
 
@@ -100,7 +100,11 @@ public class DeliveringManager : MonoBehaviour
     private bool FinishDelivery()
     {
         Dictionary<string, float> report = new();
+
         bool isHasSpoiledProducts = false;
+        bool isHasChanged = false;
+
+        var pricingInteractor = Core.Interactors.GetInteractor<PricingInteractor>();
 
         for(int i = 0; i < pallets.Count ; i++)
         {
@@ -120,6 +124,9 @@ public class DeliveringManager : MonoBehaviour
                     return false;
                 }
                 else report[unit] = report.GetValueOrDefault(unit, 0) + order[unit];
+
+                if(!isHasChanged)
+                    isHasChanged = pricingInteractor.WasChanged(unit);
             }
         }
 
@@ -140,7 +147,7 @@ public class DeliveringManager : MonoBehaviour
             report[unit] = report.GetValueOrDefault(unit, 0) - expectedProducts[unit];
         }
 
-        DeliveryReport?.Invoke(report, isHasSpoiledProducts);
+        DeliveryReport?.Invoke(report, isHasSpoiledProducts, isHasChanged);
 
         Print(report);
 

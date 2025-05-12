@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 8074700725048967516, guid: 9d032f3fa4f94814e98886c65ace9a64, type: 3}
   Capacity: 6
   ProductName: Yogurt 'Lunch' 30g.
-  Price: 1.79
+  Price: 7.5
+  BoxType: 3
   StorageType: 1
   MeasureType: 0
   CompanyTypes: 0000000002000000

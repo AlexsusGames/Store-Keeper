@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 1900871851348033252, guid: 33bc453aac1e6af42b9b890be7a88258, type: 3}
   Capacity: 3
   ProductName: Apple
-  Price: 2.77
+  Price: 5.25
+  BoxType: 1
   StorageType: 0
   MeasureType: 4
   CompanyTypes: 0000000001000000

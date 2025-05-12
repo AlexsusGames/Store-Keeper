@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BoxObject: {fileID: 8066150892796004320}
   ProductName: Yogurt 'Lunch' 30g.
-  BoxType: 5
+  BoxType: 3
   FoldByType: 0
   UseWeigh: 0
   IsFreeToPlace: 1

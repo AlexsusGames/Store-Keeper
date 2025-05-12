@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 3155255171630866170, guid: b39295c2dfa34b9479382e3b5abea7c5, type: 3}
   Capacity: 3
   ProductName: Chili Peper
-  Price: 8.22
+  Price: 62.75
+  BoxType: 1
   StorageType: 0
   MeasureType: 4
   CompanyTypes: 0000000001000000

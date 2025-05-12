@@ -13,13 +13,16 @@ public class StorageUnitShopView : MonoBehaviour
 
     public Action<StoreFurnitureConfig, int> OnCartChange;
 
-    private StoreFurnitureConfig config;
+    protected StoreFurnitureConfig config;
     private int amountToBuy;
+    private bool isSpacial;
 
     public void SetData(StoreFurnitureConfig config)
     {
         this.config = config;
         amountToBuy = 0;
+
+        isSpacial = config.isStatic;
 
         priceText.text = $"{config.Price}$";
         amountText.text = amountToBuy.ToString();
@@ -31,6 +34,7 @@ public class StorageUnitShopView : MonoBehaviour
         amountToBuy += value;
 
         if(amountToBuy < 0) amountToBuy = 0;
+        if (isSpacial && amountToBuy > 1) amountToBuy = 1;
 
         amountText.text = amountToBuy.ToString();
         ChangeCart();

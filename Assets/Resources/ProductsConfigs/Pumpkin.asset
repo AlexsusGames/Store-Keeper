@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 8796421214357160383, guid: 8b4e14ef62f47894481099d2792d65c3, type: 3}
   Capacity: 2
   ProductName: Pumpkin
-  Price: 4.99
+  Price: 31.75
+  BoxType: 1
   StorageType: 0
   MeasureType: 4
   CompanyTypes: 0000000001000000

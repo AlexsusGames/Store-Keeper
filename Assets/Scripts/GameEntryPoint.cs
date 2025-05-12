@@ -7,12 +7,13 @@ public class GameEntryPoint : MonoBehaviour
 {
     [SerializeField] private GameObject[] dataProviders;
     [SerializeField] private ProductSupplyManager productSupplyManager;
+    [SerializeField] private SupplyConditions supplyConditions;
     [SerializeField] private PhoneController phoneController;
-    [SerializeField] private SupplyConfig test;
-    [SerializeField] private DialogConfig testDialog;
     [SerializeField] private Tutorial tutor;
+    [SerializeField] private TruckAmountView truckAmountView;
 
     [Inject] private SettingsDataProvider settingsDataProvider;
+    [Inject] private SupplyCreator supplyCreator;
 
     private void Awake()
     {
@@ -24,8 +25,6 @@ public class GameEntryPoint : MonoBehaviour
     private void Start()
     {
         Init();
-
-        Core.Camera.Init();
 
         settingsDataProvider.ApplySettings();
 
@@ -41,7 +40,13 @@ public class GameEntryPoint : MonoBehaviour
 
     public void Init()
     {
-        productSupplyManager.SetData(test);
+        supplyCreator.Init();
+        truckAmountView.Init();
+
+        var carList = supplyConditions.GetCarsByCompletedConditions();
+        var supplyList = supplyCreator.CreateSupplyList(carList);
+
+        productSupplyManager.SetData(supplyList);
 
         for (int i = 0; i < dataProviders.Length; i++)
         {
@@ -50,6 +55,8 @@ public class GameEntryPoint : MonoBehaviour
                 data.Load();
             }
         }
+
+        Core.Camera.Init();
     }
 
     public void SaveData()

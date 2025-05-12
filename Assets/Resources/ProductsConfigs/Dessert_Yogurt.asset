@@ -15,7 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 8334817494780121374, guid: 07ff3228e638a2a4fba34b481c1a11c3, type: 3}
   Capacity: 6
   ProductName: Yogurt 'Dessert' 60g.
-  Price: 2
+  Price: 6.5
+  BoxType: 3
   StorageType: 1
   MeasureType: 0
   CompanyTypes: 0000000002000000

@@ -44,9 +44,8 @@ public class CompanyNameEditor : MonoBehaviour
         string input = inputField.text;
         string result = input.Replace(" ", "");
 
-        string llcTranslated = Core.Localization.Translate("LLC");
 
-        result = llcTranslated + " " + result;
+        result = "LLC" + " " + result;
 
         if (result.Length <= 24 && result.Length >= 8)
         {

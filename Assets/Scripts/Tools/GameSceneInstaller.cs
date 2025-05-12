@@ -12,5 +12,6 @@ public class GameSceneInstaller : MonoInstaller
         Container.Bind<StoreFurnitureConfigFinder>().AsSingle();
         Container.Bind<QuestConfigFinder>().AsSingle();
         Container.Bind<Fonts>().FromInstance(fonts);
+        Container.Bind<SupplyCreator>().AsSingle();
     }
 }

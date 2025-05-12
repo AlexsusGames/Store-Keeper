@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class Door : InteractiveManager
 {
-    private Animator animator;
+    [SerializeField] private Animator animator;
+
     private bool isOpen;
 
-    private void Awake() => animator = GetComponent<Animator>();
+    private void Awake()
+    {
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+    }
 
     public override void Interact()
     {
