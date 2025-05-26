@@ -25,8 +25,7 @@ public class ProductSupplyManager : MonoBehaviour
     private List<DeliveryConfig> suppliers;
 
     private DeliveryConfig cachedDeliveryConfig;
-
-    private bool isBeingSupplied;
+    public bool IsBeingSupplied { get; private set; }
 
     private void Awake()
     {
@@ -58,10 +57,10 @@ public class ProductSupplyManager : MonoBehaviour
         lossesChecker.Hide();
     }
 
-    public void StartSupply(CarType carType)
+    public bool StartSupply(CarType carType)
     {
-        if (isBeingSupplied)
-            return;
+        if (IsBeingSupplied)
+            return false;
 
         DeliveryConfig config = null;
 
@@ -84,8 +83,8 @@ public class ProductSupplyManager : MonoBehaviour
 
             supplyPresenter.AssignListener(FinishSupply);
 
-            isBeingSupplied = true;
-            supplyPresenter.IsSupplied(isBeingSupplied);
+            IsBeingSupplied = true;
+            supplyPresenter.IsSupplied(IsBeingSupplied);
 
             suppliers.Remove(config);
 
@@ -96,7 +95,9 @@ public class ProductSupplyManager : MonoBehaviour
             orderCreator.UpdateView();
 
             Core.Quest.TryChangeQuest(QuestType.OrderShipment, 1);
+            return true;
         }
+        else return false;
     }
 
     private void CreateSuppliersList(List<string> suppliers)
@@ -118,8 +119,10 @@ public class ProductSupplyManager : MonoBehaviour
             {
                 if (price <= Bank.MoneyAmount)
                 {
-                    StartSupply(slot.CarType);
-                    Bank.Spend(this, price);
+                    if (StartSupply(slot.CarType))
+                    {
+                        Bank.Spend(this, price);
+                    }
                 }
                 else Core.Clues.Show("Not enough money to pay for the shipment.");
 
@@ -143,13 +146,13 @@ public class ProductSupplyManager : MonoBehaviour
             return;
         }
 
-        if (!isBeingSupplied)
+        if (!IsBeingSupplied)
             throw new Exception("Products hasn't been supplied");
 
         if(!deliveryManager.HasProducts())
         {
             SetCarSlotsEnabled(true);
-            deliveryManager.OnCarGone();
+            deliveryManager.LetTruck();
 
             lossesChecker.Check(orderManager.ActualOrder, orderManager.GetNotes(), orderManager.ExpectedOrder);
         }
@@ -177,7 +180,7 @@ public class ProductSupplyManager : MonoBehaviour
         data.CompleteCar(cachedDeliveryConfig.DeliveryID);
         gameEntryPoint.SaveData();
 
-        isBeingSupplied = false;
+        IsBeingSupplied = false;
 
         phone.ClosePhone();
         Core.Quest.TryChangeQuest(QuestType.FinishSupply);

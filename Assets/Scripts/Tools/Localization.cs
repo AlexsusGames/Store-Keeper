@@ -21,15 +21,19 @@ public class Localization
     private Dictionary<string, string[]> localization = new Dictionary<string, string[]>()
     {
         {"Continue", new string[] {"Continue", "Продолжить"} },
+        {"Throw", new string[] { "Throw", "Выкинуть"} },
+        {"Paint", new string[] { "Paint", "Покрасить"} },
         {"Shipments", new string[] { "Shipments", "Поставки" } },
         {"Management", new string[] { "Management", "Менеджмент" } },
         {"Edit Storages", new string[] { "Edit Storages", "Редактировать склад" } },
         {"Buy Storages", new string[] { "Buy Storages", "Купить хранилища" } },
         {"Payment successful, units delivered to your warehouse!", new string[] { "Payment successful, units delivered to your warehouse!", "Платёж прошёл, хранилища доставлены на ваш склад!" } },
         {"Payment failed, not enough money!", new string[] { "Payment failed, not enough money!", "Платёж не прошёл, недостаточно денег!" } },
+        {"The truck has already arrived", new string[] { "The truck has already arrived", "Грузовик уже прибыл." } },
+        {"Some of the loaded items do not match the store type.", new string[] { "Some of the loaded items do not match the store type:", "Некоторые загруженные товары не соответствуют типу магазина:" } },
         {"Successful", new string[] { "Successful", "Успешно" } },
         {"Failure", new string[] { "Failure", "Ошибка" } },
-        {"Supply", new string[] { "Supply", "Заказать" } },
+        {"Supply", new string[] { "Supply", "Поставить" } },
         {"LLC 'MarketWay Distributors'", new string[] { "LLC 'MarketWay Distributors'", "ООО 'МаркетВэй'" } },
         {"Inc. 'Bakery'", new string[] { "Inc. 'Bakery'", "АО 'Бейкери'" } },
         {"Corp. 'Dairy'", new string[] { "Corp. 'Dairy'", "Корпорация 'Дэйри'" } },
@@ -405,9 +409,14 @@ public class Localization
                 "Вы можете продолжить игру с ограниченным контентом. Обратите внимание: в полной версии прогресс будет сброшен. Спасибо, что попробовали демо — надеемся, вам понравилось!" } },
 
         {"Products", new string[] { "Goods", "Товары" } },
+
+        {"You can't transfer a product into a box of spoiled goods.",
+            new string[] { "You can't transfer a product into a box of spoiled goods.",
+                "Нельзя переместить товар в ящик с испорченными продуктами." } },
+
         {"pcs", new string[] { "pcs.", "шт." } },
         {"Store", new string[] { "Store", "Склад" } },
-        {"Retail outlets", new string[] { "Retail outlets", "Торговые точки" } },
+        {"Retail outlets", new string[] { "Stores", "Склады" } },
         {"Pricing", new string[] { "Pricing", "Ценообразование" } },
         {"Product not selected", new string[] { "No product selected", "Продукт не выбран" } },
         {"Price on delivery:", new string[] { "Price on delivery:", "Цена при доставке:" } },
@@ -425,8 +434,8 @@ public class Localization
 
         {"CityHall", new string[] { "City Hall", "Мэрия" } },
 
-        {"Baguette", new string[] { "Baguette", "Мэрия" } },
-        {"Bread roll", new string[] { "Bread roll", "Мэрия" } },
+        {"Baguette", new string[] { "Baguette", "Багет" } },
+        {"Bread roll", new string[] { "Bread roll", "Булка" } },
         {"Donut 'Donato' Blueb", new string[] { "Donut 'Donato' Blueb.", "Пончик 'Donato' Черн." } },
         {"Donut 'Donato' Rasp", new string[] { "Donut 'Donato' Rasp", "Пончик 'Donato' Малина" } },
         {"Donut 'Donato' Strawb", new string[] { "Donut 'Donato' Strawb.", "Пончик 'Donato' Клубн." } },
@@ -437,6 +446,65 @@ public class Localization
         {"Donut 'Luxury' Kiwi", new string[] { "Donut 'Luxury' Kiwi", "Пончик 'Luxury' Киви" } },
 
         {"For Sale:", new string[] { "For Sale:", "В продаже:" } },
+
+        {"To close the place down, you'll have to lay off all the employees.",
+            new string[] { "To close the place down, you'll have to lay off all the employees. Hall",
+                "Чтобы прекратить аренду помещения, необходимо уволить всех сотрудников." } },
+
+        {"Bread Nook", new string[] { "Bread Nook", "Хлебный Уголок" } },
+        {"Tech Town", new string[] { "Tech Town", "Tech Town" } },
+        {"Business", new string[] { "Business", "Бизнес" } },
+        {"Rental price:", new string[] { "Rental price:", "Цена аренды:" } },
+        {"Renter:", new string[] { "Renter:", "Арендатор:" } },
+
+        {"ProductShop", new string[] { "Supermarket", "Супермаркет" } },
+        {"Grocceries", new string[] { "Vegetable store", "Овощной магазин" } },
+        {"MilkShop", new string[] { "Dairy store", "Молочный магазин" } },
+        {"BreadStore", new string[] { "Bakery store", "Хлебный киоск" } },
+        {"TechShop", new string[] { "Electronics store", "Магазин техники" } },
+
+        {"Rent", new string[] { "Rent", "Арендовать" } },
+        {"Info", new string[] { "Info", "Информация" } },
+        {"Map", new string[] { "Map", "Карта" } },
+        {"Employees", new string[] { "Employees", "Работники" } },
+        {"Revenue Graph", new string[] { "Revenue Graph", "Прибыль" } },
+        {"Select a store location on the map", new string[] { "Select a store location on the map", "Выберите местоположение магазина на карте." } },
+
+        {"Cashier", new string[] { "Cashier", "Касир" } },
+        {"Salesperson", new string[] { "Salesperson", "Продавец" } },
+        {"Manager", new string[] { "Manager", "Управляющий" } },
+        {"Loader", new string[] { "Loader", "Грузчик" } },
+        {"Accountant", new string[] { "Accountant", "Бухгалтер" } },
+        {"DriverHelper", new string[] { "Driver Helper", "Помощник Водителя" } },
+        {"SecurityGuard", new string[] { "Security Guard", "Охранник" } },
+
+        {"Pay", new string[] { "Pay", "Оплатить" } },
+        {"Salary", new string[] { "Salary", "Зарплата" } },
+        {"Unpaid Rent", new string[] { "Unpaid Rent", "Аренда" } },
+
+        {"Hire", new string[] { "Hire", "Нанять" } },
+        {"lay off", new string[] { "Lay off", "Уволить" } },
+        {"Unrent", new string[] { "Unrent", "Отмена" } },
+
+        {"Truck is ready for loading. ", new string[] { "Truck is ready for loading. ", "Грузовик прибыл." } },
+        {"Press 'Supply' to send it off.", new string[] { "Press 'Supply' to send it off.", "Нажмите 'Поставить' чтобы отправить." } },
+        {"Only load products that match the <color=yellow>store type", new string[] { "Only load products that match the <color=yellow>store type", "Грузите только те товары, что соответствуют <color=yellow>типу магазина" } },
+
+        {"You need a rented space to hire employees.", new string[] { "You need a rented space to hire employees.", "Чтобы нанимать сотрудников, нужно арендовать помещение." } },
+
+        {"manager_info", new string[] { "Works in the store, required to ensure the efficient and organized functioning of large retail stores.",
+            "Работает в магазине, требуется для обеспечения эффективной и организованной работы крупных розничных магазинов." } },
+        {"accountant_info", new string[] { "Works in the warehouse, handles paperwork, pays workers' salaries, and pays the rent.",
+            "Работает на складе, занимается бумажной работой, платит зарплату рабочим, оплачивает аренду." } },
+        {"salesperson_info", new string[] { "Works in the store and increases the number of items that can be sold per day.",
+            "Работает в магазине, позволяет продавать больше товаров в день." } },
+        {"security_info", new string[] { "Works in the store, reduces the risk of product theft and decreases the number of conflict situations.",
+            "Работает в магазине, уменьшает риск кражи товара, уменьшает количество конфликтных ситуаций." } },
+        {"loader_info", new string[] { "Works in the warehouse and loads products for delivery. (only works if the products are not blocked)",
+            "Pаботает на складе, загружает продукты на доставку. (работает, если продукты не заставлены)" } },
+        {"cashier_info", new string[] { "Works in the store and sells products to customers.", "Pаботает в магазине, продает товары покупателям." } },
+        {"driver_info", new string[] { "Works during deliveries and checks suppliers during loading.",
+            "Pаботает при поставках, проверяет поставщиков при погрузке." } },
     };
 
     public string Translate(string text)

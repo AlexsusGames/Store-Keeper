@@ -27,7 +27,6 @@ public class StatisticDataProvider : DataProvider
 public class StatisticData
 {
     public List<float> SuppliersRating;
-    public List<float> IncomeWeek;
 
     public string CompanyName;
 

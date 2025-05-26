@@ -19,11 +19,10 @@ public class Tutorial : MonoBehaviour
 
     [SerializeField] private DialogConfig[] tutorDialogs;
     [SerializeField] private Button signoutBtn;
-    public bool IsCompleted => PlayerPrefs.GetInt(KEY) == LAST_STAGE_NUMBER;
 
     private bool canContinue;
 
-    public void StartTutor()
+    public void StartQuestLine()
     {
         var inteructor = Core.Interactors.GetInteractor<QuestInteractor>();
 
@@ -85,13 +84,11 @@ public class Tutorial : MonoBehaviour
 
         if (stageIndex == 1)
         {
-            computerButtonsController.MakeTheOnlyBlocked(ComputerButton.Goods);
-
             signoutBtn.interactable = false;
 
             var losses = Core.Statistic.GetTotalLosses();
 
-            var dialogIndex = losses < 10 ? 6 : 7;
+            var dialogIndex = losses < 0 ? 6 : 7;
 
             AssignActions(QuestType.FinishSupply, dialogIndex);
 
@@ -133,16 +130,7 @@ public class Tutorial : MonoBehaviour
 
             Action action = () =>
             {
-                if (isDemo)
-                {
-                    stageIndex = LAST_STAGE_NUMBER;
-                    SaveStage(stageIndex);
-
-                    signoutBtn.interactable = true;
-
-                    demoWindow.SetActive(true);
-                }
-                else canContinue = true;
+                canContinue = true;
             };
 
             AssignActions(QuestType.EarnMoney, 11, action);
@@ -167,17 +155,9 @@ public class Tutorial : MonoBehaviour
             signoutBtn.interactable = true;
         }
 
-        if(stageIndex >= 4)
-        {
-            yield return null;
+        supplyConditions.UnlockSystems(new int[] { 0, 1, 2, 3 });
 
-            if(!isDemo)
-            {
-                supplyConditions.UnlockSystems(new int[] { 0, 1, 2, 3 });
-            }
-        }
-
-        if(stageIndex == 4)
+        if (stageIndex == 4)
         {
             yield return WaitForComplete();
         }

@@ -29,6 +29,8 @@ public class Management : MonoBehaviour
 
             Action callback = () =>
             {
+                Core.Interactors.GetInteractor<ShopInteractor>().OnDayEnd();
+
                 Bank.OnDayEnd();
 
                 productManager.TrySpoilProducts();
@@ -40,7 +42,7 @@ public class Management : MonoBehaviour
                 SceneManager.LoadScene(0);
             };
 
-            FadeScreen.instance.ShowLoadingScreen(callback);
+            FadeScreen.instance.TryShowLoadingScreen(callback);
         }
         else Core.Clues.Show("You cannot end the day while a truck is waiting to be loaded.");
     }

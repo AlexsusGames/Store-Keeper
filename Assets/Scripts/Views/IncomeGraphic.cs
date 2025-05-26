@@ -8,15 +8,35 @@ public class IncomeGraphic : MonoBehaviour
     [SerializeField] private IncomeGraphicView[] views;
     [SerializeField] private TMP_Text highestValueText;
 
-    private void Start()
+    [SerializeField] private string id;
+
+    private void OnEnable()
     {
-        var week = Core.Statistic.GetIncomeWeek();
+        if (!string.IsNullOrEmpty(id))
+        {
+            UpdateInfo(id);
+        }
+        else gameObject.SetActive(false);
+    }
+
+    public void SetData(string id)
+    {
+        this.id = id;
+
+        gameObject.SetActive(true);
+    }
+
+    private void UpdateInfo(string id)
+    {
+        gameObject.SetActive(true);
+
+        var week = Core.Statistic.GetIncomeWeek(id);
 
         int highest = 1000;
 
         for (int i = 0; i < week.Count; i++)
         {
-            if(week[i] > highest)
+            if (week[i] > highest)
                 highest = (int)week[i];
         }
 
@@ -31,16 +51,5 @@ public class IncomeGraphic : MonoBehaviour
         }
     }
 
-    private void Print(List<float> data)
-    {
-        string result = "";
-
-        for (int i = 0;i < data.Count; i++)
-        {
-            result += data[i].ToString();
-            result += "\n";
-        }
-
-        Debug.Log(result);
-    }
+    public void Hide() => gameObject.SetActive(false);
 }

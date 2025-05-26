@@ -33,10 +33,13 @@ public class ProductViewPool : MonoBehaviour
 
     public void HideAll()
     {
-        for (int i = 0; i < viewPool.Count; i++)
+        if(viewPool != null)
         {
-            viewPool[i].transform.SetParent(transform);
-            viewPool[i].gameObject.SetActive(false);
+            for (int i = 0; i < viewPool.Count; i++)
+            {
+                viewPool[i].transform.SetParent(transform);
+                viewPool[i].gameObject.SetActive(false);
+            }
         }
     }
 

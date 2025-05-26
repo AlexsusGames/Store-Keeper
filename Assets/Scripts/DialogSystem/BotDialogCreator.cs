@@ -44,7 +44,7 @@ public class BotDialogCreator
         return CreateDialog(list);
     }
 
-    public DialogConfig GetDeliveryReport(Dictionary<string, float> report, bool wereSpoilt, bool wereChanged, string name, Sprite sprite)
+    public DialogConfig GetDeliveryReport(DeliveryReport report, string name, Sprite sprite)
     {
         Init();
 
@@ -55,23 +55,23 @@ public class BotDialogCreator
             "Hello, you recently sent goods to our store.",
         };
 
-        foreach(var unit in report.Keys)
+        foreach(var unit in report.Products.Keys)
         {
-            if (report[unit] < -0.1f)
+            if (report.Products[unit] < -0.1f)
             {
                 if(wereMistakes == false)
                 {
                     wereMistakes = true;
                     list.Add("I noticed that some products were missing.");
-                    list.Add($"{unit} - {Math.Abs(report[unit])}");
+                    list.Add($"{unit} - {Math.Abs(report.Products[unit])}");
                 }
-                else list.Add($"{unit} - {Math.Abs(report[unit])}");
+                else list.Add($"{unit} - {Math.Abs(report.Products[unit])}");
 
                 progressInteractor.ChangeRating(-100);
             }
         }
 
-        if (wereSpoilt)
+        if (report.HasSpoiled)
         {
             list.Add("Some items were spoiled—this is unacceptable!");
 
@@ -80,7 +80,7 @@ public class BotDialogCreator
             wereMistakes = true;
         }
 
-        if (wereChanged)
+        if (report.HasPriceChanged)
         {
             progressInteractor.ChangeRating(-500);
 
@@ -89,7 +89,7 @@ public class BotDialogCreator
 
         string lastMessage = wereMistakes ? "The payment will reflect that." : "The quantity and quality are just right. Thank you!";
 
-        if(!wereChanged)
+        if(!report.HasPriceChanged)
             list.Add(lastMessage);
 
         var dialog = CreateDialog(list);

@@ -58,11 +58,11 @@ public class Delivery : MonoBehaviour
         }
     }
 
-    private void OnFinishDelivery(Dictionary<string, float> report, bool wereSpoiled, bool wereChanged)
+    private void OnFinishDelivery(DeliveryReport report)
     {
-        var price = CalculatePrice(report);
+        var price = CalculatePrice(report.Products);
 
-        var dialog = botDialogCreator.GetDeliveryReport(report, wereSpoiled, wereChanged, orderPresenter.CurrentCompany, callerSprite);
+        var dialog = botDialogCreator.GetDeliveryReport(report, orderPresenter.CurrentCompany, callerSprite);
 
         UnityAction first = () =>
         {

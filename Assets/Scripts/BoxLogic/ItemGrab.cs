@@ -188,11 +188,18 @@ public class ItemGrab : MonoBehaviour
         {
             if(grabbedItem.TryGetComponent(out StoreBox box))
             {
-                if(box.GetItemsAmount() == 0)
+                string item = box.ProductName;
+                int amount = box.GetItemsAmount();
+
+                if(amount == 0 || box.IsSpoilt)
                 {
                     Destroy(grabbedItem.gameObject);
                     grabbedItem = null;
                     editMode = false;
+
+                    Core.ProductList.RemoveProduct(item, amount);
+
+                    view.Hide();
                 }
             }
         }
@@ -225,18 +232,24 @@ public class ItemGrab : MonoBehaviour
 
         else
         {
-            if(grabbedItem.gameObject.TryGetComponent(out Box grabbedBox) && obj.TryGetComponent(out Box box))
+            if(grabbedItem.gameObject.TryGetComponent(out StoreBox grabbedBox) && obj.TryGetComponent(out StoreBox box))
             {
                 if (grabbedBox.ProductName == box.ProductName)
                 {
                     if(grabbedBox.GetItemsAmount() > 0 && box.CanTake() > 0)
                     {
-                        var itemsToReplace = 1;
+                        if (!box.IsSpoilt)
+                        {
+                            var itemsToReplace = 1;
 
-                        grabbedBox.RemoveItems(itemsToReplace);
-                        box.AddItems(itemsToReplace);
+                            grabbedBox.RemoveItems(itemsToReplace);
+                            box.AddItems(itemsToReplace);
 
-                        Core.Sound.PlayClip(AudioType.Transfer);
+                            view.ShowInfo(grabbedBox);
+
+                            Core.Sound.PlayClip(AudioType.Transfer);
+                        }
+                        else Core.Clues.Show("You can't transfer a product into a box of spoiled goods.");
                     }
                 }
 

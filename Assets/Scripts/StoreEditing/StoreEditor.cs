@@ -26,6 +26,8 @@ public class StoreEditor : MonoBehaviour, IDataProvider
 
     public void CreateNewFurniture(string name)
     {
+        Debug.Log(name);
+
         if(!isBeingPlaced && !furnitureSelector.IsSelected)
         {
             isBeingPlaced = true;

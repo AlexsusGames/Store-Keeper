@@ -41,5 +41,6 @@ public enum ComputerButton
     StorageShop,
     Supplies,
     Management,
-    Goods
+    Goods,
+    Business
 }

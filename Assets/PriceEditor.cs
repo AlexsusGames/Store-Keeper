@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class PriceEditor : MonoBehaviour
 {
+    [SerializeField] private CompanyTypeView[] companyTypes;
+
     [SerializeField] private TMP_Text deliveryPrice;
     [SerializeField] private TMP_Text shopPrice;
     [SerializeField] private TMP_Text marketPrice;
@@ -17,6 +21,8 @@ public class PriceEditor : MonoBehaviour
     [SerializeField] private Slider shopSlider;
 
     [SerializeField] private Toggle toggle;
+
+    [Inject] private ProductFinder productFinder;
 
     private PricingInteractor interactor;
     private string cachedProduct;
@@ -45,7 +51,20 @@ public class PriceEditor : MonoBehaviour
 
         AssignSliders(marketPrice, shopPrice, deliveryPrice);
 
+        UpdateCompanyTypes(productName);
+
         Enabled(true);
+    }
+
+    private void UpdateCompanyTypes(string productName)
+    {
+        var config = productFinder.FindByName(productName);
+        var list = config.CompanyTypes.ToList();
+
+        for (int i = 0; i < companyTypes.Length; i++)
+        {
+            companyTypes[i].UpdateView(list);
+        }
     }
 
     private void ChangeSelling(bool value) => interactor.ChangeSelling(cachedProduct, value);
@@ -62,7 +81,7 @@ public class PriceEditor : MonoBehaviour
         shopSlider.minValue = marketPrice;
 
         deliverySlider.maxValue = marketPrice * 2;
-        shopSlider.maxValue = marketPrice * 2;
+        shopSlider.maxValue = marketPrice * 3;
 
         deliverySlider.value = deliveryPrice;
         shopSlider.value = shopPrice;

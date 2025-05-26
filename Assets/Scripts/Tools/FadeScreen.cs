@@ -22,12 +22,17 @@ public class FadeScreen : MonoBehaviour
 
     [SerializeField] private Animator loadingScreen;
 
-    public void ShowLoadingScreen(Action callback)
+    public bool TryShowLoadingScreen(Action callback)
     {
         if(coroutine ==  null)
         {
+            callback += () => coroutine = null;
+
             coroutine = StartCoroutine(Animation(callback));
+            return true;
         }
+
+        return false;
     }
 
     public IEnumerator Animation(Action callback, bool animate = true)
@@ -48,7 +53,5 @@ public class FadeScreen : MonoBehaviour
         yield return null;
 
         callback?.Invoke();
-
-        coroutine = null;
     }
 }

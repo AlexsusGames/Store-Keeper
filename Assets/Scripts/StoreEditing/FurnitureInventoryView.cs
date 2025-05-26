@@ -35,7 +35,8 @@ public class FurnitureInventoryView : MonoBehaviour
             view.TryGetComponent(out Button button);
 
             button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() => action?.Invoke(slotsView[index].ItemId));
+
+            button.onClick.AddListener(() => action?.Invoke(view.ItemId));
         }
     }
 

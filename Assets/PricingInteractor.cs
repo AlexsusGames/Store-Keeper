@@ -180,4 +180,83 @@ public class PricingInteractor : Interactor
 
         return result;
     }
+
+    private int GetShopMultiplier(string productName)
+    {
+        if (!dataMap.ContainsKey(productName))
+        {
+            AddData(productName);
+        }
+
+        float marketPrice = GetMarketPrice(productName);
+        float currentPrice = dataMap[productName].DeliveryPrice;
+
+        float different = currentPrice / marketPrice;
+
+        int result = 2;
+
+        if (different <= 2.75) result = 3;
+        if (different <= 2.5) result = 4;
+        if (different <= 2.25) result = 5;
+        if (different <= 2) result = 6;
+        if (different <= 1.75) result = 7;
+        if (different <= 1.5) result = 8;
+        if (different <= 1.25) result = 9;
+
+        return result;
+    }
+
+    public float CalculateIncome(List<string> productNames, List<float> amounts, List<EmployeeType> employees)
+    {
+        if (!employees.Contains(EmployeeType.Cashier))
+            return 0;
+
+        float earnedMoney = 0;
+
+        List<int> indexesToRemove = new();
+
+        for (int i = 0; i < productNames.Count; i++)
+        {
+            var product = productNames[i];
+
+            int capacity = productFinder.FindByName(product).Capacity;
+
+            int maxValue = GetShopMultiplier(product) * capacity;
+
+            int minValue = employees.Contains(EmployeeType.Salesperson) ? maxValue / 2 : 0;
+
+            float randomValue = Random.Range(minValue, maxValue);
+
+            float soldAmount;
+
+            if (randomValue > amounts[i])
+            {
+                soldAmount = amounts[i];
+                indexesToRemove.Add(i);
+            }
+            else
+            {
+                var measure = productFinder.FindByName(product).MeasureType;
+                soldAmount = measure == MeasureType.pcs ? (int)randomValue : randomValue;
+            }
+
+            amounts[i] -= soldAmount;
+
+            float totalPrice = GetShopPrice(product) * soldAmount;
+
+            earnedMoney += totalPrice;
+        }
+
+        Bank.AddCoins(this, earnedMoney);
+
+        for (int i = indexesToRemove.Count - 1; i >= 0; i--)
+        {
+            int index = indexesToRemove[i];
+
+            productNames.RemoveAt(index);
+            amounts.RemoveAt(index);
+        }
+
+        return earnedMoney;
+    }
 }

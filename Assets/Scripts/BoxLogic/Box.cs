@@ -25,7 +25,7 @@ public class Box : MonoBehaviour
     }
 
     public float ProductWeight { get; set; }
-    public bool IsCanBeSpoiled => spoilEffect != null && IsSpoilt == false;
+    public bool IsCanBeSpoiled => spoilEffect != null && IsSpoilt == false && itemAmount > 0;
     public string ProductName {get => settings.ProductName; set => settings.ProductName = value; }
     public float TotalWeight => ProductWeight * itemAmount;
 

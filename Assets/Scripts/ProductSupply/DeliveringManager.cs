@@ -1,27 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class DeliveringManager : MonoBehaviour
 {
     [SerializeField] private OrderManager orderManager;
 
-    [SerializeField] private Transform[] paletaPoints;
-
     [SerializeField] private Tablet playersTablet;
     [SerializeField] private GameObject tableTablet;
 
-    [SerializeField] private DeliveredProducts palletPrefab;
+    [SerializeField] private PalletController palletController;
 
-    private List<DeliveredProducts> pallets;
+    [Inject] private ProductFinder productFinder;
 
-    public event Action<Dictionary<string, float>, bool, bool> DeliveryReport;
+    public event Action<DeliveryReport> DeliveryReport;
+
     public event Action<CarType> OnCarArrived;
     public event Action OnCarDelivered;
-
-    private Coroutine cachedCoroutine;
 
     private Dictionary<string, float> expectedProducts;
     private Dictionary<string, float> actualProducts;
@@ -29,33 +28,12 @@ public class DeliveringManager : MonoBehaviour
     public bool isCarArrived;
     private bool isDelivering;
 
-    public bool HasProducts()
-    {
-        for (int i = 0; i < pallets.Count; i++)
-        {
-            if (pallets[i].HasProducts())
-                return true;
-        }
-
-        return false;
-    }
-
-    private void ClearPallets()
-    {
-        for(int i = 0; i < pallets.Count; i++)
-        {
-            Destroy(pallets[i].gameObject);
-        }
-    }
 
     private void CarArrive(CarType type, bool isDelivering)
     {
-        if (pallets != null)
-            ClearPallets();
+        palletController.ClearPallets();
 
         OnCarArrived?.Invoke(type);
-
-        tableTablet.SetActive(true);
 
         expectedProducts = new();
         actualProducts = new();
@@ -63,12 +41,16 @@ public class DeliveringManager : MonoBehaviour
         isCarArrived = true;
 
         this.isDelivering = isDelivering;
-
-        pallets = new();
     }
 
     public bool TryDeliverProducts(DeliveryData deliveryData)
     {
+        if (isDelivering)
+        {
+            Core.Clues.Show("The truck has already arrived");
+            return false;
+        }
+
         if (isCarArrived)
         {
             Core.Clues.Show("You cannot start a delivery during a shipment.");
@@ -77,82 +59,84 @@ public class DeliveringManager : MonoBehaviour
 
         CarArrive(CarType.Delivery, true);
 
-        for(int i = 0;i < deliveryData.OrderedProducts.Count; i++)
+        palletController.CreateEmptyPallets();
+
+        if(deliveryData != null)
         {
-            var order = deliveryData.OrderedProducts[i];
+            tableTablet.SetActive(true);
 
-            expectedProducts[order.Product] = order.Amount;
+            for (int i = 0; i < deliveryData.OrderedProducts.Count; i++)
+            {
+                var order = deliveryData.OrderedProducts[i];
+
+                expectedProducts[order.Product] = order.Amount;
+            }
+
+            actualProducts = expectedProducts;
+
+            orderManager.Init(expectedProducts, actualProducts, CarType.Delivery);
         }
-
-        actualProducts = expectedProducts;
-
-        for(int i = 0; i < paletaPoints.Length; i++)
-        {
-            var pallet = Instantiate(palletPrefab.gameObject, paletaPoints[i]);
-            pallets.Add(pallet.GetComponent<DeliveredProducts>());
-        }
-
-        orderManager.Init(expectedProducts, actualProducts, CarType.Delivery);
 
         return true;
     }
 
-    private bool FinishDelivery()
+    public bool DeliverToShop(ShopInteractor interactor, StoreConfig data)
     {
-        Dictionary<string, float> report = new();
+        Dictionary<string, float> loadedProducts = palletController.GetLoadedProducts();
 
-        bool isHasSpoiledProducts = false;
-        bool isHasChanged = false;
-
-        var pricingInteractor = Core.Interactors.GetInteractor<PricingInteractor>();
-
-        for(int i = 0; i < pallets.Count ; i++)
-        {
-            pallets[i].Init(false);
-
-            if (pallets[i].ConsistSpoilled)
-                isHasSpoiledProducts = true;
-
-            var order = pallets[i].GetOrder();
-
-            foreach(var unit in order.Keys)
-            {
-                if (!expectedProducts.ContainsKey(unit))
-                {
-                    Core.Clues.Show("Before sending the delivery, unload any extra goods");
-
-                    return false;
-                }
-                else report[unit] = report.GetValueOrDefault(unit, 0) + order[unit];
-
-                if(!isHasChanged)
-                    isHasChanged = pricingInteractor.WasChanged(unit);
-            }
-        }
-
-        foreach(var item  in report.Keys)
-        {
-            Core.ProductList.RemoveProduct(item, report[item]);
-        }
-
-        if(report.Count == 0 && !isHasSpoiledProducts)
+        if(loadedProducts.Count == 0)
         {
             Core.Clues.Show("You cannot send out an empty truck.");
-
             return false;
         }
 
-        foreach(var unit in expectedProducts.Keys)
+        foreach (var product in loadedProducts.Keys)
         {
-            report[unit] = report.GetValueOrDefault(unit, 0) - expectedProducts[unit];
+            var config = productFinder.FindByName(product);
+
+            if (!config.CompanyTypes.Contains(data.CompanyType))
+            {
+                string msgTranslated = Core.Localization.Translate("Some of the loaded items do not match the store type.");
+                string productTranslated = Core.Localization.Translate(product);
+
+                Core.Clues.Show($"{msgTranslated} {productTranslated}");
+                return false;
+            }
         }
 
-        DeliveryReport?.Invoke(report, isHasSpoiledProducts, isHasChanged);
+        foreach (var product in loadedProducts.Keys)
+        {
+            var amount = loadedProducts[product];
 
-        Print(report);
+            interactor.AddProduct(data.Id, product, amount);
+
+            Core.ProductList.RemoveProduct(product, amount);
+        }
+
+        isDelivering = false;
+
+        LetTruck();
 
         return true;
     }
+
+    public bool TryFinishDelivery()
+    {
+        var report = palletController.GetDeliveryReport(expectedProducts);
+
+        if(report.IsDeliverySent)
+        {
+            DeliveryReport?.Invoke(report);
+
+            isDelivering = false;
+
+            LetTruck();
+        }
+
+        return report.IsDeliverySent;
+    }
+
+    public void FinishDelivery() => TryFinishDelivery();
 
     public bool TrySupplyProducts(DeliveryConfig deliveryData)
     {
@@ -164,11 +148,16 @@ public class DeliveringManager : MonoBehaviour
 
         CarArrive(deliveryData.carType, false);
 
-        for(int i = 0; i < deliveryData.pallets.Length; i++)
+        tableTablet.SetActive(true);
+
+        for (int i = 0; i < deliveryData.pallets.Length; i++)
         {
-            var delivery = deliveryData.pallets[i].GetOrderDelivered(paletaPoints[i]);
-            var order = delivery.GetOrder();
-            pallets.Add(delivery);
+            var parent = palletController.GetPalletParent(i);
+            var pallet = deliveryData.pallets[i].GetOrderDelivered(parent);
+
+            palletController.AddPallet(pallet);
+
+            var order = pallet.GetOrder();
 
             foreach (var item in order.Keys)
             {
@@ -180,7 +169,7 @@ public class DeliveringManager : MonoBehaviour
                 expectedProducts[item] = MathF.Round(order[item] + current, 2);
             }
 
-            var changedOrder = deliveryData.pallets[i].GetChangedOrderByDifficult(delivery);
+            var changedOrder = deliveryData.pallets[i].GetChangedOrderByDifficult(pallet);
 
             foreach(var item in changedOrder.Keys)
             {
@@ -200,86 +189,17 @@ public class DeliveringManager : MonoBehaviour
         return true;
     }
 
-    public bool SwapObjectsPositions()
-    {
-        if(cachedCoroutine == null)
-        {
-            cachedCoroutine = StartCoroutine(Timer());
-            return true;
-        }
-
-        return false;
-    }
-
-    private IEnumerator Timer()
-    {
-        List<Vector3> localPositions = new List<Vector3>();
-        foreach (var obj in paletaPoints)
-        {
-            localPositions.Add(obj.transform.localPosition);
-        }
-
-        for (int i = 0; i < paletaPoints.Length; i++)
-        {
-            int swapIndex = (i + 1) % paletaPoints.Length;
-
-            paletaPoints[i].transform.localPosition = localPositions[swapIndex];
-        }
-
-        for(int i = 0;i < paletaPoints.Length; i++)
-        {
-            yield return StartCoroutine(PalletAnim(paletaPoints[i]));
-        }
-
-        cachedCoroutine = null;
-    }
-
-    private IEnumerator PalletAnim(Transform palletTransform)
-    {
-        Vector3 startPosition = palletTransform.localPosition;
-        Vector3 targetPosition = startPosition + new Vector3(0f, 0.5f, 0f);
-
-        float timeElapsed = 0f;
-        float duration = 0.2f;
-
-        while (timeElapsed < duration)
-        {
-            palletTransform.localPosition = Vector3.Lerp(startPosition, targetPosition, timeElapsed / duration);
-            timeElapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        palletTransform.localPosition = targetPosition;
-
-        timeElapsed = 0f;
-        duration = 0.1f;
-
-        while (timeElapsed < duration)
-        {
-           palletTransform.localPosition = Vector3.Lerp(targetPosition, startPosition, timeElapsed / duration);
-            timeElapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        palletTransform.localPosition = startPosition;
-    }
-
-    private void Print(Dictionary<string, float> values)
-    {
-        string debug = "";
-
-        foreach(var item in values.Keys)
-        {
-            debug += $"Key: {item}. Value: {values[item]}.";
-            debug += "\n";
-        }
-
-        Debug.Log(debug);
-    }
+    public bool SwapObjectsPositions() => palletController.Swapped();
+    public bool HasProducts() => palletController.HasProducts();
 
     public bool CancelDelivering()
     {
-        if (HasProducts())
+        if(!isCarArrived)
+        {
+            return false;
+        }
+
+        if (palletController.HasProducts())
         {
             Core.Clues.Show("To cancel the delivery, you need to unload the products you just loaded.");
             return false;
@@ -287,19 +207,13 @@ public class DeliveringManager : MonoBehaviour
 
         isDelivering = false;
 
-        OnCarGone();
+        LetTruck();
 
         return true;
     }
 
-    public void OnCarGone()
+    public void LetTruck()
     {
-        if (isDelivering)
-        {
-            if (!FinishDelivery())
-                return;
-        }
-
         if (isCarArrived)
         {
             playersTablet.ChangeClipboardEnabled(false);

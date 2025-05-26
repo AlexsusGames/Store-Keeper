@@ -19,6 +19,6 @@ MonoBehaviour:
   BoxType: 4
   StorageType: 1
   MeasureType: 0
-  CompanyTypes: 03000000
+  CompanyTypes: 0300000004000000
   minWeight: 0.1
   maxWeight: 0.1

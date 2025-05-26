@@ -69,14 +69,10 @@ public class DeliveredProducts : MonoBehaviour
         {
             if (RandomNumber < difficulty && !cachedNames.Contains(products[i].ProductName))
             {
-                int amounToChange = Random.Range(1, 3);
+                int productAmount = products[i].GetItemsAmount();
+                int amountToChange = Random.Range(0, productAmount);
 
-                products[i].RemoveItems(amounToChange);
-
-                if (RandomNumber < difficulty)
-                {
-                    products[i].RemoveAll();
-                }
+                products[i].RemoveItems(amountToChange);
 
                 cachedNames.Add(products[i].ProductName);
             }

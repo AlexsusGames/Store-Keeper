@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.HighDefinition.ScalableSettingLevelParameter;
 
 public class SupplyCreator 
 {
@@ -44,12 +45,36 @@ public class SupplyCreator
     private string CreateSupply(CarType type)
     {
         var rating = Core.Statistic.GetSupplierRating(type) * 100;
-        var config = GetRandomConfigByLevel(rating, type);
+
+        var config = rating > 50 
+            ? GetRandomConfigByLevel(rating, type)
+            : GetLastLevelConfig(rating, type);
 
         return config.DeliveryID;
     }
 
     public DeliveryConfig GetConfigByID(string id) => supplyMap[id];
+
+    private DeliveryConfig GetLastLevelConfig(float level, CarType type)
+    {
+        DeliveryConfig result = null;
+
+        foreach (var config in this.configs)
+        {
+            if (config.carType == type && config.DeliveryLevel <= level)
+            {
+                if (config == result)
+                    continue;
+
+                if (result != null && config.DeliveryLevel < result.DeliveryLevel)
+                    continue;
+
+                result = config;
+            }
+        }
+
+        return result;
+    }
 
     private DeliveryConfig GetRandomConfigByLevel(float level, CarType type)
     {

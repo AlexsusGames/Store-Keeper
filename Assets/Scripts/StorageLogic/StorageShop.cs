@@ -35,6 +35,8 @@ public class StorageShop : MonoBehaviour
         }
     }
 
+    private void Start() => supplyConditions.CheckData();
+
     private void ChangeCart(StoreFurnitureConfig config, int amount)
     {
         if (amount != cart[config])

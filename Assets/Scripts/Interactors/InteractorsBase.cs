@@ -20,6 +20,7 @@ public class InteractorsBase
         CreateInteractor<StatisticInteractor>();
         CreateInteractor<DeliveryInteractor>();
         CreateInteractor<PricingInteractor>();
+        CreateInteractor<ShopInteractor>();
     }
 
     private void CreateInteractor<T>() where T : Interactor, new()

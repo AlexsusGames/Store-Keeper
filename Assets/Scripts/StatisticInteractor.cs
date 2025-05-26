@@ -7,11 +7,13 @@ public class StatisticInteractor : Interactor
 {
     private StatisticDataProvider dataProvider;
     private DayProgressInteractor interactor;
+    private ShopInteractor shopInteractor;
 
     public override void Init()
     {
         dataProvider = Core.DataProviders.GetDataProvider<StatisticDataProvider>();
         interactor = Core.Interactors.GetInteractor<DayProgressInteractor>();
+        shopInteractor = Core.Interactors.GetInteractor<ShopInteractor>();
     }
 
     public float GetSupplierRating(CarType carType)
@@ -38,14 +40,9 @@ public class StatisticInteractor : Interactor
     public int GetDaysPassed() => dataProvider.Data.DaysPassed;
     public float GetTotalLosses() => dataProvider.Data.TotalLost;
     public float GetTotalEarned() => dataProvider.Data.TotalEarned;
-    public List<float> GetIncomeWeek()
+    public List<float> GetIncomeWeek(string id)
     {
-        if (dataProvider.Data.IncomeWeek == null || dataProvider.Data.IncomeWeek.Count == 0)
-            dataProvider.Data.IncomeWeek = CreateIncomeWeek();
-
-        Debug.Log(dataProvider.Data.IncomeWeek.Count);
-
-        return dataProvider.Data.IncomeWeek;
+        return shopInteractor.GetIncome(id);
     }
     public void SetCompanyName(string name) => dataProvider.Data.CompanyName = name;
 
@@ -62,8 +59,7 @@ public class StatisticInteractor : Interactor
     {
         dataProvider.Data.DaysPassed++;
 
-        dataProvider.Data.IncomeWeek.RemoveAt(0);
-        dataProvider.Data.IncomeWeek.Add(income);
+        shopInteractor.UpdateIncome("store", income);
     }
     public void OnSupply(CarType carType, float price, float losses)
     {

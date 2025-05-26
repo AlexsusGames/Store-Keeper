@@ -56,7 +56,9 @@ public class DeliveryInteractor : Interactor
 
     public void CancelDelivery(DeliveryData deliveryData)
     {
-        dataProvider.DeliveryData.List.Add(deliveryData);
+        if(deliveryData !=  null)
+            dataProvider.DeliveryData.List.Add(deliveryData);
+
         dataProvider.DeliveryData.RemainingTrucks++;
 
         OnTruckAmountChanged?.Invoke();
@@ -64,7 +66,8 @@ public class DeliveryInteractor : Interactor
 
     public void OnStartDelivery(DeliveryData deliveryData)
     {
-        dataProvider.DeliveryData.List.Remove(deliveryData);
+        if(deliveryData !=  null)
+            dataProvider.DeliveryData.List.Remove(deliveryData);
 
         dataProvider.DeliveryData.RemainingTrucks--;
 
@@ -78,5 +81,8 @@ public enum CompanyType
     ProductShop,
     Grocceries,
     MilkShop,
-    CityHall
+    CityHall,
+    BreadStore,
+    TechShop,
+    Store
 }

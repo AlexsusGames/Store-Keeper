@@ -12,10 +12,10 @@ public class ProductView : MonoBehaviour
 
     private Button button;
 
-    public void SetData(string name, string amount)
+    public void SetData(string name, string amount, bool showAmount)
     {
         productName.text = name;
-        productAmount.text = amount;
+        productAmount.text = showAmount ? amount : "???";
     }
 
     public void AssignAction(UnityAction action)

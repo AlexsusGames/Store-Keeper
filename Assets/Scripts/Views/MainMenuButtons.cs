@@ -8,7 +8,8 @@ using Zenject;
 
 public class MainMenuButtons : MonoBehaviour
 {
-    private const string NEW_GAME_KEY = "NEW_GAME_STARTED";
+    private const string NEW_GAME_KEY = "GAME_STARTED";
+    private const string URL = "https://discord.gg/mdDC9B8JaK";
 
     [SerializeField] private Button continueButton;
     [SerializeField] private Button newGameButton;
@@ -63,6 +64,11 @@ public class MainMenuButtons : MonoBehaviour
         enabled = !enabled;
 
         settingsPanel.SetActive(enabled);
+    }
+
+    public void OpenDiscord()
+    {
+        Application.OpenURL(URL);
     }
 
     private void AssignListener(Button button, UnityAction action)

@@ -21,6 +21,7 @@ public class DataProviderBase
         CreateDataProvider<StatisticDataProvider>();
         CreateDataProvider<DeliveryDataProvider>();
         CreateDataProvider<PriceListDataProvider>();
+        CreateDataProvider<ShopDataProvider>();
     }
 
     private void CreateDataProvider<T>() where T : DataProvider, new()

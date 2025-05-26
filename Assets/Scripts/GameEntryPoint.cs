@@ -28,14 +28,11 @@ public class GameEntryPoint : MonoBehaviour
 
         settingsDataProvider.ApplySettings();
 
-        if(!tutor.IsCompleted)
+        if (Core.Camera.IsActive(CameraType.MainMenuCamera))
         {
-            if (Core.Camera.IsActive(CameraType.MainMenuCamera))
-            {
-                Core.Camera.StateChanged += StartDialog;
-            }
-            else tutor.StartTutor();
+            Core.Camera.StateChanged += StartDialog;
         }
+        else tutor.StartQuestLine();
     }
 
     public void Init()
@@ -85,7 +82,7 @@ public class GameEntryPoint : MonoBehaviour
     {
         if(type == CameraType.GameplayCamera)
         {
-            tutor.StartTutor();
+            tutor.StartQuestLine();
 
             Core.Camera.StateChanged -= StartDialog;
         }

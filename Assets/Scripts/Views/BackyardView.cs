@@ -18,7 +18,7 @@ public class BackyardView : MonoBehaviour
         manager.OnCarDelivered += OnFinishDelivery;
     }
 
-    private void OnCarArrived(CarType carType)
+    public void OnCarArrived(CarType carType)
     {
         truckView.ChangeSkin(carType);
         OpenGates(true);
@@ -26,7 +26,7 @@ public class BackyardView : MonoBehaviour
         SetCarDrivingAnimation(true);
     }
 
-    private void OnFinishDelivery()
+    public void OnFinishDelivery()
     {
         SetCarDrivingAnimation(false);
 
