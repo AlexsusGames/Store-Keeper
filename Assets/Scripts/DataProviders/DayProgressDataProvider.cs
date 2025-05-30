@@ -15,7 +15,7 @@ public class DayProgressDataProvider : DataProvider
             string save = PlayerPrefs.GetString(KEY);
             Data = JsonUtility.FromJson<SupplyData>(save);
         }
-        else { Data = new SupplyData(); }
+        else Data = new SupplyData();
     }
 
     public override void Save()
@@ -31,4 +31,7 @@ public class SupplyData
     public int Day;
 
     public int Rating;
+
+    public List<string> CarsPassed;
+    public List<float> TaxToPay;
 }

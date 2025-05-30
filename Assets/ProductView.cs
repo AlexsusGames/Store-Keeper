@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,6 +16,7 @@ public class ProductView : MonoBehaviour
     public void SetData(string name, string amount, bool showAmount)
     {
         productName.text = name;
+
         productAmount.text = showAmount ? amount : "???";
     }
 

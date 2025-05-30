@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 5124505835305900984, guid: 4be928c820894dc4497440aa23c456ee, type: 3}
   Capacity: 15
   ProductName: Baguette
-  Price: 10.75
+  Price: 6.5
   BoxType: 0
   StorageType: 0
   MeasureType: 0

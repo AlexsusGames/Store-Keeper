@@ -14,6 +14,9 @@ public class DeliveringManager : MonoBehaviour
     [SerializeField] private GameObject tableTablet;
 
     [SerializeField] private PalletController palletController;
+    [SerializeField] private ProductManager productManager;
+
+    [SerializeField] private EmployeeManager employeeManager;
 
     [Inject] private ProductFinder productFinder;
 
@@ -120,11 +123,24 @@ public class DeliveringManager : MonoBehaviour
         return true;
     }
 
-    public bool TryFinishDelivery()
+    public bool TryFinishDeliveryByLoader()
     {
-        var report = palletController.GetDeliveryReport(expectedProducts);
+        if (HasProducts())
+        {
+            Core.Clues.Show("You can't assign the loader to load the truck if you've already started doing it yourself");
+            return false;
+        }
 
-        if(report.IsDeliverySent)
+        Dictionary<string, float> order = new(expectedProducts);
+
+        var report = productManager.TryLoadDeliveredProducts(order);
+
+        return TryFinishDelivery(report);
+    }
+
+    private bool TryFinishDelivery(DeliveryReport report)
+    {
+        if (report.IsDeliverySent)
         {
             DeliveryReport?.Invoke(report);
 
@@ -136,6 +152,20 @@ public class DeliveringManager : MonoBehaviour
         return report.IsDeliverySent;
     }
 
+    public bool TryFinishDelivery()
+    {
+        var report = palletController.GetDeliveryReport(expectedProducts);
+
+        return TryFinishDelivery(report);
+    }
+    public void FinishDeliveryByLoader()
+    {
+        if (employeeManager.IsHired(EmployeeType.Loader))
+        {
+            TryFinishDeliveryByLoader();
+        }
+        else Core.Clues.Show("You need to hire the loader before you can tell him to load the truck.");
+    }
     public void FinishDelivery() => TryFinishDelivery();
 
     public bool TrySupplyProducts(DeliveryConfig deliveryData)

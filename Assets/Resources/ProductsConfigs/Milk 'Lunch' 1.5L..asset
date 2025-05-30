@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4611c4fe119ecfa47aa4e2b5ce234ed6, type: 3}
+  m_Name: Milk 'Lunch' 1.5L.
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6975383823758899945, guid: a47595d4fdb15244fa2839652977133e, type: 3}
+  Capacity: 4
+  ProductName: Milk 'Lunch' 1L.
+  Price: 15.25
+  BoxType: 5
+  StorageType: 0
+  MeasureType: 0
+  CompanyTypes: 0000000002000000
+  minWeight: 1.1
+  maxWeight: 1.2

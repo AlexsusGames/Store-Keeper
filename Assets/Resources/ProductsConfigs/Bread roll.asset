@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 5124505835305900984, guid: 94616249b38966649809715dcd17d325, type: 3}
   Capacity: 10
   ProductName: Bread roll
-  Price: 7.5
+  Price: 7.75
   BoxType: 0
   StorageType: 0
   MeasureType: 0

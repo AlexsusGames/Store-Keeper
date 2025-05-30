@@ -163,6 +163,7 @@ public class ProductSupplyManager : MonoBehaviour
     private void OnChecked(float saved, float totalPrice, float losses)
     {
         Core.Statistic.OnSupply(cachedDeliveryConfig.carType, totalPrice, losses);
+        Core.Interactors.GetInteractor<DayProgressInteractor>().AddTaxInfo(cachedDeliveryConfig.carType, totalPrice);
         Bank.AddCoins(this, saved);
 
         UnityAction firstAction = SaveProgress;

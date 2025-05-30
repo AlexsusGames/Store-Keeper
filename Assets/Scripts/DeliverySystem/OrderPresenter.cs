@@ -17,6 +17,7 @@ public class OrderPresenter : MonoBehaviour
     [SerializeField] private Button closeButton;
     [SerializeField] private Button completeButton;
     [SerializeField] private Button cancelDeliveryButton;
+    [SerializeField] private Button loaderButton;
     public string CurrentCompany => companyName.text;
     private string[] measures = { "", "g", "l", "ml", "kg" };
 
@@ -67,6 +68,7 @@ public class OrderPresenter : MonoBehaviour
 
         completeButton.gameObject.SetActive(enabled);
         cancelDeliveryButton.gameObject.SetActive(enabled);
+        loaderButton.gameObject.SetActive(enabled);
     }
 
     private void ResetInfo()

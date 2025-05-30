@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e08398170406934f82833bac17e8064, type: 3}
   m_Name: Milk3
   m_EditorClassIdentifier: 
-  DeliveryLevel: 3
+  DeliveryLevel: 5
   DeliveryID: milk3
   pallets:
   - {fileID: 11400000, guid: 1350b17dcfc35e245a8368068f78592f, type: 2}

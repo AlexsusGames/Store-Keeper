@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,7 +42,7 @@ public class ProductListView : MonoBehaviour
             var view = pool.Get(parent);
 
             string name = Core.Localization.Translate(product);
-            string amount = $"{products[product]} {Core.Localization.Translate(config.MeasureType.ToString())}";
+            string amount = $"{MathF.Round(products[product], 2)} {Core.Localization.Translate(config.MeasureType.ToString())}";
 
             bool allowShowingProducts = showAmount || this.showAmount;
 

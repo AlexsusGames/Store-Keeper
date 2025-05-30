@@ -15,5 +15,5 @@ MonoBehaviour:
   DeliveryLevel: 0
   DeliveryID: milk1
   pallets:
-  - {fileID: 11400000, guid: 48c331fdf479bd54faf7141c19e500b3, type: 2}
+  - {fileID: 11400000, guid: 4f39c2784fc519546b801d52d9cead64, type: 2}
   carType: 2

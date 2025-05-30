@@ -30,19 +30,17 @@ public class ShopInteractor : Interactor
 
         for (int i = 0; i < shopList.Count; i++)
         {
-            if (shopList[i].Id == "store")
-                continue;
-
             if (!IsRenting(shopList[i].Id))
                 continue;
-
 
             var shop = shopList[i];
             var config = GetConfigByID(configs, shop.Id);
 
-            var income = pricingInteractor.CalculateIncome(shop.Products, shop.Amounts, shop.Employees);
-
-            UpdateIncome(shop.Id, income);
+            if(shop.Id != "store")
+            {
+                var income = pricingInteractor.CalculateIncome(shop.Products, shop.Amounts, shop.Employees);
+                UpdateIncome(shop.Id, income);
+            }
 
             for (int j = 0; j < shop.Employees.Count; j++)
             {
@@ -51,7 +49,7 @@ public class ShopInteractor : Interactor
 
             shop.UnpaidRent += config.RentCost;
 
-            if(IsHired("store", EmployeeType.Accountant))
+            if (IsHired("store", EmployeeType.Accountant) || shop.Id == "store")
             {
                 TryPayRent(shop.Id);
                 TryPaySalary(shop.Id);

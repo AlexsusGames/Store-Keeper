@@ -34,7 +34,7 @@ public class Localization
         {"Successful", new string[] { "Successful", "Успешно" } },
         {"Failure", new string[] { "Failure", "Ошибка" } },
         {"Supply", new string[] { "Supply", "Поставить" } },
-        {"LLC 'MarketWay Distributors'", new string[] { "LLC 'MarketWay Distributors'", "ООО 'МаркетВэй'" } },
+        {"LLC 'MarketWay Distributors'", new string[] { "LLC 'MarketWay'", "ООО 'МаркетВэй'" } },
         {"Inc. 'Bakery'", new string[] { "Inc. 'Bakery'", "АО 'Бейкери'" } },
         {"Corp. 'Dairy'", new string[] { "Corp. 'Dairy'", "Корпорация 'Дэйри'" } },
         {"Inc. 'Brillex'", new string[] { "Inc. 'Brillex'", "АО 'Бриллекс'" } },
@@ -85,6 +85,14 @@ public class Localization
         {"Milk 'Milky' 700ml.", new string[] { "Milk 'Milky' 700ml.", "Молоко 'Milky' 700мл." } },
         {"Milk 'Milky' 500ml.", new string[] { "Milk 'Milky' 500ml.", "Молоко 'Milky' 500мл." } },
         {"Cheese 'Milky' 40g.", new string[] { "Cheese 'Milky' 40g.", "Сыр 'Milky' 40г." } },
+
+        {"Kefir  'Dessert' 700ml.", new string[] { "Kefir  'Dessert' 700ml.", "Кефир 'Dessert' 700мл." } },
+        {"Kefir  'Lunch' 700ml.", new string[] { "Kefir  'Lunch' 700ml.", "Кефир 'Lunch' 700мл." } },
+        {"Kefir  'Milky' 700ml.", new string[] { "Kefir  'Milky' 700ml.", "Кефир 'Milky' 700мл." } },
+        {"Milk 'Dessert' 1L.", new string[] { "Milk 'Dessert' 1L.", "Молоко 'Dessert' 1л." } },
+        {"Milk 'Lunch' 1L.", new string[] { "Milk 'Lunch' 1L.", "Молоко 'Lunch' 1л." } },
+        {"Milk 'Luxury' 1L.", new string[] { "Milk 'Luxury' 1L.", "Молоко 'Luxury' 1л." } },
+
         {"Onion", new string[] { "Onion", "Лук" } },
         {"Orange", new string[] { "Orange", "Апельсин" } },
         {"Peach", new string[] { "Peach", "Персик" } },
@@ -505,6 +513,37 @@ public class Localization
         {"cashier_info", new string[] { "Works in the store and sells products to customers.", "Pаботает в магазине, продает товары покупателям." } },
         {"driver_info", new string[] { "Works during deliveries and checks suppliers during loading.",
             "Pаботает при поставках, проверяет поставщиков при погрузке." } },
+
+        {"All tax invoices have already been filled out.", new string[] { "There are no unfilled tax invoices for you.", "У вас отсутствуют незаполненные налоговые накладные." } },
+
+        {"Before ending the day, fill out the tax invoices on the desk behind you.",
+            new string[] { "Before ending the day, fill out the tax invoices on the desk behind you.",
+                "Прежде чем завершить день, заполните налоговые накладные на столе позади вас." } },
+
+        {"TAX INVOICE", new string[] { "TAX INVOICE", "НАЛОГОВАЯ НАКЛАДНАЯ" } },
+        {"Tax", new string[] { "Tax", "Налог" } },
+
+        {"Drop", new string[] { "Drop", "Положить" } },
+
+        {"The loader can't find enough:", new string[] { "The loader can't find enough:", "Грузчик не может найти достаточно:" } },
+
+        {"You need to hire the loader before you can tell him to load the truck.", 
+            new string[] { "You need to hire the loader before you can tell him to load the truck.",
+                "Сначала нужно нанять грузчика, прежде чем приказывать ему загружать машину." } },
+
+        {"You can't assign the loader to load the truck if you've already started doing it yourself", 
+            new string[] { "You can't assign the loader to load the truck if you've already started doing it yourself",
+                "Нельзя поручить грузчику загрузку машины, если вы уже начали делать это сами." } },
+
+        {"Complete the transparent text fields with the correct items.",
+            new string[] { "Complete the transparent text fields with the <color=yellow>correct items.",
+                "Заполните прозрачные текстовые поля <color=yellow>подходящими предметами." } },
+
+        {"Grocceries_Tax", new string[] { "LLC 'MarketWay'", "ООО 'МаркетВэй'" } },
+        {"Bread_Tax", new string[] { "Inc. 'Bakery'", "АО 'Бейкери'" } },
+        {"Milk_Tax", new string[] { "Corp. 'Dairy'", "Корпорация 'Дэйри'" } },
+        {"Chemical_Tax", new string[] { "Inc. 'Brillex'", "АО 'Бриллекс'" } },
+        {"Applience_Tax", new string[] { "Corp. 'Nordwell'", "Корпорация 'Нордвелл'" } },
     };
 
     public string Translate(string text)

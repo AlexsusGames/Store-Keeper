@@ -10,6 +10,7 @@ public class Management : MonoBehaviour
 {
     [SerializeField] private ProductManager productManager;
     [SerializeField] private GameEntryPoint gameEntryPoint;
+    [SerializeField] private EmployeeManager employeeManager;
 
     [SerializeField] private DeliveringManager deliveryManager;
 
@@ -23,6 +24,21 @@ public class Management : MonoBehaviour
 
     public void StartNewDay()
     {
+        var interactor = Core.Interactors.GetInteractor<DayProgressInteractor>();
+
+        if (interactor.HasUnpaidBills())
+        {
+            if(employeeManager.IsHired(EmployeeType.Accountant))
+            {
+                interactor.PayTaxes();
+            }
+            else
+            {
+                Core.Clues.Show("Before ending the day, fill out the tax invoices on the desk behind you.");
+                return;
+            }
+        }
+
         if (!deliveryManager.isCarArrived)
         {
             Core.Quest.TryChangeQuest(QuestType.EndDay);

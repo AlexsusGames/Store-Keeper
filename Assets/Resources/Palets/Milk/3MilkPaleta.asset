@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df2f7196643b1d46a295b8e680efa51, type: 3}
   m_Name: 3MilkPaleta
   m_EditorClassIdentifier: 
-  Products: {fileID: 4655, guid: 2bc895867897c6946b41b5d1eba8e5a4, type: 3}
+  Products: {fileID: 4655, guid: 0d9bb6a823c57d445a3458f3ffe0ab41, type: 3}
   Difficulty: 4
